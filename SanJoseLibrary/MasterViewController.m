@@ -7,8 +7,12 @@
 //
 
 #import "MasterViewController.h"
-
 #import "DetailViewController.h"
+
+#import "ServiceRequest.h"
+#import "LoginParameters.h"
+
+#import "Account.h"
 
 @interface MasterViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -34,6 +38,15 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    
+    LoginParameters *param = [[LoginParameters alloc] init];
+    param.accountName = @"4084496962";
+    param.passcode = @"1234";
+    ServiceRequest *sr = [[ServiceRequest alloc] initWithSession:[NSURLSession sharedSession]];
+    [sr startLoginTaskWithParameters:param
+                   completionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
+                       Account *acc = [Account AccountWithProperties:json[@"account"]];
+                   }];
 }
 
 - (void)didReceiveMemoryWarning
