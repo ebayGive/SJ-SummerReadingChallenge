@@ -38,11 +38,7 @@
                                                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                           {
                                               NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                                              
-                                              NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:json[@"authToken"]
-                                                                                                        options:0];
-                                              self.authToken = [[NSString alloc] initWithData:decodedData
-                                                                                              encoding:NSUTF8StringEncoding];
+                                              self.authToken = json[@"authToken"];
                                               handler(json,response,error);
                                           }];
     [postDataTask resume];

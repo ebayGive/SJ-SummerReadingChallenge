@@ -18,7 +18,7 @@
 		C24FDF3F19195819009C7A9A /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C24FDF3D19195819009C7A9A /* Main_iPad.storyboard */; };
 		C24FDF4219195819009C7A9A /* SanJoseLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C24FDF4019195819009C7A9A /* SanJoseLibrary.xcdatamodeld */; };
 		C24FDF4519195819009C7A9A /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C24FDF4419195819009C7A9A /* MasterViewController.m */; };
-		C24FDF4819195819009C7A9A /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C24FDF4719195819009C7A9A /* DetailViewController.m */; };
+		C24FDF4819195819009C7A9A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C24FDF4719195819009C7A9A /* LoginViewController.m */; };
 		C24FDF4A19195819009C7A9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C24FDF4919195819009C7A9A /* Images.xcassets */; };
 		C24FDF5119195819009C7A9A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C24FDF5019195819009C7A9A /* XCTest.framework */; };
 		C24FDF5219195819009C7A9A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C24FDF2619195819009C7A9A /* Foundation.framework */; };
@@ -40,6 +40,7 @@
 		C283E415191AD724008B66DB /* PrizeType.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E414191AD724008B66DB /* PrizeType.m */; };
 		C283E418191AD7B5008B66DB /* UserTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E417191AD7B5008B66DB /* UserTypes.m */; };
 		C283E41F191AE028008B66DB /* NSObject+JSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E41E191AE028008B66DB /* NSObject+JSONObject.m */; };
+		C2CB4DC6191BF5A200BA3FBD /* Utillities.m in Sources */ = {isa = PBXBuildFile; fileRef = C2CB4DC5191BF5A200BA3FBD /* Utillities.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,8 +70,8 @@
 		C24FDF4119195819009C7A9A /* SanJoseLibrary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SanJoseLibrary.xcdatamodel; sourceTree = "<group>"; };
 		C24FDF4319195819009C7A9A /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		C24FDF4419195819009C7A9A /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		C24FDF4619195819009C7A9A /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		C24FDF4719195819009C7A9A /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		C24FDF4619195819009C7A9A /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		C24FDF4719195819009C7A9A /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		C24FDF4919195819009C7A9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C24FDF4F19195819009C7A9A /* SanJoseLibraryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SanJoseLibraryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C24FDF5019195819009C7A9A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -106,6 +107,8 @@
 		C283E41B191AD9B7008B66DB /* CollectionsProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionsProtocol.h; sourceTree = "<group>"; };
 		C283E41D191AE028008B66DB /* NSObject+JSONObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+JSONObject.h"; sourceTree = "<group>"; };
 		C283E41E191AE028008B66DB /* NSObject+JSONObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JSONObject.m"; sourceTree = "<group>"; };
+		C2CB4DC4191BF5A200BA3FBD /* Utillities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utillities.h; sourceTree = "<group>"; };
+		C2CB4DC5191BF5A200BA3FBD /* Utillities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utillities.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,13 +178,15 @@
 				C283E420191AF11D008B66DB /* Extentions */,
 				C24FDF4319195819009C7A9A /* MasterViewController.h */,
 				C24FDF4419195819009C7A9A /* MasterViewController.m */,
-				C24FDF4619195819009C7A9A /* DetailViewController.h */,
-				C24FDF4719195819009C7A9A /* DetailViewController.m */,
+				C24FDF4619195819009C7A9A /* LoginViewController.h */,
+				C24FDF4719195819009C7A9A /* LoginViewController.m */,
 				C24FDF4919195819009C7A9A /* Images.xcassets */,
 				C24FDF4019195819009C7A9A /* SanJoseLibrary.xcdatamodeld */,
 				C24FDF2F19195819009C7A9A /* Supporting Files */,
 				C283E419191AD824008B66DB /* API */,
 				C283E41A191AD836008B66DB /* DataModels */,
+				C2CB4DC4191BF5A200BA3FBD /* Utillities.h */,
+				C2CB4DC5191BF5A200BA3FBD /* Utillities.m */,
 			);
 			path = SanJoseLibrary;
 			sourceTree = "<group>";
@@ -371,7 +376,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C24FDF4819195819009C7A9A /* DetailViewController.m in Sources */,
+				C24FDF4819195819009C7A9A /* LoginViewController.m in Sources */,
 				C24FDF6F1919922F009C7A9A /* Account.m in Sources */,
 				C283E3FF191AAD35008B66DB /* NSObject+Properties.m in Sources */,
 				C283E409191AD1FD008B66DB /* Activity.m in Sources */,
@@ -382,6 +387,7 @@
 				C283E40F191AD26B008B66DB /* Prize.m in Sources */,
 				C24FDF4519195819009C7A9A /* MasterViewController.m in Sources */,
 				C24FDF7219199BA9009C7A9A /* UserCollection.m in Sources */,
+				C2CB4DC6191BF5A200BA3FBD /* Utillities.m in Sources */,
 				C24FDF4219195819009C7A9A /* SanJoseLibrary.xcdatamodeld in Sources */,
 				C24FDF6C19198279009C7A9A /* LoginParameters.m in Sources */,
 				C283E406191AAFCB008B66DB /* User.m in Sources */,
