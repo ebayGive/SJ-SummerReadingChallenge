@@ -10,4 +10,9 @@
 
 @implementation User
 
+-(NSString *)fullName
+{
+    return [NSString stringWithFormat:@"%@ %@",_firstName,_lastName];
+}
+
 @end

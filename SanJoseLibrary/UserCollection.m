@@ -7,13 +7,22 @@
 //
 
 #import "UserCollection.h"
-#import "User.h"
 
 @implementation UserCollection
 
-+(NSString *)collectionType
++(Class)collectionType
 {
-    return NSStringFromClass([User class]);
+    return [User class];
+}
+
+-(id)collectionContainer
+{
+    return self.container;
+}
+
+-(void)setCollectionContainer:(id)val
+{
+    self.container = [[NSArray alloc] initWithArray:val];
 }
 
 @end

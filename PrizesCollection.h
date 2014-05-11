@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "CollectionsProtocol.h"
+#import "Prize.h"
 
-@interface PrizesCollection : NSArray <CollectionsProtocol>
+@interface PrizesCollection : NSObject <CollectionsProtocol>
+
+@property (nonatomic, strong) NSArray *container;
 
 @end

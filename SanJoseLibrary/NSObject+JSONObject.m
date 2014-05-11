@@ -36,7 +36,10 @@
     const char * c = [self typeOfPropertyNamed:propertyName];
     if (c) {
         NSString *classStr = [NSString stringWithUTF8String:c];
-        classStr = [[classStr componentsSeparatedByString:@"@"] objectAtIndex:1];
+        NSArray *temp = [classStr componentsSeparatedByString:@"@"];
+        if ([temp count]>=2) {
+            classStr = [temp objectAtIndex:1];
+        }
         classStr = [classStr stringByReplacingOccurrencesOfString:@"\"" withString:@""];
         classForKey = NSClassFromString(classStr);
     }
@@ -47,19 +50,19 @@
 {
     Class classForKey = [self classForPropertyNamed:key];
     
-    if ([[value class] isSubclassOfClass:[NSArray class]]) {
-        
+    if ([[value class] isSubclassOfClass:[NSArray class]] &&
+        [classForKey conformsToProtocol:@protocol(CollectionsProtocol)])
+    {
+        Class classOfObj = classOfObj = [classForKey performSelector:@selector(collectionType)];
         NSMutableArray *mutableValue = [NSMutableArray arrayWithCapacity:[value count]];
         
         for (id obj in value) {
-            NSString * type = nil;
-            if ([classForKey conformsToProtocol:@protocol(CollectionsProtocol)]) {
-                type = [classForKey performSelector:@selector(collectionType)];
-                id o = [[NSClassFromString(type) alloc] initWithJSONProperties:obj];
-                [mutableValue addObject:o];
-            }
+            id o = [[classOfObj alloc] initWithJSONProperties:obj];
+            [mutableValue addObject:o];
         }
-        [self setValue:[NSArray arrayWithArray:mutableValue] forKey:key];
+        id ob = [[classForKey alloc] init];
+        [ob setCollectionContainer:mutableValue];
+        [self setValue:ob forKeyPath:key];
     }
     else
     {

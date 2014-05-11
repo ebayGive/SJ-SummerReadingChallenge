@@ -7,13 +7,22 @@
 //
 
 #import "ActivityGridCollection.h"
-#import "Activity.h"
 
 @implementation ActivityGridCollection
 
-+(NSString *)collectionType
++(Class)collectionType
 {
-    return NSStringFromClass([Activity class]);
+    return [Activity class];
+}
+
+-(id)collectionContainer
+{
+    return self.container;
+}
+
+-(void)setCollectionContainer:(id)val
+{
+    self.container = [[NSArray alloc] initWithArray:val];
 }
 
 @end

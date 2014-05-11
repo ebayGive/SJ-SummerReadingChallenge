@@ -9,6 +9,8 @@
 #import "ServiceRequest.h"
 #import "LoginParameters.h"
 
+static ServiceRequest *sharedInstance;
+
 @interface ServiceRequest ()
 
 @property (nonatomic, strong) NSString *authToken;
@@ -23,12 +25,42 @@
     [self.session invalidateAndCancel];
 }
 
++(instancetype)sharedRequest
+{
+    if(!sharedInstance)
+    {
+        sharedInstance = [[ServiceRequest alloc] initWithSession:[NSURLSession sharedSession]];
+    }
+    return sharedInstance;
+}
+
 -(instancetype) initWithSession:(NSURLSession *)session {
     
     if(self = [self init]) {
         self.session = session;
     }
     return self;
+}
+
+- (void)getBranchDetailsWithCompletionHandler:(ServiceRequestCompletion)handler
+{
+    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createBranchRequest]
+                                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                          {
+                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                                              handler(json,response,error);
+                                          }];
+    [postDataTask resume];
+}
+
+-(NSMutableURLRequest *)createBranchRequest
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://hackathon.ebaystratus.com/branches.json"]
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:60.0];
+    
+    [request setHTTPMethod:@"GET"];
+    return request;
 }
 
 - (void)startLoginTaskWithParameters:(LoginParameters *)param
@@ -39,6 +71,9 @@
                                           {
                                               NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                                               self.authToken = json[@"authToken"];
+                                              NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+                                              [ud setBool:YES forKey:@"isUserLoggedIn"];
+                                              [ud synchronize];
                                               handler(json,response,error);
                                           }];
     [postDataTask resume];

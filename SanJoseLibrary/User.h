@@ -21,4 +21,6 @@
 @property (nonatomic, strong) PrizesCollection *prizes;
 @property (nonatomic, strong) ActivityGridCollection *activityGrid;
 
+-(NSString *)fullName;
+
 @end

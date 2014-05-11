@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-#import "MasterViewController.h"
+#import "SelectUserViewController.h"
 
 @implementation AppDelegate
 
@@ -25,11 +25,11 @@
         splitViewController.delegate = (id)navigationController.topViewController;
         
         UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
-        MasterViewController *controller = (MasterViewController *)masterNavigationController.topViewController;
+        SelectUserViewController *controller = (SelectUserViewController *)masterNavigationController.topViewController;
         controller.managedObjectContext = self.managedObjectContext;
     } else {
         UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-        MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
+        SelectUserViewController *controller = (SelectUserViewController *)navigationController.topViewController;
         controller.managedObjectContext = self.managedObjectContext;
     }
     return YES;

@@ -10,4 +10,8 @@
 
 @interface Activity : NSObject
 
+@property (nonatomic) BOOL activity;
+@property (nonatomic, strong) NSString *notes;
+@property (nonatomic, strong) NSString *updatedAt;
+
 @end

@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "CollectionsProtocol.h"
+#import "Activity.h"
 
-@interface ActivityGridCollection : NSArray <CollectionsProtocol>
+@interface ActivityGridCollection : NSObject <CollectionsProtocol>
+
+@property (nonatomic, strong) NSArray *container;
 
 @end

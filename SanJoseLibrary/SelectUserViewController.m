@@ -6,9 +6,13 @@
 //  Copyright (c) 2014 ___FULLUSERNAME___. All rights reserved.
 //
 
-#import "MasterViewController.h"
+#import "SelectUserViewController.h"
+#import "LoginViewController.h"
+#import "Account.h"
+#import "UserCollection.h"
+#import "ActivityViewController.h"
 
-@interface MasterViewController ()
+@interface SelectUserViewController ()
 
 @property (strong, nonatomic) LoginViewController *loginViewController;
 
@@ -16,7 +20,7 @@
 
 @end
 
-@implementation MasterViewController
+@implementation SelectUserViewController
 
 - (void)awakeFromNib
 {
@@ -30,16 +34,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setBool:NO forKey:@"isUserLoggedIn"];
+    [ud synchronize];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    UIViewController *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginVC];
-    navController.modalPresentationStyle = UIModalPresentationFormSheet;
-    [self presentViewController:navController animated:YES completion:^{
-        
-    }];
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isUserLoggedIn"]) {
+        UIViewController *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        [(LoginViewController *)loginVC setPresentingController:self];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        navController.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self presentViewController:navController animated:YES completion:^{
+            
+        }];
+    }
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,13 +84,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[self.fetchedResultsController sections] count];
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-    return [sectionInfo numberOfObjects];
+    return [self.accountInfo.users.container count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -119,17 +130,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+//        NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-//        [[segue destinationViewController] setDetailItem:object];
-    }
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    User *object = [self.accountInfo.users.container objectAtIndex:indexPath.row];
+    ActivityViewController * destVC = (ActivityViewController *)[segue destinationViewController];
+    [destVC setCurrentUser:object];
 }
 
 #pragma mark - Fetched results controller
@@ -233,8 +243,8 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [[object valueForKey:@"timeStamp"] description];
+    User *name = [self.accountInfo.users.container objectAtIndex:indexPath.row];
+    cell.textLabel.text = [name fullName];
 }
 
 @end

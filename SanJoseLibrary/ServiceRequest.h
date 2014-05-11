@@ -14,8 +14,10 @@ typedef void(^ServiceRequestCompletion)(NSDictionary *json, NSURLResponse *respo
 
 @interface ServiceRequest : NSObject
 
++(instancetype)sharedRequest;
 -(instancetype) initWithSession:(NSURLSession *)session;
 - (void)startLoginTaskWithParameters:(LoginParameters *)param
                    completionHandler:(ServiceRequestCompletion)handler;
+- (void)getBranchDetailsWithCompletionHandler:(ServiceRequestCompletion)handler;
 
 @end

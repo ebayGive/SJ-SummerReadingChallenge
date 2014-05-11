@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "CollectionsProtocol.h"
+#import "User.h"
 
-@interface UserCollection : NSArray <CollectionsProtocol>
+@interface UserCollection : NSObject <CollectionsProtocol>
+
+@property (nonatomic, strong) NSArray *container;
 
 @end

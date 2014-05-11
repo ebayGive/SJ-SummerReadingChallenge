@@ -10,4 +10,8 @@
 
 @interface Prize : NSObject
 
+@property (nonatomic) BOOL state;
+@property (nonatomic, strong) NSString *notes;
+@property (nonatomic, strong) NSString *updatedAt;
+
 @end

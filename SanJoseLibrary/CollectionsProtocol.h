@@ -10,6 +10,8 @@
 
 @protocol CollectionsProtocol <NSObject>
 
-+(NSString *)collectionType;
-
+@required
++(Class)collectionType;
+-(id)collectionContainer;
+-(void)setCollectionContainer:(id)val;
 @end

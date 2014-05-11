@@ -8,7 +8,8 @@
 
 #import "Utillities.h"
 #import "LoginViewController.h"
-#import "LoginViewController.h"
+#import "RegisterViewController.h"
+#import "SelectUserViewController.h"
 
 #import "ServiceRequest.h"
 #import "LoginParameters.h"
@@ -34,8 +35,8 @@
 {
     [super viewDidLoad];
 
-    UIBarButtonItem *registerButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(registerNewUser)];
-    self.navigationItem.rightBarButtonItem = registerButton;
+//    UIBarButtonItem *registerButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(registerNewUser)];
+//    self.navigationItem.rightBarButtonItem = registerButton;
     
     self.param = [[LoginParameters alloc] init];
     [self.accountName becomeFirstResponder];
@@ -43,7 +44,8 @@
 
 -(void)registerNewUser
 {
-    
+    UIViewController *registerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"RegisterViewController"];
+    [self.navigationController pushViewController:registerVC animated:YES];
 }
 
 
@@ -74,13 +76,14 @@
 -(void)handleResponse:(Account *)accountInfo
 {
     if ([accountInfo.id length]) {
-        [Utillities alertViewWithTitle:@"Signin Error" message:@"Failed to login with the supplied credentials" delegate:nil
-                     cancelButtonTitle:nil
-                     otherButtonTitles:@"Ok",nil];
+        [(SelectUserViewController *)self.presentingController setAccountInfo:accountInfo];
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     }
     else
     {
-        
+        [Utillities alertViewWithTitle:@"Signin Error" message:@"Failed to login with the supplied credentials" delegate:nil
+                     cancelButtonTitle:nil
+                     otherButtonTitles:@"Ok",nil];
     }
 }
 

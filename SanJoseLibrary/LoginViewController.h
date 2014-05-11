@@ -10,4 +10,6 @@
 
 @interface LoginViewController : UIViewController <UISplitViewControllerDelegate>
 
+@property(nonatomic,strong) UIViewController *presentingController;
+
 @end

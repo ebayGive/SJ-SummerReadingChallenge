@@ -10,8 +10,11 @@
 #import <UIKit/UIKit.h>
 
 @class LoginViewController;
+@class Account;
 
-@interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@interface SelectUserViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+
+@property (strong, nonatomic) Account *accountInfo;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
