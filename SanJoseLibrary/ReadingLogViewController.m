@@ -13,8 +13,8 @@
 
 @interface ReadingLogViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
+@property (weak, nonatomic) NSIndexPath *currentIndexPath;
 @property (weak, nonatomic) User *currentUser;
-
 @property (weak, nonatomic) IBOutlet UICollectionView *readingLogCollectionView;
 
 
@@ -38,21 +38,35 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.readingLogCollectionView performBatchUpdates:^{
-        NSInteger max = [self.currentUser.readingLog integerValue]/20;
-        if (max>[self.readingLogCollectionView numberOfItemsInSection:0]) {
-            max = [self.readingLogCollectionView numberOfItemsInSection:0];
-        }
-        for (int i=max-1; i>=0; i--) {
-            NSIndexPath *ip = [NSIndexPath indexPathForItem:i inSection:0];
-            ReadingLogCell *cell = (ReadingLogCell *)[self.readingLogCollectionView cellForItemAtIndexPath:ip];
-            [cell setBackgroundColor:[UIColor greenColor]];
-        }
-    } completion:^(BOOL finished) {
-        
-    }];
+    
+    NSInteger max = [self.currentUser.readingLog integerValue]/20;
+    if (max>[self.readingLogCollectionView numberOfItemsInSection:0]) {
+        max = [self.readingLogCollectionView numberOfItemsInSection:0];
+    }
+    
+    self.currentIndexPath = [NSIndexPath indexPathForItem:max-1 inSection:0];
+    [self updateCellAtIndexPath:self.currentIndexPath];
 }
 
+- (void)updateCellAtIndexPath:(NSIndexPath *)ip
+{
+    if (ip.item<0) {
+        return;
+    }
+    [self.readingLogCollectionView performBatchUpdates:^{
+        ReadingLogCell *cell = (ReadingLogCell *)[self.readingLogCollectionView cellForItemAtIndexPath:ip];
+        NSString *imgName = nil;
+        if ((ip.item+1)/10<1) {
+            imgName = [NSString stringWithFormat:@"APP BATTERY ON-0%d",ip.item+1];
+        } else {
+            imgName = [NSString stringWithFormat:@"APP BATTERY ON-%d",ip.item+1];
+        }
+        [cell.imageView setImage:[UIImage imageNamed:imgName]];
+    } completion:^(BOOL finished) {
+        self.currentIndexPath = [NSIndexPath indexPathForItem:ip.item-1 inSection:ip.section];
+        [self updateCellAtIndexPath:self.currentIndexPath];
+    }];
+}
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -68,7 +82,21 @@
 {
     ReadingLogCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"readingLogCell"
                                                                            forIndexPath:indexPath];
+    NSString *imgName = nil;
+    if ((indexPath.item+1)/10<1) {
+        imgName = [NSString stringWithFormat:@"APP BATTERY OFF-0%d",indexPath.item+1];
+    } else {
+        imgName = [NSString stringWithFormat:@"APP BATTERY OFF-%d",indexPath.item+1];
+    }
+    [cell.imageView setImage:[UIImage imageNamed:imgName]];
     return cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.currentIndexPath = [NSIndexPath indexPathForItem:_currentIndexPath.item-1
+                                                inSection:_currentIndexPath.section];
+    [self updateCellAtIndexPath:self.currentIndexPath];
 }
 
 @end

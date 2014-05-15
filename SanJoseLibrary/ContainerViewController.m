@@ -20,26 +20,11 @@
 
 @implementation ContainerViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [self swapSegueWithIdentifier:SegueIdentifierActivityGrid];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Navigation
@@ -55,26 +40,6 @@
         [self.view addSubview:((UIViewController *)segue.destinationViewController).view];
         [segue.destinationViewController didMoveToParentViewController:self];
     }
-//    if ([segue.identifier isEqualToString:SegueIdentifierActivityGrid])
-//    {
-//        if (self.childViewControllers.count > 0) {
-//            [self swapFromViewController:[self.childViewControllers objectAtIndex:0] toViewController:segue.destinationViewController];
-//        }
-//        else {
-//            [self addChildViewController:segue.destinationViewController];
-//            ((UIViewController *)segue.destinationViewController).view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-//            [self.view addSubview:((UIViewController *)segue.destinationViewController).view];
-//            [segue.destinationViewController didMoveToParentViewController:self];
-//        }
-//    }
-//    else if ([segue.identifier isEqualToString:SegueIdentifierReadingLog])
-//    {
-//        [self swapFromViewController:[self.childViewControllers objectAtIndex:0] toViewController:segue.destinationViewController];
-//    }
-//    else if ([segue.identifier isEqualToString:SegueIdentifierInformation])
-//    {
-//        [self swapFromViewController:[self.childViewControllers objectAtIndex:0] toViewController:segue.destinationViewController];
-//    }
 }
 
 - (void)swapFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController
