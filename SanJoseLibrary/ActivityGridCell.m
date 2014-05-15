@@ -9,24 +9,31 @@
 #import "ActivityGridCell.h"
 #import "ActivityGridCellContents.h"
 #import "Utillities.h"
+#import "Activity.h"
 
 @interface ActivityGridCell ()
 @property (nonatomic, weak) ActivityGridCellContents *activityCellData;
+@property (nonatomic, weak) Activity *userActivity;
 @end
 
 @implementation ActivityGridCell
 
--(void)populateWithData:(ActivityGridCellContents *)activityCellData
+-(void)populateWithActivityData:(ActivityGridCellContents *)activityCellData userActivity:(Activity *)activity
 {
+    self.userActivity = activity;
     self.activityCellData = activityCellData;
 }
 
-- (UIAlertView *)showActivityDescription
+- (void)showActivityDescription
 {
-    return [Utillities alertViewWithTitle:@"Activity"
+    UIAlertView *alert = [Utillities alertViewWithTitle:@"Activity"
                            message:self.activityCellData.description
                           delegate:nil
                  cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+
+    [alert show];
 }
+
+
 
 @end

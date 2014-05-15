@@ -14,6 +14,7 @@
 #import "ServiceRequest.h"
 #import "ActivityGrids.h"
 #import "ActivityGridCellDataCollection.h"
+#import "ActivityGrid.h"
 
 @interface ActivityGridViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -69,7 +70,7 @@
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [[self.currentUser.activityGrid container] count];
+    return [[self.activityGrid.cells container] count];
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -77,15 +78,15 @@
     ActivityGridCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"activityGridCell"
                                                                            forIndexPath:indexPath];
     ActivityGridCellContents *data = [self.activityGrid.cells.container objectAtIndex:indexPath.item];
-    [cell populateWithData:data];
+    Activity *userActivity = [self.currentUser.activityGrid.container objectAtIndex:indexPath.item];
+    [cell populateWithActivityData:data userActivity:userActivity];
     return cell;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ActivityGridCell *cell = (ActivityGridCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    UIAlertView *alert = [cell showActivityDescription];
-    [alert show];
+    [cell showActivityDescription];
 }
 
 @end
