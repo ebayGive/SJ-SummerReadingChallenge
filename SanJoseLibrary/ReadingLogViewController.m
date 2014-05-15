@@ -9,6 +9,7 @@
 #import "ReadingLogViewController.h"
 #import "ContainerViewController.h"
 #import "User.h"
+#import "ReadingLogCell.h"
 
 @interface ReadingLogViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -34,6 +35,24 @@
     [self.readingLogCollectionView reloadData];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.readingLogCollectionView performBatchUpdates:^{
+        NSInteger max = [self.currentUser.readingLog integerValue]/20;
+        if (max>[self.readingLogCollectionView numberOfItemsInSection:0]) {
+            max = [self.readingLogCollectionView numberOfItemsInSection:0];
+        }
+        for (int i=max-1; i>=0; i--) {
+            NSIndexPath *ip = [NSIndexPath indexPathForItem:i inSection:0];
+            ReadingLogCell *cell = (ReadingLogCell *)[self.readingLogCollectionView cellForItemAtIndexPath:ip];
+            [cell setBackgroundColor:[UIColor greenColor]];
+        }
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -47,7 +66,7 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"readingLogCell"
+    ReadingLogCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"readingLogCell"
                                                                            forIndexPath:indexPath];
     return cell;
 }

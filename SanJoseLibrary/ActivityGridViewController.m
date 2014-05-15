@@ -9,10 +9,16 @@
 #import "ActivityGridViewController.h"
 #import "ContainerViewController.h"
 #import "User.h"
+#import "ActivityGridCell.h"
+#import "ActivityCollection.h"
+#import "ServiceRequest.h"
+#import "ActivityGrids.h"
+#import "ActivityGridCellDataCollection.h"
 
 @interface ActivityGridViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (weak, nonatomic) User *currentUser;
+@property (strong, nonatomic) ActivityGrid *activityGrid;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *activityGridCollectionView;
 
@@ -34,6 +40,14 @@
 {
     [super viewDidLoad];
     self.currentUser = [(ContainerViewController *)self.parentViewController currentUser];
+    ServiceRequest *sr = [ServiceRequest sharedRequest];
+    [sr getGridDetailsWithCompletionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
+        ActivityGrids *ag = [[ActivityGrids alloc] activityGridsWithProperties:(NSArray *)json[@"grids"]];
+        self.activityGrid = [ag activityGridForUserId:self.currentUser.userType];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.activityGridCollectionView reloadData];
+        });
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -55,14 +69,23 @@
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 25;
+    return [[self.currentUser.activityGrid container] count];
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"activityGridCell"
+    ActivityGridCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"activityGridCell"
                                                                            forIndexPath:indexPath];
+    ActivityGridCellContents *data = [self.activityGrid.cells.container objectAtIndex:indexPath.item];
+    [cell populateWithData:data];
     return cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ActivityGridCell *cell = (ActivityGridCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    UIAlertView *alert = [cell showActivityDescription];
+    [alert show];
 }
 
 @end

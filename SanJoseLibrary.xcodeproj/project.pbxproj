@@ -34,11 +34,11 @@
 		C283E400191AAD35008B66DB /* NSString+PropertyKVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E3FE191AAD35008B66DB /* NSString+PropertyKVC.m */; };
 		C283E406191AAFCB008B66DB /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E405191AAFCB008B66DB /* User.m */; };
 		C283E409191AD1FD008B66DB /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E408191AD1FD008B66DB /* Activity.m */; };
-		C283E40C191AD255008B66DB /* ActivityGridCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E40B191AD255008B66DB /* ActivityGridCollection.m */; };
+		C283E40C191AD255008B66DB /* ActivityCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E40B191AD255008B66DB /* ActivityCollection.m */; };
 		C283E40F191AD26B008B66DB /* Prize.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E40E191AD26B008B66DB /* Prize.m */; };
 		C283E412191AD281008B66DB /* PrizesCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E411191AD281008B66DB /* PrizesCollection.m */; };
 		C283E415191AD724008B66DB /* PrizeType.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E414191AD724008B66DB /* PrizeType.m */; };
-		C283E418191AD7B5008B66DB /* UserTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E417191AD7B5008B66DB /* UserTypes.m */; };
+		C283E418191AD7B5008B66DB /* UserType.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E417191AD7B5008B66DB /* UserType.m */; };
 		C283E41F191AE028008B66DB /* NSObject+JSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E41E191AE028008B66DB /* NSObject+JSONObject.m */; };
 		C2981F721920348900DEBA0D /* ReadingLogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2981F711920348900DEBA0D /* ReadingLogCell.m */; };
 		C2981F75192034A300DEBA0D /* ActivityGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2981F74192034A300DEBA0D /* ActivityGridCell.m */; };
@@ -51,6 +51,11 @@
 		C2D683B9191D778F00C3F7E5 /* ActivityGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D683B8191D778F00C3F7E5 /* ActivityGridViewController.m */; };
 		C2D683BC191D77A200C3F7E5 /* ReadingLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D683BB191D77A200C3F7E5 /* ReadingLogViewController.m */; };
 		C2D683BF191D77B400C3F7E5 /* InformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D683BE191D77B400C3F7E5 /* InformationViewController.m */; };
+		C2DEEC481922C9540003495B /* ActivityGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DEEC471922C9540003495B /* ActivityGrid.m */; };
+		C2DEEC4B1922CA340003495B /* ActivityGridCellContents.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DEEC4A1922CA340003495B /* ActivityGridCellContents.m */; };
+		C2DEEC4E1922CBB50003495B /* ActivityGrids.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DEEC4D1922CBB50003495B /* ActivityGrids.m */; };
+		C2DEEC511922CD080003495B /* ActivityGridCellDataCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DEEC501922CD080003495B /* ActivityGridCellDataCollection.m */; };
+		C2DEEC541922CD600003495B /* UserTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DEEC531922CD600003495B /* UserTypes.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,16 +110,16 @@
 		C283E405191AAFCB008B66DB /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		C283E407191AD1FD008B66DB /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Activity.h; path = ../Activity.h; sourceTree = "<group>"; };
 		C283E408191AD1FD008B66DB /* Activity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Activity.m; path = ../Activity.m; sourceTree = "<group>"; };
-		C283E40A191AD255008B66DB /* ActivityGridCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityGridCollection.h; path = ../ActivityGridCollection.h; sourceTree = "<group>"; };
-		C283E40B191AD255008B66DB /* ActivityGridCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityGridCollection.m; path = ../ActivityGridCollection.m; sourceTree = "<group>"; };
+		C283E40A191AD255008B66DB /* ActivityCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityCollection.h; path = ../ActivityCollection.h; sourceTree = "<group>"; };
+		C283E40B191AD255008B66DB /* ActivityCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityCollection.m; path = ../ActivityCollection.m; sourceTree = "<group>"; };
 		C283E40D191AD26B008B66DB /* Prize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prize.h; path = ../Prize.h; sourceTree = "<group>"; };
 		C283E40E191AD26B008B66DB /* Prize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Prize.m; path = ../Prize.m; sourceTree = "<group>"; };
 		C283E410191AD281008B66DB /* PrizesCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrizesCollection.h; path = ../PrizesCollection.h; sourceTree = "<group>"; };
 		C283E411191AD281008B66DB /* PrizesCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrizesCollection.m; path = ../PrizesCollection.m; sourceTree = "<group>"; };
 		C283E413191AD724008B66DB /* PrizeType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrizeType.h; path = ../PrizeType.h; sourceTree = "<group>"; };
 		C283E414191AD724008B66DB /* PrizeType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrizeType.m; path = ../PrizeType.m; sourceTree = "<group>"; };
-		C283E416191AD7B5008B66DB /* UserTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserTypes.h; path = ../UserTypes.h; sourceTree = "<group>"; };
-		C283E417191AD7B5008B66DB /* UserTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserTypes.m; path = ../UserTypes.m; sourceTree = "<group>"; };
+		C283E416191AD7B5008B66DB /* UserType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserType.h; path = ../UserType.h; sourceTree = "<group>"; };
+		C283E417191AD7B5008B66DB /* UserType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserType.m; path = ../UserType.m; sourceTree = "<group>"; };
 		C283E41B191AD9B7008B66DB /* CollectionsProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionsProtocol.h; sourceTree = "<group>"; };
 		C283E41D191AE028008B66DB /* NSObject+JSONObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+JSONObject.h"; sourceTree = "<group>"; };
 		C283E41E191AE028008B66DB /* NSObject+JSONObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JSONObject.m"; sourceTree = "<group>"; };
@@ -140,6 +145,16 @@
 		C2D683BB191D77A200C3F7E5 /* ReadingLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingLogViewController.m; sourceTree = "<group>"; };
 		C2D683BD191D77B400C3F7E5 /* InformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationViewController.h; sourceTree = "<group>"; };
 		C2D683BE191D77B400C3F7E5 /* InformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationViewController.m; sourceTree = "<group>"; };
+		C2DEEC461922C9540003495B /* ActivityGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityGrid.h; sourceTree = "<group>"; };
+		C2DEEC471922C9540003495B /* ActivityGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityGrid.m; sourceTree = "<group>"; };
+		C2DEEC491922CA340003495B /* ActivityGridCellContents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityGridCellContents.h; sourceTree = "<group>"; };
+		C2DEEC4A1922CA340003495B /* ActivityGridCellContents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityGridCellContents.m; sourceTree = "<group>"; };
+		C2DEEC4C1922CBB50003495B /* ActivityGrids.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityGrids.h; sourceTree = "<group>"; };
+		C2DEEC4D1922CBB50003495B /* ActivityGrids.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityGrids.m; sourceTree = "<group>"; };
+		C2DEEC4F1922CD080003495B /* ActivityGridCellDataCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityGridCellDataCollection.h; sourceTree = "<group>"; };
+		C2DEEC501922CD080003495B /* ActivityGridCellDataCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityGridCellDataCollection.m; sourceTree = "<group>"; };
+		C2DEEC521922CD600003495B /* UserTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTypes.h; sourceTree = "<group>"; };
+		C2DEEC531922CD600003495B /* UserTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTypes.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,14 +283,16 @@
 				C283E40E191AD26B008B66DB /* Prize.m */,
 				C283E407191AD1FD008B66DB /* Activity.h */,
 				C283E408191AD1FD008B66DB /* Activity.m */,
-				C283E416191AD7B5008B66DB /* UserTypes.h */,
-				C283E417191AD7B5008B66DB /* UserTypes.m */,
+				C283E416191AD7B5008B66DB /* UserType.h */,
+				C283E417191AD7B5008B66DB /* UserType.m */,
 				C283E413191AD724008B66DB /* PrizeType.h */,
 				C283E414191AD724008B66DB /* PrizeType.m */,
 				C2CB4DCD191C0D9400BA3FBD /* Branch.h */,
 				C2CB4DCE191C0D9400BA3FBD /* Branch.m */,
-				C2CB4DD0191C398D00BA3FBD /* Branches.h */,
-				C2CB4DD1191C398D00BA3FBD /* Branches.m */,
+				C2DEEC461922C9540003495B /* ActivityGrid.h */,
+				C2DEEC471922C9540003495B /* ActivityGrid.m */,
+				C2DEEC491922CA340003495B /* ActivityGridCellContents.h */,
+				C2DEEC4A1922CA340003495B /* ActivityGridCellContents.m */,
 			);
 			name = DataModels;
 			sourceTree = "<group>";
@@ -283,12 +300,20 @@
 		C283E41C191ADC15008B66DB /* Collections */ = {
 			isa = PBXGroup;
 			children = (
+				C2CB4DD0191C398D00BA3FBD /* Branches.h */,
+				C2CB4DD1191C398D00BA3FBD /* Branches.m */,
 				C24FDF7019199BA9009C7A9A /* UserCollection.h */,
 				C24FDF7119199BA9009C7A9A /* UserCollection.m */,
 				C283E410191AD281008B66DB /* PrizesCollection.h */,
 				C283E411191AD281008B66DB /* PrizesCollection.m */,
-				C283E40A191AD255008B66DB /* ActivityGridCollection.h */,
-				C283E40B191AD255008B66DB /* ActivityGridCollection.m */,
+				C283E40A191AD255008B66DB /* ActivityCollection.h */,
+				C283E40B191AD255008B66DB /* ActivityCollection.m */,
+				C2DEEC4C1922CBB50003495B /* ActivityGrids.h */,
+				C2DEEC4D1922CBB50003495B /* ActivityGrids.m */,
+				C2DEEC4F1922CD080003495B /* ActivityGridCellDataCollection.h */,
+				C2DEEC501922CD080003495B /* ActivityGridCellDataCollection.m */,
+				C2DEEC521922CD600003495B /* UserTypes.h */,
+				C2DEEC531922CD600003495B /* UserTypes.m */,
 			);
 			name = Collections;
 			sourceTree = "<group>";
@@ -445,15 +470,19 @@
 			files = (
 				C24FDF4819195819009C7A9A /* LoginViewController.m in Sources */,
 				C24FDF6F1919922F009C7A9A /* Account.m in Sources */,
+				C2DEEC4E1922CBB50003495B /* ActivityGrids.m in Sources */,
 				C283E3FF191AAD35008B66DB /* NSObject+Properties.m in Sources */,
 				C283E409191AD1FD008B66DB /* Activity.m in Sources */,
 				C2CB4DC9191BFFBF00BA3FBD /* RegisterViewController.m in Sources */,
 				C283E41F191AE028008B66DB /* NSObject+JSONObject.m in Sources */,
-				C283E40C191AD255008B66DB /* ActivityGridCollection.m in Sources */,
+				C283E40C191AD255008B66DB /* ActivityCollection.m in Sources */,
+				C2DEEC4B1922CA340003495B /* ActivityGridCellContents.m in Sources */,
 				C2981F75192034A300DEBA0D /* ActivityGridCell.m in Sources */,
 				C283E400191AAD35008B66DB /* NSString+PropertyKVC.m in Sources */,
 				C283E412191AD281008B66DB /* PrizesCollection.m in Sources */,
+				C2DEEC511922CD080003495B /* ActivityGridCellDataCollection.m in Sources */,
 				C2D683B1191D42EF00C3F7E5 /* ActivityViewController.m in Sources */,
+				C2DEEC541922CD600003495B /* UserTypes.m in Sources */,
 				C283E40F191AD26B008B66DB /* Prize.m in Sources */,
 				C24FDF4519195819009C7A9A /* SelectUserViewController.m in Sources */,
 				C24FDF7219199BA9009C7A9A /* UserCollection.m in Sources */,
@@ -468,9 +497,10 @@
 				C24FDF3919195819009C7A9A /* AppDelegate.m in Sources */,
 				C2CB4DCF191C0D9400BA3FBD /* Branch.m in Sources */,
 				C2CB4DD2191C398D00BA3FBD /* Branches.m in Sources */,
-				C283E418191AD7B5008B66DB /* UserTypes.m in Sources */,
+				C283E418191AD7B5008B66DB /* UserType.m in Sources */,
 				C283E415191AD724008B66DB /* PrizeType.m in Sources */,
 				C24FDF3519195819009C7A9A /* main.m in Sources */,
+				C2DEEC481922C9540003495B /* ActivityGrid.m in Sources */,
 				C2981F721920348900DEBA0D /* ReadingLogCell.m in Sources */,
 				C24FDF69191958EE009C7A9A /* ServiceRequest.m in Sources */,
 				C2D683B9191D778F00C3F7E5 /* ActivityGridViewController.m in Sources */,
@@ -603,6 +633,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SanJoseLibrary/SanJoseLibrary-Prefix.pch";
 				INFOPLIST_FILE = "SanJoseLibrary/SanJoseLibrary-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -616,6 +647,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SanJoseLibrary/SanJoseLibrary-Prefix.pch";
 				INFOPLIST_FILE = "SanJoseLibrary/SanJoseLibrary-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

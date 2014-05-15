@@ -42,6 +42,27 @@ static ServiceRequest *sharedInstance;
     return self;
 }
 
+- (void)getGridDetailsWithCompletionHandler:(ServiceRequestCompletion)handler
+{
+    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createGridsRequest]
+                                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                          {
+                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                                              handler(json,response,error);
+                                          }];
+    [postDataTask resume];
+}
+
+-(NSMutableURLRequest *)createGridsRequest
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://hackathon.ebaystratus.com/grids.json"]
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:60.0];
+    
+    [request setHTTPMethod:@"GET"];
+    return request;
+}
+
 - (void)getBranchDetailsWithCompletionHandler:(ServiceRequestCompletion)handler
 {
     NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createBranchRequest]

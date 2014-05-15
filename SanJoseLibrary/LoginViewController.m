@@ -65,7 +65,7 @@
 {
     self.param.accountName = self.accountName.text;
     self.param.passcode = self.passcode.text;
-    ServiceRequest *sr = [[ServiceRequest alloc] initWithSession:[NSURLSession sharedSession]];
+    ServiceRequest *sr = [ServiceRequest sharedRequest];
     [sr startLoginTaskWithParameters:self.param
                    completionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
                        Account *acc = [Account AccountWithProperties:json[@"account"]];

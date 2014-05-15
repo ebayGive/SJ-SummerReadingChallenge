@@ -16,8 +16,10 @@ typedef void(^ServiceRequestCompletion)(NSDictionary *json, NSURLResponse *respo
 
 +(instancetype)sharedRequest;
 -(instancetype) initWithSession:(NSURLSession *)session;
+
 - (void)startLoginTaskWithParameters:(LoginParameters *)param
                    completionHandler:(ServiceRequestCompletion)handler;
 - (void)getBranchDetailsWithCompletionHandler:(ServiceRequestCompletion)handler;
+- (void)getGridDetailsWithCompletionHandler:(ServiceRequestCompletion)handler;
 
 @end

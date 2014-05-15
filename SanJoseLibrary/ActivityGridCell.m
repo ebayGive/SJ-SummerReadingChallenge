@@ -7,25 +7,26 @@
 //
 
 #import "ActivityGridCell.h"
+#import "ActivityGridCellContents.h"
+#import "Utillities.h"
+
+@interface ActivityGridCell ()
+@property (nonatomic, weak) ActivityGridCellContents *activityCellData;
+@end
 
 @implementation ActivityGridCell
 
-- (id)initWithFrame:(CGRect)frame
+-(void)populateWithData:(ActivityGridCellContents *)activityCellData
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+    self.activityCellData = activityCellData;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (UIAlertView *)showActivityDescription
 {
-    // Drawing code
+    return [Utillities alertViewWithTitle:@"Activity"
+                           message:self.activityCellData.description
+                          delegate:nil
+                 cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 }
-*/
 
 @end

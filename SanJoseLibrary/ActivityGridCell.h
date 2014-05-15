@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class ActivityGridCellContents;
 @interface ActivityGridCell : UICollectionViewCell
+
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
+-(void)populateWithData:(ActivityGridCellContents *)activityCellData;
+-(UIAlertView *)showActivityDescription;
 
 @end

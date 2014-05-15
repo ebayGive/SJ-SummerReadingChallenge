@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class ActivityGridCollection;
+@class ActivityCollection;
 @class PrizesCollection;
 
 @interface User : NSObject
@@ -19,7 +19,7 @@
 @property (nonatomic, strong) NSNumber *readingLog;
 @property (nonatomic, strong) NSString *userType;
 @property (nonatomic, strong) PrizesCollection *prizes;
-@property (nonatomic, strong) ActivityGridCollection *activityGrid;
+@property (nonatomic, strong) ActivityCollection *activityGrid;
 
 -(NSString *)fullName;
 

@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Himanshu Tantia. All rights reserved.
 //
 
-#import "UserTypes.h"
+#import "UserType.h"
 
-@implementation UserTypes
+@implementation UserType
 
 @end
