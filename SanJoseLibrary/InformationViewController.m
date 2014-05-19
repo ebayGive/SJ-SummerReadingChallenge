@@ -11,42 +11,31 @@
 
 @interface InformationViewController ()
 
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) User *currentUser;
 
 @end
 
 @implementation InformationViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    NSString *pathForHTML = [[NSBundle mainBundle] pathForResource:@"help-android" ofType:@"html"];
+    
+    NSString *imagePath = [[NSBundle mainBundle] resourcePath];
+    imagePath = [imagePath stringByReplacingOccurrencesOfString:@"/" withString:@"//"];
+    imagePath = [imagePath stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    
+    NSURL *baseURL = [NSURL URLWithString:[NSString stringWithFormat:@"file:/%@//",imagePath]];
+    
+    NSData *htmlData = [[NSFileManager defaultManager] contentsAtPath:pathForHTML];
+    
+    [self.webView loadData:htmlData
+                  MIMEType:@"text/html"
+          textEncodingName:@"utf-8"
+                   baseURL:baseURL];
+    
 }
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
