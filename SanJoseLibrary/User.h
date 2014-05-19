@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@class ActivityCollection;
-@class PrizesCollection;
+@protocol Prize;
+@protocol Activity;
+//@protocol User
+//@end
 
 @interface User : NSObject
 
@@ -18,8 +20,8 @@
 @property (nonatomic, strong) NSString *lastName;
 @property (nonatomic, strong) NSNumber *readingLog;
 @property (nonatomic, strong) NSString *userType;
-@property (nonatomic, strong) PrizesCollection *prizes;
-@property (nonatomic, strong) ActivityCollection *activityGrid;
+@property (nonatomic, strong) NSArray<Prize> *prizes;
+@property (nonatomic, strong) NSArray<Activity> *activityGrid;
 
 -(NSString *)fullName;
 

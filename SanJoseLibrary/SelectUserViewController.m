@@ -89,7 +89,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.accountInfo.users.container count];
+    return [self.accountInfo.users count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -137,7 +137,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    User *object = [self.accountInfo.users.container objectAtIndex:indexPath.row];
+    User *object = [self.accountInfo.users objectAtIndex:indexPath.row];
     ActivityViewController * destVC = (ActivityViewController *)[segue destinationViewController];
     [destVC setCurrentUser:object];
 }
@@ -243,7 +243,7 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    User *name = [self.accountInfo.users.container objectAtIndex:indexPath.row];
+    User *name = [self.accountInfo.users objectAtIndex:indexPath.row];
     cell.textLabel.text = [name fullName];
 }
 

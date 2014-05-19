@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "NSObject+JSONObject.h"
 
-@class UserCollection;
+@protocol User;
 
 @interface Account : NSObject
 
@@ -23,7 +23,7 @@
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) NSString *createdAt;
 @property (nonatomic, strong) NSString *updatedAt;
-@property (nonatomic, strong) UserCollection *users;
+@property (nonatomic, strong) NSArray<User> *users;
 
 + (id)AccountWithProperties:(NSDictionary *)properties;
 

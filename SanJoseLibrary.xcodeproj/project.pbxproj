@@ -29,14 +29,11 @@
 		C24FDF69191958EE009C7A9A /* ServiceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C24FDF68191958EE009C7A9A /* ServiceRequest.m */; };
 		C24FDF6C19198279009C7A9A /* LoginParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = C24FDF6B19198279009C7A9A /* LoginParameters.m */; };
 		C24FDF6F1919922F009C7A9A /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = C24FDF6E1919922F009C7A9A /* Account.m */; };
-		C24FDF7219199BA9009C7A9A /* UserCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = C24FDF7119199BA9009C7A9A /* UserCollection.m */; };
 		C283E3FF191AAD35008B66DB /* NSObject+Properties.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E3FC191AAD35008B66DB /* NSObject+Properties.m */; };
 		C283E400191AAD35008B66DB /* NSString+PropertyKVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E3FE191AAD35008B66DB /* NSString+PropertyKVC.m */; };
 		C283E406191AAFCB008B66DB /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E405191AAFCB008B66DB /* User.m */; };
 		C283E409191AD1FD008B66DB /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E408191AD1FD008B66DB /* Activity.m */; };
-		C283E40C191AD255008B66DB /* ActivityCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E40B191AD255008B66DB /* ActivityCollection.m */; };
 		C283E40F191AD26B008B66DB /* Prize.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E40E191AD26B008B66DB /* Prize.m */; };
-		C283E412191AD281008B66DB /* PrizesCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E411191AD281008B66DB /* PrizesCollection.m */; };
 		C283E415191AD724008B66DB /* PrizeType.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E414191AD724008B66DB /* PrizeType.m */; };
 		C283E418191AD7B5008B66DB /* UserType.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E417191AD7B5008B66DB /* UserType.m */; };
 		C283E41F191AE028008B66DB /* NSObject+JSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E41E191AE028008B66DB /* NSObject+JSONObject.m */; };
@@ -144,7 +141,6 @@
 		C2DEEC481922C9540003495B /* ActivityGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DEEC471922C9540003495B /* ActivityGrid.m */; };
 		C2DEEC4B1922CA340003495B /* ActivityGridCellContents.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DEEC4A1922CA340003495B /* ActivityGridCellContents.m */; };
 		C2DEEC4E1922CBB50003495B /* ActivityGrids.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DEEC4D1922CBB50003495B /* ActivityGrids.m */; };
-		C2DEEC511922CD080003495B /* ActivityGridCellDataCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DEEC501922CD080003495B /* ActivityGridCellDataCollection.m */; };
 		C2DEEC541922CD600003495B /* UserTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DEEC531922CD600003495B /* UserTypes.m */; };
 /* End PBXBuildFile section */
 
@@ -859,17 +855,13 @@
 				C283E409191AD1FD008B66DB /* Activity.m in Sources */,
 				C2CB4DC9191BFFBF00BA3FBD /* RegisterViewController.m in Sources */,
 				C283E41F191AE028008B66DB /* NSObject+JSONObject.m in Sources */,
-				C283E40C191AD255008B66DB /* ActivityCollection.m in Sources */,
 				C2DEEC4B1922CA340003495B /* ActivityGridCellContents.m in Sources */,
 				C2981F75192034A300DEBA0D /* ActivityGridCell.m in Sources */,
 				C283E400191AAD35008B66DB /* NSString+PropertyKVC.m in Sources */,
-				C283E412191AD281008B66DB /* PrizesCollection.m in Sources */,
-				C2DEEC511922CD080003495B /* ActivityGridCellDataCollection.m in Sources */,
 				C2D683B1191D42EF00C3F7E5 /* ActivityViewController.m in Sources */,
 				C2DEEC541922CD600003495B /* UserTypes.m in Sources */,
 				C283E40F191AD26B008B66DB /* Prize.m in Sources */,
 				C24FDF4519195819009C7A9A /* SelectUserViewController.m in Sources */,
-				C24FDF7219199BA9009C7A9A /* UserCollection.m in Sources */,
 				C2CB4DC6191BF5A200BA3FBD /* Utillities.m in Sources */,
 				C2D683B5191D756400C3F7E5 /* ContainerViewController.m in Sources */,
 				C24FDF4219195819009C7A9A /* SanJoseLibrary.xcdatamodeld in Sources */,

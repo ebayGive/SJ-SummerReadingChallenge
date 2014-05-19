@@ -70,15 +70,15 @@
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [[self.activityGrid.cells container] count];
+    return [self.activityGrid.cells count];
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ActivityGridCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"activityGridCell"
                                                                            forIndexPath:indexPath];
-    ActivityGridCellContents *data = [self.activityGrid.cells.container objectAtIndex:indexPath.item];
-    Activity *userActivity = [self.currentUser.activityGrid.container objectAtIndex:indexPath.item];
+    ActivityGridCellContents *data = [self.activityGrid.cells objectAtIndex:indexPath.item];
+    Activity *userActivity = [self.currentUser.activityGrid objectAtIndex:indexPath.item];
     [cell populateWithActivityData:data userActivity:userActivity];
     return cell;
 }

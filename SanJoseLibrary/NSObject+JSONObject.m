@@ -23,46 +23,64 @@
         for (NSString *propertyName in [self propertyNames]) {
             [self populateValue:[properties valueForKey:propertyName] forKey:propertyName];
         }
-//        NSDictionary *jsonDict = [properties dictionaryWithValuesForKeys:[self propertyNames]];
-//        
-//        [self setValuesForKeysWithDictionary:jsonDict];
     }
     return self;
 }
 
-- (Class)classForPropertyNamed:(NSString *)propertyName
+- (NSDictionary *)classForPropertyNamed:(NSString *)propertyName
 {
-    Class classForKey = nil;
+    NSString *classForKey = @"";
+    NSString *protocolForKey = @"";
     const char * c = [self typeOfPropertyNamed:propertyName];
-    if (c) {
+    if (c)
+    {
         NSString *classStr = [NSString stringWithUTF8String:c];
         NSArray *temp = [classStr componentsSeparatedByString:@"@"];
         if ([temp count]>=2) {
             classStr = [temp objectAtIndex:1];
         }
         classStr = [classStr stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-        classForKey = NSClassFromString(classStr);
+    
+        NSRange startRange = [classStr rangeOfString:@"<"];
+        NSRange endRange = [classStr rangeOfString:@">"];
+        if (startRange.location != NSNotFound)
+        {
+            classForKey = [classStr substringToIndex:startRange.location];
+            protocolForKey = [classStr substringWithRange:
+                        NSMakeRange(startRange.location+1, (endRange.location-startRange.location)-1)];
+        }
+        else
+        {
+            classForKey = classStr;
+        }
     }
-    return classForKey;
+    return @{@"c": classForKey, @"p":protocolForKey};
 }
 
 -(void)populateValue:(id)value forKey:(NSString *)key
 {
-    Class classForKey = [self classForPropertyNamed:key];
+    NSDictionary *class_protocol = [self classForPropertyNamed:key];
+    Class classForKey = NSClassFromString([class_protocol valueForKey:@"c"]);
+    Class protocolClass = NSClassFromString([class_protocol valueForKey:@"p"]);
     
     if ([[value class] isSubclassOfClass:[NSArray class]] &&
-        [classForKey conformsToProtocol:@protocol(CollectionsProtocol)])
+        protocolClass)
     {
-        Class classOfObj = classOfObj = [classForKey performSelector:@selector(collectionType)];
+        Class classOfObj = protocolClass;
         NSMutableArray *mutableValue = [NSMutableArray arrayWithCapacity:[value count]];
         
         for (id obj in value) {
             id o = [[classOfObj alloc] initWithJSONProperties:obj];
             [mutableValue addObject:o];
         }
-        id ob = [[classForKey alloc] init];
-        [ob setCollectionContainer:mutableValue];
-        [self setValue:ob forKeyPath:key];
+        [self setValue:[mutableValue copy] forKeyPath:key];
+    }
+    else if ([[value class] isSubclassOfClass:[NSDictionary class]] &&
+             classForKey)
+    {
+        Class classOfObj = classForKey;
+        id o = [[classOfObj alloc] initWithJSONProperties:value];
+        [self setValue:o forKey:key];
     }
     else
     {
