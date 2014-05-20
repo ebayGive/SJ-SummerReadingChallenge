@@ -10,16 +10,18 @@
 #import "ContainerViewController.h"
 #import "User.h"
 #import "ActivityGridCell.h"
-#import "ActivityCollection.h"
 #import "ServiceRequest.h"
 #import "ActivityGrids.h"
-#import "ActivityGridCellDataCollection.h"
 #import "ActivityGrid.h"
+#import "PrizesFooterView.h"
+#import "PrizeType.h"
+#import "PrizeTypes.h"
 
 @interface ActivityGridViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (weak, nonatomic) User *currentUser;
 @property (strong, nonatomic) ActivityGrid *activityGrid;
+@property (strong, nonatomic) PrizeType *prizesForUser;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *activityGridCollectionView;
 
@@ -41,6 +43,7 @@
 {
     [super viewDidLoad];
     self.currentUser = [(ContainerViewController *)self.parentViewController currentUser];
+    
     ServiceRequest *sr = [ServiceRequest sharedRequest];
     [sr getGridDetailsWithCompletionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
         ActivityGrids *ag = [[ActivityGrids alloc] activityGridsWithProperties:(NSArray *)json[@"grids"]];
@@ -49,6 +52,17 @@
             [self.activityGridCollectionView reloadData];
         });
     }];
+    [sr getPrizeAndUserTypesWithCompletionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
+        PrizeTypes *prizes = [[PrizeTypes alloc] prizeTypesWithProperties:json[@"prizes"]];
+        self.prizesForUser = [prizes prizesForUserType:self.currentUser.userType];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.activityGridCollectionView reloadData];
+        });
+    }];
+    
+    [self.activityGridCollectionView registerClass:[UICollectionReusableView class]
+                        forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                               withReuseIdentifier:@"HeaderView"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -87,6 +101,26 @@
 {
     ActivityGridCell *cell = (ActivityGridCell *)[collectionView cellForItemAtIndexPath:indexPath];
     [cell showActivityDescription];
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    if (kind == UICollectionElementKindSectionHeader) {
+        
+        UICollectionReusableView *reusableview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
+        UILabel *header = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 310, 42)];
+        [header setLineBreakMode:NSLineBreakByWordWrapping];
+        [header setNumberOfLines:0];
+        [header setText:@"Complete 5 squares in a row to win prizes"];
+        [reusableview addSubview:header];
+        return reusableview;
+    }
+    else if (kind == UICollectionElementKindSectionFooter) {
+        PrizesFooterView *reusableview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"PrizesFooterView" forIndexPath:indexPath];
+        [reusableview setupViewWithPrizeType:self.prizesForUser];
+        return reusableview;
+    }
+    return nil;
 }
 
 @end

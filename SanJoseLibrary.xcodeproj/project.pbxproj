@@ -35,6 +35,16 @@
 		C2548544192AA2C80007DFC6 /* energize.png in Resources */ = {isa = PBXBuildFile; fileRef = C254853E192AA2C80007DFC6 /* energize.png */; };
 		C2548545192AA2C80007DFC6 /* help-web.html in Resources */ = {isa = PBXBuildFile; fileRef = C254853F192AA2C80007DFC6 /* help-web.html */; };
 		C2548546192AA2C80007DFC6 /* learn.png in Resources */ = {isa = PBXBuildFile; fileRef = C2548540192AA2C80007DFC6 /* learn.png */; };
+		C2548549192ABB9B0007DFC6 /* NewMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2548548192ABB9B0007DFC6 /* NewMemberViewController.m */; };
+		C254854C192BBB7B0007DFC6 /* PrizesFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C254854B192BBB7B0007DFC6 /* PrizesFooterView.m */; };
+		C254854F192BCD810007DFC6 /* PrizeTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = C254854E192BCD810007DFC6 /* PrizeTypes.m */; };
+		C2548557192BE0190007DFC6 /* ADULT.png in Resources */ = {isa = PBXBuildFile; fileRef = C2548550192BE0190007DFC6 /* ADULT.png */; };
+		C2548558192BE0190007DFC6 /* Header Bar.png in Resources */ = {isa = PBXBuildFile; fileRef = C2548551192BE0190007DFC6 /* Header Bar.png */; };
+		C2548559192BE0190007DFC6 /* READER.png in Resources */ = {isa = PBXBuildFile; fileRef = C2548552192BE0190007DFC6 /* READER.png */; };
+		C254855A192BE0190007DFC6 /* TEEN.png in Resources */ = {isa = PBXBuildFile; fileRef = C2548553192BE0190007DFC6 /* TEEN.png */; };
+		C254855B192BE0190007DFC6 /* PRE-READER.png in Resources */ = {isa = PBXBuildFile; fileRef = C2548554192BE0190007DFC6 /* PRE-READER.png */; };
+		C254855C192BE0190007DFC6 /* Background-01.png in Resources */ = {isa = PBXBuildFile; fileRef = C2548555192BE0190007DFC6 /* Background-01.png */; };
+		C254855D192BE0190007DFC6 /* STAFF SJPL.png in Resources */ = {isa = PBXBuildFile; fileRef = C2548556192BE0190007DFC6 /* STAFF SJPL.png */; };
 		C283E3FF191AAD35008B66DB /* NSObject+Properties.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E3FC191AAD35008B66DB /* NSObject+Properties.m */; };
 		C283E400191AAD35008B66DB /* NSString+PropertyKVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E3FE191AAD35008B66DB /* NSString+PropertyKVC.m */; };
 		C283E406191AAFCB008B66DB /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = C283E405191AAFCB008B66DB /* User.m */; };
@@ -192,14 +202,25 @@
 		C24FDF6B19198279009C7A9A /* LoginParameters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginParameters.m; sourceTree = "<group>"; };
 		C24FDF6D1919922F009C7A9A /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
 		C24FDF6E1919922F009C7A9A /* Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Account.m; sourceTree = "<group>"; };
-		C24FDF7019199BA9009C7A9A /* UserCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCollection.h; sourceTree = "<group>"; };
-		C24FDF7119199BA9009C7A9A /* UserCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCollection.m; sourceTree = "<group>"; };
 		C254853B192AA2C80007DFC6 /* read.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = read.png; sourceTree = "<group>"; };
 		C254853C192AA2C80007DFC6 /* help-android.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "help-android.html"; sourceTree = "<group>"; };
 		C254853D192AA2C80007DFC6 /* explore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explore.png; sourceTree = "<group>"; };
 		C254853E192AA2C80007DFC6 /* energize.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = energize.png; sourceTree = "<group>"; };
 		C254853F192AA2C80007DFC6 /* help-web.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "help-web.html"; sourceTree = "<group>"; };
 		C2548540192AA2C80007DFC6 /* learn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = learn.png; sourceTree = "<group>"; };
+		C2548547192ABB9B0007DFC6 /* NewMemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMemberViewController.h; sourceTree = "<group>"; };
+		C2548548192ABB9B0007DFC6 /* NewMemberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMemberViewController.m; sourceTree = "<group>"; };
+		C254854A192BBB7B0007DFC6 /* PrizesFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrizesFooterView.h; sourceTree = "<group>"; };
+		C254854B192BBB7B0007DFC6 /* PrizesFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrizesFooterView.m; sourceTree = "<group>"; };
+		C254854D192BCD810007DFC6 /* PrizeTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrizeTypes.h; sourceTree = "<group>"; };
+		C254854E192BCD810007DFC6 /* PrizeTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrizeTypes.m; sourceTree = "<group>"; };
+		C2548550192BE0190007DFC6 /* ADULT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ADULT.png; sourceTree = "<group>"; };
+		C2548551192BE0190007DFC6 /* Header Bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Header Bar.png"; sourceTree = "<group>"; };
+		C2548552192BE0190007DFC6 /* READER.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = READER.png; sourceTree = "<group>"; };
+		C2548553192BE0190007DFC6 /* TEEN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TEEN.png; sourceTree = "<group>"; };
+		C2548554192BE0190007DFC6 /* PRE-READER.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PRE-READER.png"; sourceTree = "<group>"; };
+		C2548555192BE0190007DFC6 /* Background-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Background-01.png"; sourceTree = "<group>"; };
+		C2548556192BE0190007DFC6 /* STAFF SJPL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "STAFF SJPL.png"; sourceTree = "<group>"; };
 		C283E3FB191AAD35008B66DB /* NSObject+Properties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Properties.h"; sourceTree = "<group>"; };
 		C283E3FC191AAD35008B66DB /* NSObject+Properties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Properties.m"; sourceTree = "<group>"; };
 		C283E3FD191AAD35008B66DB /* NSString+PropertyKVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PropertyKVC.h"; sourceTree = "<group>"; };
@@ -208,12 +229,8 @@
 		C283E405191AAFCB008B66DB /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		C283E407191AD1FD008B66DB /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Activity.h; path = ../Activity.h; sourceTree = "<group>"; };
 		C283E408191AD1FD008B66DB /* Activity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Activity.m; path = ../Activity.m; sourceTree = "<group>"; };
-		C283E40A191AD255008B66DB /* ActivityCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityCollection.h; path = ../ActivityCollection.h; sourceTree = "<group>"; };
-		C283E40B191AD255008B66DB /* ActivityCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityCollection.m; path = ../ActivityCollection.m; sourceTree = "<group>"; };
 		C283E40D191AD26B008B66DB /* Prize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prize.h; path = ../Prize.h; sourceTree = "<group>"; };
 		C283E40E191AD26B008B66DB /* Prize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Prize.m; path = ../Prize.m; sourceTree = "<group>"; };
-		C283E410191AD281008B66DB /* PrizesCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrizesCollection.h; path = ../PrizesCollection.h; sourceTree = "<group>"; };
-		C283E411191AD281008B66DB /* PrizesCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrizesCollection.m; path = ../PrizesCollection.m; sourceTree = "<group>"; };
 		C283E413191AD724008B66DB /* PrizeType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrizeType.h; path = ../PrizeType.h; sourceTree = "<group>"; };
 		C283E414191AD724008B66DB /* PrizeType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrizeType.m; path = ../PrizeType.m; sourceTree = "<group>"; };
 		C283E416191AD7B5008B66DB /* UserType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserType.h; path = ../UserType.h; sourceTree = "<group>"; };
@@ -339,8 +356,6 @@
 		C2DEEC4A1922CA340003495B /* ActivityGridCellContents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityGridCellContents.m; sourceTree = "<group>"; };
 		C2DEEC4C1922CBB50003495B /* ActivityGrids.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityGrids.h; sourceTree = "<group>"; };
 		C2DEEC4D1922CBB50003495B /* ActivityGrids.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityGrids.m; sourceTree = "<group>"; };
-		C2DEEC4F1922CD080003495B /* ActivityGridCellDataCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityGridCellDataCollection.h; sourceTree = "<group>"; };
-		C2DEEC501922CD080003495B /* ActivityGridCellDataCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityGridCellDataCollection.m; sourceTree = "<group>"; };
 		C2DEEC521922CD600003495B /* UserTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTypes.h; sourceTree = "<group>"; };
 		C2DEEC531922CD600003495B /* UserTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTypes.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -449,6 +464,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		C254855E192BE0330007DFC6 /* Information Screen Assets */ = {
+			isa = PBXGroup;
+			children = (
+				C254853B192AA2C80007DFC6 /* read.png */,
+				C254853C192AA2C80007DFC6 /* help-android.html */,
+				C254853D192AA2C80007DFC6 /* explore.png */,
+				C254853E192AA2C80007DFC6 /* energize.png */,
+				C254853F192AA2C80007DFC6 /* help-web.html */,
+				C2548540192AA2C80007DFC6 /* learn.png */,
+			);
+			name = "Information Screen Assets";
+			sourceTree = "<group>";
+		};
 		C283E419191AD824008B66DB /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -491,18 +519,12 @@
 			children = (
 				C2CB4DD0191C398D00BA3FBD /* Branches.h */,
 				C2CB4DD1191C398D00BA3FBD /* Branches.m */,
-				C24FDF7019199BA9009C7A9A /* UserCollection.h */,
-				C24FDF7119199BA9009C7A9A /* UserCollection.m */,
-				C283E410191AD281008B66DB /* PrizesCollection.h */,
-				C283E411191AD281008B66DB /* PrizesCollection.m */,
-				C283E40A191AD255008B66DB /* ActivityCollection.h */,
-				C283E40B191AD255008B66DB /* ActivityCollection.m */,
 				C2DEEC4C1922CBB50003495B /* ActivityGrids.h */,
 				C2DEEC4D1922CBB50003495B /* ActivityGrids.m */,
-				C2DEEC4F1922CD080003495B /* ActivityGridCellDataCollection.h */,
-				C2DEEC501922CD080003495B /* ActivityGridCellDataCollection.m */,
 				C2DEEC521922CD600003495B /* UserTypes.h */,
 				C2DEEC531922CD600003495B /* UserTypes.m */,
+				C254854D192BCD810007DFC6 /* PrizeTypes.h */,
+				C254854E192BCD810007DFC6 /* PrizeTypes.m */,
 			);
 			name = Collections;
 			sourceTree = "<group>";
@@ -578,12 +600,14 @@
 		C29A2BAA19247598000CE3DF /* images */ = {
 			isa = PBXGroup;
 			children = (
-				C254853B192AA2C80007DFC6 /* read.png */,
-				C254853C192AA2C80007DFC6 /* help-android.html */,
-				C254853D192AA2C80007DFC6 /* explore.png */,
-				C254853E192AA2C80007DFC6 /* energize.png */,
-				C254853F192AA2C80007DFC6 /* help-web.html */,
-				C2548540192AA2C80007DFC6 /* learn.png */,
+				C2548550192BE0190007DFC6 /* ADULT.png */,
+				C2548551192BE0190007DFC6 /* Header Bar.png */,
+				C2548552192BE0190007DFC6 /* READER.png */,
+				C2548553192BE0190007DFC6 /* TEEN.png */,
+				C2548554192BE0190007DFC6 /* PRE-READER.png */,
+				C2548555192BE0190007DFC6 /* Background-01.png */,
+				C2548556192BE0190007DFC6 /* STAFF SJPL.png */,
+				C254855E192BE0330007DFC6 /* Information Screen Assets */,
 				C29A2BAB192475D9000CE3DF /* APP Battery OFF */,
 				C29A2B4F1924757C000CE3DF /* APP Battery ON */,
 			);
@@ -652,6 +676,8 @@
 				C24FDF4419195819009C7A9A /* SelectUserViewController.m */,
 				C24FDF4619195819009C7A9A /* LoginViewController.h */,
 				C24FDF4719195819009C7A9A /* LoginViewController.m */,
+				C2548547192ABB9B0007DFC6 /* NewMemberViewController.h */,
+				C2548548192ABB9B0007DFC6 /* NewMemberViewController.m */,
 			);
 			name = Viewcontrollers;
 			sourceTree = "<group>";
@@ -675,6 +701,8 @@
 				C2981F711920348900DEBA0D /* ReadingLogCell.m */,
 				C2981F73192034A300DEBA0D /* ActivityGridCell.h */,
 				C2981F74192034A300DEBA0D /* ActivityGridCell.m */,
+				C254854A192BBB7B0007DFC6 /* PrizesFooterView.h */,
+				C254854B192BBB7B0007DFC6 /* PrizesFooterView.m */,
 			);
 			name = "Activity Controller";
 			sourceTree = "<group>";
@@ -757,6 +785,7 @@
 			files = (
 				C29A2B901924757C000CE3DF /* APP BATTERY ON-20.png in Resources */,
 				C24FDF4A19195819009C7A9A /* Images.xcassets in Resources */,
+				C254855B192BE0190007DFC6 /* PRE-READER.png in Resources */,
 				C29A2BF8192475D9000CE3DF /* APP BATTERY OFF-32.png in Resources */,
 				C29A2BA01924757C000CE3DF /* APP BATTERY ON-36.png in Resources */,
 				C29A2BF0192475D9000CE3DF /* APP BATTERY OFF-24.png in Resources */,
@@ -770,6 +799,7 @@
 				C29A2BE9192475D9000CE3DF /* APP BATTERY OFF-17.png in Resources */,
 				C29A2B8B1924757C000CE3DF /* APP BATTERY ON-15.png in Resources */,
 				C2548541192AA2C80007DFC6 /* read.png in Resources */,
+				C254855D192BE0190007DFC6 /* STAFF SJPL.png in Resources */,
 				C29A2BA21924757C000CE3DF /* APP BATTERY ON-38.png in Resources */,
 				C29A2B961924757C000CE3DF /* APP BATTERY ON-26.png in Resources */,
 				C29A2BA71924757C000CE3DF /* APP BATTERY ON-43.png in Resources */,
@@ -814,19 +844,24 @@
 				C24FDF3C19195819009C7A9A /* Main_iPhone.storyboard in Resources */,
 				C29A2B811924757C000CE3DF /* APP BATTERY ON-05.png in Resources */,
 				C29A2BEE192475D9000CE3DF /* APP BATTERY OFF-22.png in Resources */,
+				C254855C192BE0190007DFC6 /* Background-01.png in Resources */,
 				C29A2B9A1924757C000CE3DF /* APP BATTERY ON-30.png in Resources */,
 				C29A2BF3192475D9000CE3DF /* APP BATTERY OFF-27.png in Resources */,
 				C29A2B8F1924757C000CE3DF /* APP BATTERY ON-19.png in Resources */,
 				C29A2B871924757C000CE3DF /* APP BATTERY ON-11.png in Resources */,
 				C29A2B9D1924757C000CE3DF /* APP BATTERY ON-33.png in Resources */,
 				C29A2BDC192475D9000CE3DF /* APP BATTERY OFF-04.png in Resources */,
+				C2548558192BE0190007DFC6 /* Header Bar.png in Resources */,
 				C29A2B8A1924757C000CE3DF /* APP BATTERY ON-14.png in Resources */,
 				C29A2B9C1924757C000CE3DF /* APP BATTERY ON-32.png in Resources */,
 				C29A2BEB192475D9000CE3DF /* APP BATTERY OFF-19.png in Resources */,
 				C29A2BD9192475D9000CE3DF /* APP BATTERY OFF-01.png in Resources */,
+				C2548559192BE0190007DFC6 /* READER.png in Resources */,
 				C24FDF3319195819009C7A9A /* InfoPlist.strings in Resources */,
 				C29A2BDD192475D9000CE3DF /* APP BATTERY OFF-05.png in Resources */,
 				C29A2B911924757C000CE3DF /* APP BATTERY ON-21.png in Resources */,
+				C254855A192BE0190007DFC6 /* TEEN.png in Resources */,
+				C2548557192BE0190007DFC6 /* ADULT.png in Resources */,
 				C29A2B981924757C000CE3DF /* APP BATTERY ON-28.png in Resources */,
 				C29A2BF9192475D9000CE3DF /* APP BATTERY OFF-33.png in Resources */,
 				C29A2B941924757C000CE3DF /* APP BATTERY ON-24.png in Resources */,
@@ -875,11 +910,13 @@
 				C24FDF4819195819009C7A9A /* LoginViewController.m in Sources */,
 				C24FDF6F1919922F009C7A9A /* Account.m in Sources */,
 				C2DEEC4E1922CBB50003495B /* ActivityGrids.m in Sources */,
+				C254854F192BCD810007DFC6 /* PrizeTypes.m in Sources */,
 				C283E3FF191AAD35008B66DB /* NSObject+Properties.m in Sources */,
 				C283E409191AD1FD008B66DB /* Activity.m in Sources */,
 				C2CB4DC9191BFFBF00BA3FBD /* RegisterViewController.m in Sources */,
 				C283E41F191AE028008B66DB /* NSObject+JSONObject.m in Sources */,
 				C2DEEC4B1922CA340003495B /* ActivityGridCellContents.m in Sources */,
+				C254854C192BBB7B0007DFC6 /* PrizesFooterView.m in Sources */,
 				C2981F75192034A300DEBA0D /* ActivityGridCell.m in Sources */,
 				C283E400191AAD35008B66DB /* NSString+PropertyKVC.m in Sources */,
 				C2D683B1191D42EF00C3F7E5 /* ActivityViewController.m in Sources */,
@@ -897,6 +934,7 @@
 				C24FDF3919195819009C7A9A /* AppDelegate.m in Sources */,
 				C2CB4DCF191C0D9400BA3FBD /* Branch.m in Sources */,
 				C2CB4DD2191C398D00BA3FBD /* Branches.m in Sources */,
+				C2548549192ABB9B0007DFC6 /* NewMemberViewController.m in Sources */,
 				C283E418191AD7B5008B66DB /* UserType.m in Sources */,
 				C283E415191AD724008B66DB /* PrizeType.m in Sources */,
 				C24FDF3519195819009C7A9A /* main.m in Sources */,

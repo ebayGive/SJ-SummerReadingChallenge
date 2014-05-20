@@ -19,4 +19,6 @@
 @property (nonatomic, strong) NSString *id;
 @property (nonatomic, strong) NSString *type;
 
+@property (nonatomic, strong) UIColor *color;
+
 @end

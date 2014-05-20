@@ -22,6 +22,9 @@
 {
     self.userActivity = activity;
     self.activityCellData = activityCellData;
+    
+    NSString *img = [NSString stringWithFormat:@"%@",activityCellData.gridIcon];
+    [self.imageView setImage:[UIImage imageNamed:img]];
 }
 
 - (void)showActivityDescription

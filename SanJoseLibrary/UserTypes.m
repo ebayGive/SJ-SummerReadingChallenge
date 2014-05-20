@@ -26,4 +26,24 @@
     return this;
 }
 
+-(UIColor *)colorForUserType:(NSString *)userType
+{
+    for (UserType *u in self.userTypes) {
+        if ([userType isEqualToString:u.id]) {
+            return [u color];
+        }
+    }
+    return [UIColor blackColor];
+}
+
+-(NSString *)nameForUserType:(NSString *)userType
+{
+    for (UserType *u in self.userTypes) {
+        if ([userType isEqualToString:u.id]) {
+            return [u name];
+        }
+    }
+    return nil;
+}
+
 @end

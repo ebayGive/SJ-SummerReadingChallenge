@@ -14,4 +14,7 @@
 
 - (id)userTypesWithProperties:(NSArray *)properties;
 
+- (UIColor *)colorForUserType:(NSString *)userType;
+-(NSString *)nameForUserType:(NSString *)userType;
+
 @end

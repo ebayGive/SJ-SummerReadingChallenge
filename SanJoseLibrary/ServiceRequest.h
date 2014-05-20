@@ -21,5 +21,6 @@ typedef void(^ServiceRequestCompletion)(NSDictionary *json, NSURLResponse *respo
                    completionHandler:(ServiceRequestCompletion)handler;
 - (void)getBranchDetailsWithCompletionHandler:(ServiceRequestCompletion)handler;
 - (void)getGridDetailsWithCompletionHandler:(ServiceRequestCompletion)handler;
-
+- (void)getUserTypesWithCompletionHandler:(ServiceRequestCompletion)handler;
+- (void)getPrizeAndUserTypesWithCompletionHandler:(ServiceRequestCompletion)handler;
 @end

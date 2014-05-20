@@ -69,7 +69,9 @@
     [sr startLoginTaskWithParameters:self.param
                    completionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
                        Account *acc = [Account AccountWithProperties:json[@"account"]];
-                       [self handleResponse:acc];
+                       dispatch_sync(dispatch_get_main_queue(), ^{
+                           [self handleResponse:acc];
+                       });
                    }];
 }
 
@@ -81,9 +83,10 @@
     }
     else
     {
-        [Utillities alertViewWithTitle:@"Signin Error" message:@"Failed to login with the supplied credentials" delegate:nil
+        UIAlertView *error = [Utillities alertViewWithTitle:@"Signin Error" message:@"Failed to login with the supplied credentials" delegate:nil
                      cancelButtonTitle:nil
                      otherButtonTitles:@"Ok",nil];
+        [error show];
     }
 }
 

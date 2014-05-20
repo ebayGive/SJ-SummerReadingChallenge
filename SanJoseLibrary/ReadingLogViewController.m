@@ -13,6 +13,7 @@
 
 @interface ReadingLogViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
+@property (strong, nonatomic) NSArray *readingLogCollectionViewCells;
 @property (weak, nonatomic) NSIndexPath *currentIndexPath;
 @property (weak, nonatomic) User *currentUser;
 @property (weak, nonatomic) IBOutlet UICollectionView *readingLogCollectionView;
@@ -27,6 +28,23 @@
     [super viewDidLoad];
     
     self.currentUser = [(ContainerViewController *)self.parentViewController currentUser];
+    
+    NSMutableArray *cells = [[NSMutableArray alloc] initWithCapacity:23];
+    for (int i =0; i<[self.readingLogCollectionView numberOfItemsInSection:0]; i++) {
+        NSIndexPath *ip = [NSIndexPath indexPathForItem:i inSection:0];
+        ReadingLogCell *cell = [self.readingLogCollectionView dequeueReusableCellWithReuseIdentifier:@"readingLogCell"
+                                                                                        forIndexPath:ip];
+        NSString *imgName = nil;
+        if ((ip.item+1)/10<1) {
+            imgName = [NSString stringWithFormat:@"APP BATTERY OFF-0%d",ip.item+1];
+        } else {
+            imgName = [NSString stringWithFormat:@"APP BATTERY OFF-%d",ip.item+1];
+        }
+        [cell.imageView setImage:[UIImage imageNamed:imgName]];
+        [cells addObject:cell];
+    }
+    
+    self.readingLogCollectionViewCells = [cells copy];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -54,7 +72,7 @@
         return;
     }
     [self.readingLogCollectionView performBatchUpdates:^{
-        ReadingLogCell *cell = (ReadingLogCell *)[self.readingLogCollectionView cellForItemAtIndexPath:ip];
+        ReadingLogCell *cell = [self.readingLogCollectionViewCells objectAtIndex:ip.item];
         NSString *imgName = nil;
         if ((ip.item+1)/10<1) {
             imgName = [NSString stringWithFormat:@"APP BATTERY ON-0%d",ip.item+1];
@@ -80,15 +98,8 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ReadingLogCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"readingLogCell"
-                                                                           forIndexPath:indexPath];
-    NSString *imgName = nil;
-    if ((indexPath.item+1)/10<1) {
-        imgName = [NSString stringWithFormat:@"APP BATTERY OFF-0%d",indexPath.item+1];
-    } else {
-        imgName = [NSString stringWithFormat:@"APP BATTERY OFF-%d",indexPath.item+1];
-    }
-    [cell.imageView setImage:[UIImage imageNamed:imgName]];
+    ReadingLogCell *cell = [self.readingLogCollectionViewCells objectAtIndex:indexPath.item];
+    
     return cell;
 }
 

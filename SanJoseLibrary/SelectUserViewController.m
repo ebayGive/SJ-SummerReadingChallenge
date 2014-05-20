@@ -9,14 +9,16 @@
 #import "SelectUserViewController.h"
 #import "LoginViewController.h"
 #import "Account.h"
-#import "UserCollection.h"
 #import "ActivityViewController.h"
+#import "ServiceRequest.h"
+#import "UserTypes.h"
+#import "User.h"
 
 @interface SelectUserViewController ()
 
-@property (strong, nonatomic) LoginViewController *loginViewController;
-
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+
+@property (strong, nonatomic) UserTypes *userTypes;
 
 @end
 
@@ -34,10 +36,28 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.title = @"Select Member";
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setBool:NO forKey:@"isUserLoggedIn"];
     [ud synchronize];
+    
+    ServiceRequest *sr = [ServiceRequest sharedRequest];
+    [sr getUserTypesWithCompletionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
+        self.userTypes = [[UserTypes alloc] userTypesWithProperties:(NSArray *)json];
+    }];
+    
+    self.tableView.tableFooterView = [UIView new];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.title = @"Select Member";
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.title = @"";
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -89,13 +109,25 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.accountInfo.users count];
+    return [self.accountInfo.users count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    static NSString *cellId = @"";
+    if (indexPath.row<[tableView numberOfRowsInSection:indexPath.section]-1) {
+        cellId = @"Cell";
+    }
+    else
+    {
+        cellId = @"newMember";
+    }
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId
+                                                            forIndexPath:indexPath];
+    
     [self configureCell:cell atIndexPath:indexPath];
+    
     return cell;
 }
 
@@ -137,9 +169,15 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    User *object = [self.accountInfo.users objectAtIndex:indexPath.row];
-    ActivityViewController * destVC = (ActivityViewController *)[segue destinationViewController];
-    [destVC setCurrentUser:object];
+    if (indexPath.row>[self.accountInfo.users count]-1) {
+        
+    }
+    else
+    {
+        User *object = [self.accountInfo.users objectAtIndex:indexPath.row];
+        ActivityViewController * destVC = (ActivityViewController *)[segue destinationViewController];
+        [destVC setCurrentUser:object];
+    }
 }
 
 #pragma mark - Fetched results controller
@@ -243,8 +281,16 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    User *name = [self.accountInfo.users objectAtIndex:indexPath.row];
-    cell.textLabel.text = [name fullName];
+    if (indexPath.row<[self.accountInfo.users count]) {
+        User *name = [self.accountInfo.users objectAtIndex:indexPath.row];
+        cell.textLabel.text = [name fullName];
+        [cell setBackgroundColor:[self.userTypes colorForUserType:name.userType]];
+        cell.imageView.image = [UIImage imageNamed:[self.userTypes nameForUserType:name.userType]];
+    }
+    else
+    {
+        cell.textLabel.text = @"Add Family Member";
+    }
 }
 
 @end

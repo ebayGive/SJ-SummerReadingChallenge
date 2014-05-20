@@ -42,9 +42,9 @@ static ServiceRequest *sharedInstance;
     return self;
 }
 
-- (void)getGridDetailsWithCompletionHandler:(ServiceRequestCompletion)handler
+-(void)getPrizeAndUserTypesWithCompletionHandler:(ServiceRequestCompletion)handler
 {
-    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createGridsRequest]
+    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createGetRequestForURLPath:@"http://hackathon.ebaystratus.com/prizes.json"]
                                                          completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                           {
                                               NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
@@ -53,19 +53,31 @@ static ServiceRequest *sharedInstance;
     [postDataTask resume];
 }
 
--(NSMutableURLRequest *)createGridsRequest
+- (void)getUserTypesWithCompletionHandler:(ServiceRequestCompletion)handler
 {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://hackathon.ebaystratus.com/grids.json"]
-                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                       timeoutInterval:60.0];
-    
-    [request setHTTPMethod:@"GET"];
-    return request;
+    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createGetRequestForURLPath:@"http://hackathon.ebaystratus.com/user_types.json"]
+                                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                          {
+                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                                              handler(json,response,error);
+                                          }];
+    [postDataTask resume];
+}
+
+- (void)getGridDetailsWithCompletionHandler:(ServiceRequestCompletion)handler
+{
+    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createGetRequestForURLPath:@"http://hackathon.ebaystratus.com/grids.json"]
+                                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                          {
+                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                                              handler(json,response,error);
+                                          }];
+    [postDataTask resume];
 }
 
 - (void)getBranchDetailsWithCompletionHandler:(ServiceRequestCompletion)handler
 {
-    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createBranchRequest]
+    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createGetRequestForURLPath:@"http://hackathon.ebaystratus.com/branches.json"]
                                                          completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                           {
                                               NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
@@ -74,9 +86,9 @@ static ServiceRequest *sharedInstance;
     [postDataTask resume];
 }
 
--(NSMutableURLRequest *)createBranchRequest
+-(NSMutableURLRequest *)createGetRequestForURLPath:(NSString *)endpoint
 {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://hackathon.ebaystratus.com/branches.json"]
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:endpoint]
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:60.0];
     
