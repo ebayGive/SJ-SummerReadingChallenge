@@ -57,6 +57,12 @@
         [sr getUserAccountDetailsWithCompletionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
             if (json != nil) {
                 self.accountInfo = [Account AccountWithProperties:json];
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                    if ([self.accountInfo.users count]==1) {
+                        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+                    }
+                });
             }
         }];
     }
@@ -72,14 +78,6 @@
 {
     [super viewWillDisappear:animated];
     self.title = @"";
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    [self.tableView reloadData];
-    if ([self.accountInfo.users count]==1) {
-        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
-    }
 }
 
 - (IBAction)logout:(UIBarButtonItem *)sender {

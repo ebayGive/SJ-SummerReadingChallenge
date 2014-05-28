@@ -12,7 +12,7 @@
 #import "ReadingLogCell.h"
 #import "ServiceRequest.h"
 
-@interface ReadingLogViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface ReadingLogViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIActionSheetDelegate>
 
 @property (strong, nonatomic) NSArray *readingLogCollectionViewCells;
 @property (strong, nonatomic) NSIndexPath *currentIndexPath;
@@ -96,7 +96,26 @@
 
 -(void)updateReadingLog:(UIBarButtonItem *)sender
 {
-    
+    UIActionSheet *updateReadingLogConfirmation = [[UIActionSheet alloc] initWithTitle:@"Challenge yourself to read at least 20 minutes a day"
+                                                                              delegate:self
+                                                                     cancelButtonTitle:@"I dint read for 20 minutes"
+                                                                destructiveButtonTitle:@"I read for 20 minutes"
+                                                                     otherButtonTitles:nil];
+    UINavigationItem *navItem = self.parentViewController.parentViewController.navigationItem;
+    [updateReadingLogConfirmation showFromBarButtonItem:navItem.rightBarButtonItem animated:YES];
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == [actionSheet destructiveButtonIndex]) {
+        [self.currentUser incrementReadingLog];
+        [[ServiceRequest sharedRequest] updateReadingLogForUser:self.currentUser
+                                              completionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
+                                                  dispatch_sync(dispatch_get_main_queue(), ^{
+                                                      [self updateCellAtIndexPath:self.currentIndexPath];
+                                                  });
+                                              }];
+    }
 }
 
 - (void)updateCellAtIndexPath:(NSIndexPath *)ip
@@ -138,13 +157,7 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.currentUser incrementReadingLog];
-    [[ServiceRequest sharedRequest] updateReadingLogForUser:self.currentUser
-                                          completionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
-                                              dispatch_sync(dispatch_get_main_queue(), ^{
-                                                  [self updateCellAtIndexPath:self.currentIndexPath];
-                                              });
-                                          }];
+    [self updateReadingLog:nil];
 }
 
 @end
