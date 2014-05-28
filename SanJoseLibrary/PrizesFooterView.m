@@ -28,11 +28,11 @@
 {
     self.prizeType = prizeType;
     self.title.text = @"Prizes";
-    [self.prize1 setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-    [self.prize2 setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-    [self.prize3 setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-    [self.prize4 setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-    [self.prize5 setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    [self.prize1 setBackgroundImage:[UIImage imageNamed:@"PRIZES_1_0"] forState:UIControlStateNormal];
+    [self.prize2 setBackgroundImage:[UIImage imageNamed:@"PRIZES_2_0"] forState:UIControlStateNormal];
+    [self.prize3 setBackgroundImage:[UIImage imageNamed:@"PRIZES_3_0"] forState:UIControlStateNormal];
+    [self.prize4 setBackgroundImage:[UIImage imageNamed:@"PRIZES_4_0"] forState:UIControlStateNormal];
+    [self.prize5 setBackgroundImage:[UIImage imageNamed:@"PRIZES_5_0"] forState:UIControlStateNormal];
 }
 
 - (IBAction)prizeButtonClicked:(UIButton *)sender

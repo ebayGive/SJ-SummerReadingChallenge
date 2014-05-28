@@ -10,10 +10,8 @@
 #import "LoginViewController.h"
 #import "RegisterViewController.h"
 #import "SelectUserViewController.h"
-
+#import "PersistentStore.h"
 #import "ServiceRequest.h"
-#import "LoginParameters.h"
-
 #import "Account.h"
 
 @interface LoginViewController () <UITextFieldDelegate>
@@ -23,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *accountName;
 @property (weak, nonatomic) IBOutlet UITextField *passcode;
 
-@property (strong, nonatomic) LoginParameters *param;
+@property (strong, nonatomic) Account *param;
 
 @end
 
@@ -34,28 +32,31 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-//    UIBarButtonItem *registerButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(registerNewUser)];
-//    self.navigationItem.rightBarButtonItem = registerButton;
     
-    self.param = [[LoginParameters alloc] init];
+    if(!(self.param = [PersistentStore accountDetails]))
+    {
+        self.param = [[Account alloc] init];
+    }
+    
+    self.accountName.text = self.param.accountName;
+    self.passcode.text = self.param.passcode;
+    
     [self.accountName becomeFirstResponder];
 }
 
 -(void)registerNewUser
 {
-    UIViewController *registerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"RegisterViewController"];
+    RegisterViewController *registerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"RegisterViewController"];
+    [registerVC setPresentingController:self.presentingController];
     [self.navigationController pushViewController:registerVC animated:YES];
 }
-
-
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if ([textField isEqual:self.accountName]) {
         [self.passcode becomeFirstResponder];
     }else{
-        [textField resignFirstResponder];
+//        [textField resignFirstResponder];
         [self startLoginRequest];
     }
     return YES;
@@ -68,7 +69,7 @@
     ServiceRequest *sr = [ServiceRequest sharedRequest];
     [sr startLoginTaskWithParameters:self.param
                    completionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
-                       Account *acc = [Account AccountWithProperties:json[@"account"]];
+                       Account *acc = [Account AccountWithProperties:json];
                        dispatch_sync(dispatch_get_main_queue(), ^{
                            [self handleResponse:acc];
                        });
@@ -87,6 +88,7 @@
                      cancelButtonTitle:nil
                      otherButtonTitles:@"Ok",nil];
         [error show];
+        [self.accountName becomeFirstResponder];
     }
 }
 

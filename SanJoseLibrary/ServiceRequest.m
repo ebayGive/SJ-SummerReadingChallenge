@@ -6,14 +6,16 @@
 //  Copyright (c) 2014 Himanshu Tantia. All rights reserved.
 //
 
+#import "PersistentStore.h"
 #import "ServiceRequest.h"
-#import "LoginParameters.h"
+#import "Account.h"
+#import "User.h"
 
 static ServiceRequest *sharedInstance;
 
 @interface ServiceRequest ()
 
-@property (nonatomic, strong) NSString *authToken;
+@property (nonatomic, strong) Account *account;
 @property (nonatomic, strong) NSURLSession *session;
 
 @end
@@ -27,14 +29,14 @@ static ServiceRequest *sharedInstance;
 
 +(instancetype)sharedRequest
 {
-    if(!sharedInstance)
-    {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         sharedInstance = [[ServiceRequest alloc] initWithSession:[NSURLSession sharedSession]];
-    }
+    });
     return sharedInstance;
 }
 
--(instancetype) initWithSession:(NSURLSession *)session {
+-(instancetype)initWithSession:(NSURLSession *)session {
     
     if(self = [self init]) {
         self.session = session;
@@ -44,9 +46,23 @@ static ServiceRequest *sharedInstance;
 
 -(void)getPrizeAndUserTypesWithCompletionHandler:(ServiceRequestCompletion)handler
 {
-    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createGetRequestForURLPath:@"http://hackathon.ebaystratus.com/prizes.json"]
+    NSString *urlStr = @"http://hackathon.ebaystratus.com/prizes.json";
+    
+//    id data = [PersistentStore objectWithKey:urlStr];
+//    
+//    if (data != nil) {
+//        NSError *error = nil;
+//        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+//        handler(json,nil,error);
+//        return;
+//    }
+    
+    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createGetRequestForURLPath:urlStr]
                                                          completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                           {
+//                                              if (data && [data length]) {
+//                                                  [PersistentStore saveObject:data withKey:urlStr];
+//                                              }
                                               NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                                               handler(json,response,error);
                                           }];
@@ -55,7 +71,8 @@ static ServiceRequest *sharedInstance;
 
 - (void)getUserTypesWithCompletionHandler:(ServiceRequestCompletion)handler
 {
-    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createGetRequestForURLPath:@"http://hackathon.ebaystratus.com/user_types.json"]
+    NSString *urlStr = @"http://hackathon.ebaystratus.com/user_types.json";
+    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createGetRequestForURLPath:urlStr]
                                                          completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                           {
                                               NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
@@ -66,7 +83,8 @@ static ServiceRequest *sharedInstance;
 
 - (void)getGridDetailsWithCompletionHandler:(ServiceRequestCompletion)handler
 {
-    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createGetRequestForURLPath:@"http://hackathon.ebaystratus.com/grids.json"]
+    NSString *urlStr = @"http://hackathon.ebaystratus.com/grids.json";
+    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createGetRequestForURLPath:urlStr]
                                                          completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                           {
                                               NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
@@ -77,7 +95,8 @@ static ServiceRequest *sharedInstance;
 
 - (void)getBranchDetailsWithCompletionHandler:(ServiceRequestCompletion)handler
 {
-    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createGetRequestForURLPath:@"http://hackathon.ebaystratus.com/branches.json"]
+    NSString *urlStr = @"http://hackathon.ebaystratus.com/branches.json";
+    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createGetRequestForURLPath:urlStr]
                                                          completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                           {
                                               NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
@@ -85,6 +104,22 @@ static ServiceRequest *sharedInstance;
                                           }];
     [postDataTask resume];
 }
+
+- (void)getUserAccountDetailsWithCompletionHandler:(ServiceRequestCompletion)handler
+{
+    Account *acc = [PersistentStore accountDetails];
+    NSString *urlStr = [NSString stringWithFormat:@"http://hackathon.ebaystratus.com/accounts/%@.json",acc.id];
+    
+    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createGetRequestForURLPath:urlStr]
+                                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                          {
+                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                                              handler(json,response,error);
+                                          }];
+    [postDataTask resume];
+
+}
+
 
 -(NSMutableURLRequest *)createGetRequestForURLPath:(NSString *)endpoint
 {
@@ -96,37 +131,208 @@ static ServiceRequest *sharedInstance;
     return request;
 }
 
-- (void)startLoginTaskWithParameters:(LoginParameters *)param
-                   completionHandler:(ServiceRequestCompletion)handler
+-(void)updateAvtivityForUser:(User *)user
+             completionHandler:(ServiceRequestCompletion)handler
 {
-    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createLoginRequestWithParameters:param]
-                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+    
+    
+}
+
+-(void)updateReadingLogForUser:(User *)user
+             completionHandler:(ServiceRequestCompletion)handler
+{
+    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createRequestWithUser:user]
+                                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                           {
                                               NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                                              self.authToken = json[@"authToken"];
-                                              NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-                                              [ud setBool:YES forKey:@"isUserLoggedIn"];
-                                              [ud synchronize];
                                               handler(json,response,error);
                                           }];
     [postDataTask resume];
 }
 
--(NSMutableURLRequest *)createLoginRequestWithParameters:(LoginParameters *)param
+-(NSMutableURLRequest *)createRequestWithUser:(User *)user
 {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[self loginURLWithParameters:param]
+    NSMutableString *loginURL = [NSMutableString stringWithFormat:@"http://hackathon.ebaystratus.com/accounts/%@/users/%@/reading_log.json?",self.account.id,user.id];
+    [loginURL appendFormat:@"readingLog=%@",user.readingLog];
+    
+    NSMutableURLRequest *req = [self createPutRequestForURLPath:loginURL];
+    return req;
+}
+
+
+-(NSMutableURLRequest *)createPutRequestForURLPath:(NSString *)endpoint
+{
+    endpoint = [endpoint stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:endpoint]
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:60.0];
+    
+    [request setHTTPMethod:@"PUT"];
+    return request;
+}
+
+-(Account *)account
+{
+    if (_account || [_account.id length]) {
+        return _account;
+    }
+    if ((_account = [PersistentStore accountDetails])) {
+        return _account;
+    }
+    return _account = [Account new];
+}
+
+- (void)startAddUserTaskWithParameters:(User *)param
+                     completionHandler:(ServiceRequestCompletion)handler
+{
+    NSDictionary *newUser = @{@"user": @{@"firstName": param.firstName,
+                                         @"lastName": param.lastName,
+                                         @"userType": param.userType}};
+    NSString *urlPath = [NSString stringWithFormat:@"http://hackathon.ebaystratus.com/accounts/%@/users.json",self.account.id];
+    
+    NSMutableURLRequest *req = [self createPostRequestForURLPath:urlPath];
+    if ([NSJSONSerialization isValidJSONObject:newUser]) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:newUser
+                                               options:kNilOptions
+                                                 error:nil];
+        [req setHTTPBody:data];
+    }
+    
+    NSLog(@"request Data %@",[NSString stringWithUTF8String:[[req HTTPBody] bytes]]);
+    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:req
+                                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                          {
+                                              NSLog(@"%@",[NSString stringWithUTF8String:[data bytes]]);
+                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                                              
+                                              NSString *errorMessage = json[@"message"];
+                                              if (errorMessage && [errorMessage length]) {
+                                                  if (error == nil) {
+                                                      error = [[NSError alloc] initWithDomain:@"Error Adding User"
+                                                                                         code:-1
+                                                                                     userInfo:json];
+                                                  }
+                                                  else
+                                                  {
+                                                      NSMutableDictionary *userInfo = [error.userInfo mutableCopy];
+                                                      [userInfo addEntriesFromDictionary:json];
+                                                      NSError *err = [[NSError alloc] initWithDomain:error.domain
+                                                                                                code:error.code
+                                                                                            userInfo:userInfo];
+                                                      error = err;
+                                                  }
+                                              }
+                                              else
+                                              {
+                                                  
+                                              }
+                                              handler(json[@"account"],response,error);
+                                          }];
+    [postDataTask resume];
+
+}
+
+- (void)startRegisterTaskWithParameters:(Account *)param
+                      completionHandler:(ServiceRequestCompletion)handler
+{
+    self.account = param;
+    self.account.accountName = param.accountName;
+    self.account.passcode = param.passcode;
+    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createRequestWithAccountParameters:param]
+                                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                          {
+                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                                              
+                                              NSString *errorMessage = json[@"message"];
+                                              NSString *errorMsg = json[@"errors"];
+                                              if ((errorMessage && [errorMessage length]) ||
+                                                  (errorMsg && [errorMsg length])) {
+                                                  if (error == nil) {
+                                                      error = [[NSError alloc] initWithDomain:@"Registration Error"
+                                                                                         code:-1
+                                                                                     userInfo:json];
+                                                  }
+                                                  else
+                                                  {
+                                                      NSMutableDictionary *userInfo = [error.userInfo mutableCopy];
+                                                      [userInfo addEntriesFromDictionary:json[@"message"]];
+                                                      [userInfo addEntriesFromDictionary:json[@"errors"]];
+                                                      NSError *err = [[NSError alloc] initWithDomain:error.domain
+                                                                                                code:error.code
+                                                                                            userInfo:userInfo];
+                                                      error = err;
+                                                  }
+                                              }
+                                              else
+                                              {
+                                                  self.account.authToken = json[@"authToken"];
+                                                  if (self.account.authToken && [self.account.authToken length]) {
+                                                      self.account = [[Account alloc] initWithJSONProperties:json[@"account"]];
+                                                      self.account.authToken = json[@"authToken"];
+                                                      self.account.passcode = param.passcode;
+                                                      [PersistentStore saveAccountDetails:self.account];
+                                                  }
+                                              }
+                                              handler(json[@"account"],response,error);
+                                          }];
+    [postDataTask resume];
+}
+
+-(NSMutableURLRequest *)createRequestWithAccountParameters:(Account *)param
+{
+    NSMutableString *loginURL = [NSMutableString stringWithString:@"http://hackathon.ebaystratus.com/accounts.json?"];
+    [loginURL appendFormat:@"accountName=%@&emailAddress=%@&branchId=%@&passcode=%@",
+     param.accountName,param.emailAddress,param.branchId,param.passcode];
+    
+    NSDictionary *newAcc = @{@"accountName": param.accountName,
+                                         @"emailAddress": param.emailAddress,
+                                         @"branchId": param.branchId,
+                                         @"passcode": param.passcode};
+    
+    NSMutableURLRequest *req = [self createPostRequestForURLPath:loginURL];
+    [req setHTTPBody:[NSJSONSerialization dataWithJSONObject:newAcc
+                                                     options:kNilOptions
+                                                       error:nil]];
+    return req;
+}
+
+- (void)startLoginTaskWithParameters:(Account *)param
+                   completionHandler:(ServiceRequestCompletion)handler
+{
+    self.account = param;
+    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createRequestWithLoginParameters:param]
+                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                          {
+                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                                              self.account.authToken = json[@"authToken"];
+                                              if (self.account.authToken && [self.account.authToken length]) {
+                                                  self.account = [[Account alloc] initWithJSONProperties:json[@"account"]];
+                                                  self.account.authToken = json[@"authToken"];
+                                                  self.account.passcode = param.passcode;
+                                                  [PersistentStore saveAccountDetails:self.account];
+                                              }
+                                              handler(json[@"account"],response,error);
+                                          }];
+    [postDataTask resume];
+}
+
+-(NSMutableURLRequest *)createRequestWithLoginParameters:(Account *)param
+{
+    NSMutableString *loginURL = [NSMutableString stringWithString:@"http://hackathon.ebaystratus.com/accounts/signin.json?"];
+    [loginURL appendFormat:@"accountName=%@&passcode=%@",param.accountName,param.passcode];
+    
+    return [self createPostRequestForURLPath:loginURL];
+}
+
+-(NSMutableURLRequest *)createPostRequestForURLPath:(NSString *)endpoint
+{
+    endpoint = [endpoint stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:endpoint]
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:60.0];
     
     [request setHTTPMethod:@"POST"];
     return request;
-}
-
-- (NSURL *)loginURLWithParameters:(LoginParameters *)param
-{
-    NSMutableString *loginURL = [NSMutableString stringWithString:@"http://hackathon.ebaystratus.com/accounts/signin.json?"];
-    [loginURL appendFormat:@"accountName=%@&passcode=%@",param.accountName,param.passcode];
-    return [NSURL URLWithString:[loginURL stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
 }
 
 @end

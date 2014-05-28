@@ -7,8 +7,17 @@
 //
 
 #import "NewMemberViewController.h"
+#import "UserTypes.h"
+#import "UserType.h"
+#import "ServiceRequest.h"
+#import "User.h"
 
-@interface NewMemberViewController ()
+@interface NewMemberViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
+
+@property (weak, nonatomic) IBOutlet UITextField *firstName;
+@property (weak, nonatomic) IBOutlet UITextField *lastName;
+@property (weak, nonatomic) IBOutlet UIPickerView *userType;
+
 
 @end
 
@@ -27,10 +36,38 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)dismissView:(id)sender {
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+- (IBAction)dismissView:(UIButton *)sender {
+    if (sender.tag == 1) {
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    }
+    else
+    {
+        User *new = [User new];
+        new.firstName = self.firstName.text;
+        new.lastName = self.lastName.text;
+        NSInteger i = [self.userType selectedRowInComponent:0];
+        new.userType = [[[self.userTypes userTypes] objectAtIndex:i] id];
+        [[ServiceRequest sharedRequest] startAddUserTaskWithParameters:new completionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
+            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        }];
+    }
 }
 
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [[self.userTypes userTypes] count];
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    UserType *b = [self.userTypes.userTypes objectAtIndex:row];
+    return b.name;
+}
 
 
 /*

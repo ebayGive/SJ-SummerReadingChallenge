@@ -11,7 +11,7 @@
 #import "Utillities.h"
 #import "Activity.h"
 
-@interface ActivityGridCell ()
+@interface ActivityGridCell () <UIAlertViewDelegate>
 @property (nonatomic, weak) ActivityGridCellContents *activityCellData;
 @property (nonatomic, weak) Activity *userActivity;
 @end
@@ -23,7 +23,8 @@
     self.userActivity = activity;
     self.activityCellData = activityCellData;
     
-    NSString *img = [NSString stringWithFormat:@"%@",activityCellData.gridIcon];
+    NSString *img = [NSString stringWithFormat:@"GRID_%@_%d",activityCellData.gridIcon,activity.activity];
+    img = [img stringByAppendingPathExtension:@"jpg"];
     [self.imageView setImage:[UIImage imageNamed:img]];
 }
 
@@ -31,12 +32,22 @@
 {
     UIAlertView *alert = [Utillities alertViewWithTitle:@"Activity"
                            message:self.activityCellData.description
-                          delegate:nil
-                 cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                          delegate:self
+                 cancelButtonTitle:@"Do it later" otherButtonTitles:@"Did it",nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
 
     [alert show];
 }
 
-
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == [alertView cancelButtonIndex]) {
+        
+    }
+    else
+    {
+        
+    }
+}
 
 @end

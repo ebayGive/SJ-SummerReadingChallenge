@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D65" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Account" syncable="YES">
+        <attribute name="accountName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="branchId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="emailAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="passcode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="role" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="salt" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="users" optional="YES" attributeType="Transformable" syncable="YES"/>
+    </entity>
     <entity name="User" syncable="YES">
         <attribute name="activityGrid" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
@@ -17,7 +29,8 @@
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="userActivity" inverseEntity="User" syncable="YES"/>
     </entity>
     <elements>
-        <element name="UserActivity" positionX="-63" positionY="-18" width="128" height="103"/>
         <element name="User" positionX="-227" positionY="-27" width="128" height="163"/>
+        <element name="UserActivity" positionX="-63" positionY="-18" width="128" height="103"/>
+        <element name="Account" positionX="-450" positionY="-286" width="128" height="193"/>
     </elements>
 </model>

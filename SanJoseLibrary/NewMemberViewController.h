@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class Account;
+@class UserTypes;
 @interface NewMemberViewController : UITableViewController
+
+@property (strong, nonatomic) Account *accountInfo;
+@property (strong, nonatomic) UserTypes *userTypes;
 
 @end

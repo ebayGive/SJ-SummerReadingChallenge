@@ -25,6 +25,8 @@
 @property (nonatomic, strong) NSString *updatedAt;
 @property (nonatomic, strong) NSArray<User> *users;
 
+@property (nonatomic, strong) NSString *authToken;
+
 + (id)AccountWithProperties:(NSDictionary *)properties;
 
 @end

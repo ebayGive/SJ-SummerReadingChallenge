@@ -42,27 +42,38 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.activityGridCollectionView registerClass:[UICollectionReusableView class]
+                        forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                               withReuseIdentifier:@"HeaderView"];
+
     self.currentUser = [(ContainerViewController *)self.parentViewController currentUser];
     
     ServiceRequest *sr = [ServiceRequest sharedRequest];
     [sr getGridDetailsWithCompletionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
         ActivityGrids *ag = [[ActivityGrids alloc] activityGridsWithProperties:(NSArray *)json[@"grids"]];
         self.activityGrid = [ag activityGridForUserId:self.currentUser.userType];
-        dispatch_sync(dispatch_get_main_queue(), ^{
+        if (response) {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self.activityGridCollectionView reloadData];
+            });
+        }
+        else
             [self.activityGridCollectionView reloadData];
-        });
+        
     }];
+    
     [sr getPrizeAndUserTypesWithCompletionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
         PrizeTypes *prizes = [[PrizeTypes alloc] prizeTypesWithProperties:json[@"prizes"]];
         self.prizesForUser = [prizes prizesForUserType:self.currentUser.userType];
-        dispatch_sync(dispatch_get_main_queue(), ^{
+        if (response) {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self.activityGridCollectionView reloadData];
+            });
+        }
+        else
             [self.activityGridCollectionView reloadData];
-        });
     }];
-    
-    [self.activityGridCollectionView registerClass:[UICollectionReusableView class]
-                        forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                               withReuseIdentifier:@"HeaderView"];
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface RegisterViewController : UIViewController
-
+@property(nonatomic,strong) UIViewController *presentingController;
 @end

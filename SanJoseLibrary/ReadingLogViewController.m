@@ -10,11 +10,12 @@
 #import "ContainerViewController.h"
 #import "User.h"
 #import "ReadingLogCell.h"
+#import "ServiceRequest.h"
 
 @interface ReadingLogViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (strong, nonatomic) NSArray *readingLogCollectionViewCells;
-@property (weak, nonatomic) NSIndexPath *currentIndexPath;
+@property (strong, nonatomic) NSIndexPath *currentIndexPath;
 @property (weak, nonatomic) User *currentUser;
 @property (weak, nonatomic) IBOutlet UICollectionView *readingLogCollectionView;
 
@@ -50,27 +51,59 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setFrame:CGRectMake(0, 0, 32, 32)];
+    [btn setImage:[UIImage imageNamed:@"battery-charging"] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(updateReadingLog:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *chargeBattery = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    UINavigationItem *navItem = self.parentViewController.parentViewController.navigationItem;
+    [navItem setRightBarButtonItem:chargeBattery animated:YES];
+
     [self.readingLogCollectionView reloadData];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    UINavigationItem *navItem = self.parentViewController.parentViewController.navigationItem;
+    [navItem setRightBarButtonItem:nil animated:YES];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
     NSInteger max = [self.currentUser.readingLog integerValue]/20;
-    if (max>[self.readingLogCollectionView numberOfItemsInSection:0]) {
-        max = [self.readingLogCollectionView numberOfItemsInSection:0];
+    if (max>0) {
+        [self updateCellAtIndexPath:self.currentIndexPath];
     }
+}
+
+-(NSIndexPath *)currentIndexPath
+{
+    if (!_currentIndexPath) {
+        self.currentIndexPath = [NSIndexPath indexPathForItem:[self.readingLogCollectionViewCells count]-1
+                                                    inSection:0];
+    }
+    return _currentIndexPath;
+}
+
+-(void)updateIndexPath
+{
+    NSUInteger idx = self.currentIndexPath.item;
+    self.currentIndexPath = [NSIndexPath indexPathForItem:idx-1 inSection:self.currentIndexPath.section];
+}
+
+-(void)updateReadingLog:(UIBarButtonItem *)sender
+{
     
-    self.currentIndexPath = [NSIndexPath indexPathForItem:max-1 inSection:0];
-    [self updateCellAtIndexPath:self.currentIndexPath];
 }
 
 - (void)updateCellAtIndexPath:(NSIndexPath *)ip
 {
-    if (ip.item<0) {
-        return;
-    }
+    NSInteger max = ([self.readingLogCollectionViewCells count]-1)-([self.currentUser.readingLog integerValue]/20);
+    if (ip.item<=max) return;
+    
     [self.readingLogCollectionView performBatchUpdates:^{
         ReadingLogCell *cell = [self.readingLogCollectionViewCells objectAtIndex:ip.item];
         NSString *imgName = nil;
@@ -81,7 +114,7 @@
         }
         [cell.imageView setImage:[UIImage imageNamed:imgName]];
     } completion:^(BOOL finished) {
-        self.currentIndexPath = [NSIndexPath indexPathForItem:ip.item-1 inSection:ip.section];
+        [self updateIndexPath];
         [self updateCellAtIndexPath:self.currentIndexPath];
     }];
 }
@@ -105,9 +138,13 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.currentIndexPath = [NSIndexPath indexPathForItem:_currentIndexPath.item-1
-                                                inSection:_currentIndexPath.section];
-    [self updateCellAtIndexPath:self.currentIndexPath];
+    [self.currentUser incrementReadingLog];
+    [[ServiceRequest sharedRequest] updateReadingLogForUser:self.currentUser
+                                          completionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
+                                              dispatch_sync(dispatch_get_main_queue(), ^{
+                                                  [self updateCellAtIndexPath:self.currentIndexPath];
+                                              });
+                                          }];
 }
 
 @end

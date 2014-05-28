@@ -15,7 +15,7 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *location;
 @property (nonatomic, strong) NSString *hoursOfOperation;
-@property (nonatomic, strong) NSString *id;
+@property (nonatomic, strong, getter = identifier) NSString *id;
 @property (nonatomic, strong) NSString *type;
 
 @end

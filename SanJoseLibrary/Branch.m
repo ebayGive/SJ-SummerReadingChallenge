@@ -10,4 +10,9 @@
 
 @implementation Branch
 
+-(NSString *)identifier
+{
+    return _id;
+}
+
 @end

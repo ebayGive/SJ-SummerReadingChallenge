@@ -10,8 +10,6 @@
 
 @protocol Prize;
 @protocol Activity;
-//@protocol User
-//@end
 
 @interface User : NSObject
 
@@ -24,5 +22,6 @@
 @property (nonatomic, strong) NSArray<Activity> *activityGrid;
 
 -(NSString *)fullName;
+-(void)incrementReadingLog;
 
 @end

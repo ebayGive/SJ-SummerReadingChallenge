@@ -47,7 +47,7 @@
     [self addChildViewController:toViewController];
     toViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     [fromViewController willMoveToParentViewController:nil];
-    [self transitionFromViewController:fromViewController toViewController:toViewController duration:1.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:nil completion:^(BOOL finished) {
+    [self transitionFromViewController:fromViewController toViewController:toViewController duration:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:nil completion:^(BOOL finished) {
         [fromViewController removeFromParentViewController];
         [toViewController didMoveToParentViewController:self];
     }];

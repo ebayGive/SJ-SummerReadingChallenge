@@ -31,6 +31,7 @@
 {
     [super viewDidLoad];
     self.title = [self.currentUser fullName];
+    [self.swapViewsSegment setBackgroundColor:[UIColor whiteColor]];
 }
 
 - (IBAction)updateView:(UISegmentedControl *)sender {
