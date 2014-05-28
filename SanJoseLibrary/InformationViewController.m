@@ -9,7 +9,7 @@
 #import "InformationViewController.h"
 #import "User.h"
 
-@interface InformationViewController ()
+@interface InformationViewController () <UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) User *currentUser;
@@ -36,6 +36,15 @@
           textEncodingName:@"utf-8"
                    baseURL:baseURL];
     
+}
+
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+        [[UIApplication sharedApplication] openURL:request.URL];
+        return NO;
+    }
+    return YES;
 }
 
 @end
