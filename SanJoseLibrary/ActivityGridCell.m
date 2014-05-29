@@ -35,13 +35,28 @@
         return;
     }
 
-    UIAlertView *alert = [Utillities alertViewWithTitle:@"Activity"
-                           message:self.activityCellData.description
-                          delegate:self
-                 cancelButtonTitle:@"I'll do it later" otherButtonTitles:@"I did it",nil];
-    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    [alert textFieldAtIndex:0].text = self.userActivity.notes;
-    [[alert textFieldAtIndex:0] setPlaceholder:@"Enter activity notes (optional)"];
+    UIAlertView *alert = nil;
+    if (self.userActivity.activity) {
+        NSString *msg = [NSString stringWithFormat:@"%@\n\n%@",self.activityCellData.description,self.userActivity.notes];
+        msg = [msg stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        
+        alert = [Utillities alertViewWithTitle:@"Activity"
+                                       message:msg
+                                      delegate:self
+                             cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        alert.tag = 1;
+    }
+    else
+    {
+        alert = [Utillities alertViewWithTitle:@"Activity"
+                                       message:self.activityCellData.description
+                                      delegate:self
+                             cancelButtonTitle:@"I'll do it later" otherButtonTitles:@"I did it",nil];
+        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        [alert textFieldAtIndex:0].text = self.userActivity.notes;
+        [[alert textFieldAtIndex:0] setPlaceholder:@"Enter activity notes (optional)"];
+        alert.tag = 2;
+    }
     [alert show];
 }
 
@@ -55,6 +70,8 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    if (alertView.tag==1) return;
+    
     UserActivityAction action;
     if (buttonIndex == [alertView cancelButtonIndex]) {
         action = ActivityDelayed;
