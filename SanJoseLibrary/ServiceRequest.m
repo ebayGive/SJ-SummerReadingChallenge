@@ -200,8 +200,13 @@ static ServiceRequest *sharedInstance;
     NSDictionary *newUser = @{@"user": @{@"firstName": param.firstName,
                                          @"lastName": param.lastName,
                                          @"userType": param.userType,
-                                         @"age":param.age}};
-    NSString *urlPath = [NSString stringWithFormat:@"http://hackathon.ebaystratus.com/accounts/%@/users.json",self.account.id];
+                                         @"age":@(param.age)}};
+    NSMutableString *urlPath = [NSMutableString stringWithFormat:@"http://hackathon.ebaystratus.com/accounts/%@/users.json?",self.account.id];
+    
+    [urlPath appendFormat:@"firstName=%@",param.firstName];
+    [urlPath appendFormat:@"&lastName=%@",param.lastName];
+    [urlPath appendFormat:@"&userType=%@",param.userType];
+    [urlPath appendFormat:@"&age=%@",param.age];
     
     NSMutableURLRequest *req = [self createPostRequestForURLPath:urlPath];
     if ([NSJSONSerialization isValidJSONObject:newUser]) {

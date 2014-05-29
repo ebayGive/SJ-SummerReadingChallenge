@@ -16,6 +16,8 @@
 #import "PrizesFooterView.h"
 #import "PrizeType.h"
 #import "PrizeTypes.h"
+#import "Prize.h"
+#import "NSObject+JSONObject.h"
 
 @interface ActivityGridViewController () <UICollectionViewDataSource, UICollectionViewDelegate, ActivityGridCellDelegate>
 
@@ -29,15 +31,6 @@
 @end
 
 @implementation ActivityGridViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -82,12 +75,6 @@
     [self.activityGridCollectionView reloadData];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
@@ -122,10 +109,29 @@
                                                userActivity:userActivityInfo
                                                   cellIndex:cellIndex
                                           completionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
+                                              NSMutableArray *arr = [[NSMutableArray alloc] initWithCapacity:[json[@"prizes"] count]];
+                                              for (id obj in json[@"prizes"]) {
+                                                  Prize *p = [[Prize alloc] initWithJSONProperties:obj];
+                                                  [arr addObject:p];
+                                              }
+                                              BOOL prizesViewNeedsRefresh = NO;
+                                              if (![[arr valueForKeyPath:@"state"] isEqualToArray:[self.currentUser.prizes valueForKeyPath:@"state"]])
+                                              {
+                                                  prizesViewNeedsRefresh = YES;
+                                                  self.currentUser.prizes = [arr copy];
+                                              }
+                                              
+                                              [arr removeLastObject];
                                               NSIndexPath *ip = [NSIndexPath indexPathForItem:[cellIndex integerValue] inSection:0];
                                               dispatch_async(dispatch_get_main_queue(), ^{
+                                                  
                                                   [self.currentUser updateActivity:userActivityInfo atIndex:[cellIndex integerValue]];
-                                                  [self.activityGridCollectionView reloadItemsAtIndexPaths:@[ip]];
+                                                  
+                                                  if (prizesViewNeedsRefresh)
+                                                      [self.activityGridCollectionView reloadData];
+                                                  else
+                                                      [self.activityGridCollectionView reloadItemsAtIndexPaths:@[ip]];
+                                                  
                                               });
                                           }];
 }

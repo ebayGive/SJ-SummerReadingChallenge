@@ -169,7 +169,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="cra-N8-TIN">
-                        <barButtonItem key="rightBarButtonItem" title="Register" id="KEp-3v-qWW">
+                        <barButtonItem key="leftBarButtonItem" title="Register" id="KEp-3v-qWW">
                             <connections>
                                 <segue destination="NbA-vn-xTI" kind="push" id="zb6-qe-HWn"/>
                             </connections>

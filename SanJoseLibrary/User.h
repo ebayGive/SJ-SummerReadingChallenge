@@ -19,7 +19,7 @@
 @property (nonatomic, strong) NSString *lastName;
 @property (nonatomic, strong) NSNumber *readingLog;
 @property (nonatomic, strong) NSString *userType;
-@property (nonatomic, strong) NSString *age;
+@property (nonatomic, assign) NSInteger age;
 @property (nonatomic, strong) NSArray<Prize> *prizes;
 @property (nonatomic, strong) NSArray<Activity> *activityGrid;
 

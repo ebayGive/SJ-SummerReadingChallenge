@@ -99,7 +99,7 @@
 {
     UIActionSheet *updateReadingLogConfirmation = [[UIActionSheet alloc] initWithTitle:@"Challenge yourself to read at least 20 minutes a day"
                                                                               delegate:self
-                                                                     cancelButtonTitle:@"I dint read for 20 minutes"
+                                                                     cancelButtonTitle:@"I didn't read for 20 minutes"
                                                                 destructiveButtonTitle:@"I read for 20 minutes"
                                                                      otherButtonTitles:nil];
     UINavigationItem *navItem = self.parentViewController.parentViewController.navigationItem;
