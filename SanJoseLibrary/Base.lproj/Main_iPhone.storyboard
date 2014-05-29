@@ -445,12 +445,17 @@
                                     <outlet property="delegate" destination="Bs9-oP-Dpy" id="MV6-sg-9yq"/>
                                 </connections>
                             </collectionView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="APP Robot ON-01.png" id="Wrf-aU-3tL">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="465"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="465"/>
                     <connections>
+                        <outlet property="batteryFullImageView" destination="Wrf-aU-3tL" id="Agq-bY-No5"/>
                         <outlet property="readingLogCollectionView" destination="OQv-Fq-GA2" id="DUF-pD-z0P"/>
                     </connections>
                 </viewController>
@@ -645,6 +650,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="APP Robot ON-01.png" width="4217" height="5771"/>
         <image name="Header Bar.png" width="355" height="70"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -19,6 +19,7 @@
 @property (weak, nonatomic) User *currentUser;
 @property (weak, nonatomic) IBOutlet UICollectionView *readingLogCollectionView;
 
+@property (weak, nonatomic) IBOutlet UIImageView *batteryFullImageView;
 
 @end
 
@@ -44,20 +45,13 @@
         [cell.imageView setImage:[UIImage imageNamed:imgName]];
         [cells addObject:cell];
     }
-    
+    self.batteryFullImageView.hidden = YES;
     self.readingLogCollectionViewCells = [cells copy];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [btn setFrame:CGRectMake(0, 0, 32, 32)];
-//    [btn setImage:[UIImage imageNamed:@"battery-charging"] forState:UIControlStateNormal];
-//    [btn addTarget:self action:@selector(updateReadingLog:) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *chargeBattery = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    
     UIBarButtonItem *chargeBattery = [[UIBarButtonItem alloc] initWithTitle:@"+20 Mins"
                                                                       style:UIBarButtonItemStyleDone
                                                                      target:self
@@ -74,6 +68,7 @@
     [super viewWillDisappear:animated];
     UINavigationItem *navItem = self.parentViewController.parentViewController.navigationItem;
     [navItem setRightBarButtonItem:nil animated:YES];
+    [navItem setTitle:@""];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -141,6 +136,10 @@
     } completion:^(BOOL finished) {
         [self updateIndexPath];
         [self updateCellAtIndexPath:self.currentIndexPath];
+        if (self.currentIndexPath.item==0) {
+            self.batteryFullImageView.hidden = NO;
+            self.readingLogCollectionView.hidden = YES;
+        }
     }];
 }
 
