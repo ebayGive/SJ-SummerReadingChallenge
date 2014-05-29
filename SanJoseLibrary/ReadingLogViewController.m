@@ -122,7 +122,15 @@
 - (void)updateCellAtIndexPath:(NSIndexPath *)ip
 {
     NSInteger max = ([self.readingLogCollectionViewCells count]-1)-([self.currentUser.readingLog integerValue]/20);
-    if (ip.item<=max) return;
+    if (ip.item<=max) {
+        if (self.currentIndexPath.item==-1) {
+            self.batteryFullImageView.hidden = NO;
+            self.readingLogCollectionView.hidden = YES;
+            UINavigationItem *navItem = self.parentViewController.parentViewController.navigationItem;
+            navItem.rightBarButtonItem.enabled = NO;
+        }
+        return;
+    }
     
     [self.readingLogCollectionView performBatchUpdates:^{
         ReadingLogCell *cell = [self.readingLogCollectionViewCells objectAtIndex:ip.item];
@@ -136,10 +144,6 @@
     } completion:^(BOOL finished) {
         [self updateIndexPath];
         [self updateCellAtIndexPath:self.currentIndexPath];
-        if (self.currentIndexPath.item==0) {
-            self.batteryFullImageView.hidden = NO;
-            self.readingLogCollectionView.hidden = YES;
-        }
     }];
 }
 

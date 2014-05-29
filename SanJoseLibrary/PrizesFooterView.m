@@ -85,7 +85,7 @@
 
 - (void)showActivityDescription:(NSString *)prizeText
 {
-    NSString *msg = [NSString stringWithFormat:@"Some Text '%@' some more text",prizeText];
+    NSString *msg = [NSString stringWithFormat:@"Complete 5 squares in a row to win '%@'",prizeText];
     UIAlertView *alert = [Utillities alertViewWithTitle:@"Prize"
                                    message:msg
                                   delegate:self
