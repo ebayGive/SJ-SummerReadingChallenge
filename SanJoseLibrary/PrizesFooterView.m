@@ -9,6 +9,7 @@
 #import "PrizesFooterView.h"
 #import "PrizeType.h"
 #import "Prize.h"
+#import "Utillities.h"
 
 @interface PrizesFooterView ()
 
@@ -31,11 +32,31 @@
     self.userPrizes = userPrizes;
     self.prizeType = prizeType;
     self.title.text = @"Prizes";
-    [self.prize1 setBackgroundImage:[UIImage imageNamed:@"PRIZES_1_0"] forState:UIControlStateNormal];
-    [self.prize2 setBackgroundImage:[UIImage imageNamed:@"PRIZES_2_0"] forState:UIControlStateNormal];
-    [self.prize3 setBackgroundImage:[UIImage imageNamed:@"PRIZES_3_0"] forState:UIControlStateNormal];
-    [self.prize4 setBackgroundImage:[UIImage imageNamed:@"PRIZES_4_0"] forState:UIControlStateNormal];
-    [self.prize5 setBackgroundImage:[UIImage imageNamed:@"PRIZES_5_0"] forState:UIControlStateNormal];
+    
+    Prize *p = [self.userPrizes objectAtIndex:0];
+    NSString *imgName = [NSString stringWithFormat:@"PRIZES_1_%d",p.state];
+    [self.prize1 setBackgroundImage:[UIImage imageNamed:imgName]
+                           forState:UIControlStateNormal];
+    
+    p = [self.userPrizes objectAtIndex:1];
+    imgName = [NSString stringWithFormat:@"PRIZES_2_%d",p.state];
+    [self.prize2 setBackgroundImage:[UIImage imageNamed:imgName]
+                           forState:UIControlStateNormal];
+    
+    p = [self.userPrizes objectAtIndex:2];
+    imgName = [NSString stringWithFormat:@"PRIZES_3_%d",p.state];
+    [self.prize3 setBackgroundImage:[UIImage imageNamed:imgName]
+                           forState:UIControlStateNormal];
+    
+    p = [self.userPrizes objectAtIndex:3];
+    imgName = [NSString stringWithFormat:@"PRIZES_4_%d",p.state];
+    [self.prize4 setBackgroundImage:[UIImage imageNamed:imgName]
+                           forState:UIControlStateNormal];
+    
+    p = [self.userPrizes objectAtIndex:5];
+    imgName = [NSString stringWithFormat:@"PRIZES_5_%d",p.state];
+    [self.prize5 setBackgroundImage:[UIImage imageNamed:imgName]
+                           forState:UIControlStateNormal];
 }
 
 - (IBAction)prizeButtonClicked:(UIButton *)sender
@@ -43,24 +64,34 @@
     switch (sender.tag)
     {
         case 1:
-            
+            [self showActivityDescription:self.prizeType.prize1];
             break;
         case 2:
-            
+            [self showActivityDescription:self.prizeType.prize2];
             break;
         case 3:
-            
+            [self showActivityDescription:self.prizeType.prize3];
             break;
         case 4:
-            
+            [self showActivityDescription:self.prizeType.prize4];
             break;
         case 5:
-            
+            [self showActivityDescription:self.prizeType.prize5];
             break;
         default:
             break;
     }
 }
 
+- (void)showActivityDescription:(NSString *)prizeText
+{
+    NSString *msg = [NSString stringWithFormat:@"Some Text '%@' some more text",prizeText];
+    UIAlertView *alert = [Utillities alertViewWithTitle:@"Prize"
+                                   message:msg
+                                  delegate:self
+                         cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    alert.tag = 1;
+    [alert show];
+}
 
 @end
