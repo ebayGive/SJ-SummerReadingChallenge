@@ -7,6 +7,7 @@
 //
 
 #import "User.h"
+#import "Activity.h"
 
 @implementation User
 
@@ -63,6 +64,14 @@
     NSInteger current = [self.readingLog integerValue];
     current = current+20;
     self.readingLog = [NSNumber numberWithInteger:current];
+}
+
+-(void)updateActivity:(Activity *)userActivity atIndex:(NSInteger)cellIndex
+{
+    Activity *act = [self.activityGrid objectAtIndex:cellIndex];
+    act.activity = userActivity.activity;
+    act.notes = userActivity.notes;
+    act.updatedAt = userActivity.updatedAt;
 }
 
 @end

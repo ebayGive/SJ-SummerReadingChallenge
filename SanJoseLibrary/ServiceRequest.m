@@ -10,6 +10,7 @@
 #import "ServiceRequest.h"
 #import "Account.h"
 #import "User.h"
+#import "Activity.h"
 
 static ServiceRequest *sharedInstance;
 
@@ -131,11 +132,22 @@ static ServiceRequest *sharedInstance;
     return request;
 }
 
--(void)updateAvtivityForUser:(User *)user
+-(void)updateAvtivityForUserID:(NSString *)userId
+                  userActivity:(Activity *)userActivity
+                     cellIndex:(NSString *)cellIndex
              completionHandler:(ServiceRequestCompletion)handler
 {
+    NSMutableString *userActivityUrl = [NSMutableString stringWithFormat:@"http://hackathon.ebaystratus.com/accounts/%@/users/%@/activity_grid/%@.json?",self.account.id,userId,cellIndex];
+    [userActivityUrl appendFormat:@"activity=%d&notes=%@&updatedAt=%@",userActivity.activity,userActivity.notes,userActivity.updatedAt];
     
-    
+    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createPutRequestForURLPath:userActivityUrl]
+                                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                          {
+                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                                              handler(json,response,error);
+                                          }];
+    [postDataTask resume];
+
 }
 
 -(void)updateReadingLogForUser:(User *)user
@@ -187,7 +199,8 @@ static ServiceRequest *sharedInstance;
 {
     NSDictionary *newUser = @{@"user": @{@"firstName": param.firstName,
                                          @"lastName": param.lastName,
-                                         @"userType": param.userType}};
+                                         @"userType": param.userType,
+                                         @"age":param.age}};
     NSString *urlPath = [NSString stringWithFormat:@"http://hackathon.ebaystratus.com/accounts/%@/users.json",self.account.id];
     
     NSMutableURLRequest *req = [self createPostRequestForURLPath:urlPath];

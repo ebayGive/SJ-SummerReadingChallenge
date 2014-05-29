@@ -32,6 +32,15 @@
     [super viewDidLoad];
     self.title = [self.currentUser fullName];
     [self.swapViewsSegment setBackgroundColor:[UIColor whiteColor]];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(switchToChargeBatteryViewController) name:@"switchToChargeBatteryViewController"
+                                               object:nil];
+}
+
+-(void)switchToChargeBatteryViewController
+{
+    [self.swapViewsSegment setSelectedSegmentIndex:IndexReadingLog];
+    [self.swapViewsSegment sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
 - (IBAction)updateView:(UISegmentedControl *)sender {

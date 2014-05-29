@@ -52,14 +52,20 @@
 {
     [super viewWillAppear:animated];
     
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setFrame:CGRectMake(0, 0, 32, 32)];
-    [btn setImage:[UIImage imageNamed:@"battery-charging"] forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(updateReadingLog:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *chargeBattery = [[UIBarButtonItem alloc] initWithCustomView:btn];
+//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [btn setFrame:CGRectMake(0, 0, 32, 32)];
+//    [btn setImage:[UIImage imageNamed:@"battery-charging"] forState:UIControlStateNormal];
+//    [btn addTarget:self action:@selector(updateReadingLog:) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *chargeBattery = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    
+    UIBarButtonItem *chargeBattery = [[UIBarButtonItem alloc] initWithTitle:@"+20 Mins"
+                                                                      style:UIBarButtonItemStyleDone
+                                                                     target:self
+                                                                     action:@selector(updateReadingLog:)];
     UINavigationItem *navItem = self.parentViewController.parentViewController.navigationItem;
     [navItem setRightBarButtonItem:chargeBattery animated:YES];
-
+    [navItem setTitle:@"I read for "];
+    
     [self.readingLogCollectionView reloadData];
 }
 

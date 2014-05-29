@@ -8,10 +8,12 @@
 
 #import "PrizesFooterView.h"
 #import "PrizeType.h"
+#import "Prize.h"
 
 @interface PrizesFooterView ()
 
 @property PrizeType *prizeType;
+@property NSArray *userPrizes;
 
 @property (weak, nonatomic) IBOutlet UIButton *prize1;
 @property (weak, nonatomic) IBOutlet UIButton *prize2;
@@ -24,8 +26,9 @@
 
 @implementation PrizesFooterView
 
--(void)setupViewWithPrizeType:(PrizeType *)prizeType
+-(void)setupViewWithPrizeType:(PrizeType *)prizeType userPrizeStatus:(NSArray *)userPrizes
 {
+    self.userPrizes = userPrizes;
     self.prizeType = prizeType;
     self.title.text = @"Prizes";
     [self.prize1 setBackgroundImage:[UIImage imageNamed:@"PRIZES_1_0"] forState:UIControlStateNormal];

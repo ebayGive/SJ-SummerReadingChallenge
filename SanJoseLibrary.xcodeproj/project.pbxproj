@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C241FFFF191D8CEB00C914AA /* EmptySegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C241FFFE191D8CEB00C914AA /* EmptySegue.m */; };
+		C245050E1936823200936337 /* BatteryCharged.png in Resources */ = {isa = PBXBuildFile; fileRef = C245050D1936823200936337 /* BatteryCharged.png */; };
 		C2483501192EA10600539C98 /* Badge 1.png in Resources */ = {isa = PBXBuildFile; fileRef = C248341C192EA10600539C98 /* Badge 1.png */; };
 		C2483502192EA10600539C98 /* Badge 2.png in Resources */ = {isa = PBXBuildFile; fileRef = C248341D192EA10600539C98 /* Badge 2.png */; };
 		C2483503192EA10600539C98 /* Badge 3.png in Resources */ = {isa = PBXBuildFile; fileRef = C248341E192EA10600539C98 /* Badge 3.png */; };
@@ -398,6 +399,7 @@
 /* Begin PBXFileReference section */
 		C241FFFD191D8CEB00C914AA /* EmptySegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptySegue.h; sourceTree = "<group>"; };
 		C241FFFE191D8CEB00C914AA /* EmptySegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptySegue.m; sourceTree = "<group>"; };
+		C245050D1936823200936337 /* BatteryCharged.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BatteryCharged.png; sourceTree = "<group>"; };
 		C248341C192EA10600539C98 /* Badge 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Badge 1.png"; sourceTree = "<group>"; };
 		C248341D192EA10600539C98 /* Badge 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Badge 2.png"; sourceTree = "<group>"; };
 		C248341E192EA10600539C98 /* Badge 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Badge 3.png"; sourceTree = "<group>"; };
@@ -1349,6 +1351,7 @@
 		C29A2BAA19247598000CE3DF /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C245050D1936823200936337 /* BatteryCharged.png */,
 				C2A8F3E01935A194006051A3 /* battery-charging.png */,
 				C248341A192EA10600539C98 /* Activity Grid */,
 				C2548550192BE0190007DFC6 /* ADULT.png */,
@@ -1854,6 +1857,7 @@
 				C29A2BDF192475D9000CE3DF /* APP BATTERY OFF-07.png in Resources */,
 				C2483585192EA10600539C98 /* Battery1-07.png in Resources */,
 				C248358E192EA10600539C98 /* Battery1-16.png in Resources */,
+				C245050E1936823200936337 /* BatteryCharged.png in Resources */,
 				C29A2B8C1924757C000CE3DF /* APP BATTERY ON-16.png in Resources */,
 				C24835C5192EA10600539C98 /* Battery On-26.png in Resources */,
 				C24835D3192EA10600539C98 /* Battery On-40.png in Resources */,

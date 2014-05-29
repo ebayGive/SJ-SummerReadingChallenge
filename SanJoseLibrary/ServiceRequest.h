@@ -12,6 +12,7 @@ typedef void(^ServiceRequestCompletion)(NSDictionary *json, NSURLResponse *respo
 
 @class Account;
 @class User;
+@class Activity;
 
 @interface ServiceRequest : NSObject
 
@@ -30,8 +31,10 @@ typedef void(^ServiceRequestCompletion)(NSDictionary *json, NSURLResponse *respo
 - (void)getGridDetailsWithCompletionHandler:(ServiceRequestCompletion)handler;
 - (void)getUserTypesWithCompletionHandler:(ServiceRequestCompletion)handler;
 - (void)getPrizeAndUserTypesWithCompletionHandler:(ServiceRequestCompletion)handler;
--(void)updateAvtivityForUser:(User *)user
-           completionHandler:(ServiceRequestCompletion)handler;
+-(void)updateAvtivityForUserID:(NSString *)userId
+                  userActivity:(Activity *)userActivity
+                     cellIndex:(NSString *)cellIndex
+             completionHandler:(ServiceRequestCompletion)handler;
 -(void)updateReadingLogForUser:(User *)user
              completionHandler:(ServiceRequestCompletion)handler;
 @end

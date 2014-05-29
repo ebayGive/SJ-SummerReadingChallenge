@@ -17,7 +17,7 @@
 #import "PrizeType.h"
 #import "PrizeTypes.h"
 
-@interface ActivityGridViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface ActivityGridViewController () <UICollectionViewDataSource, UICollectionViewDelegate, ActivityGridCellDelegate>
 
 @property (weak, nonatomic) User *currentUser;
 @property (strong, nonatomic) ActivityGrid *activityGrid;
@@ -111,7 +111,23 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ActivityGridCell *cell = (ActivityGridCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    cell.delegate = self;
     [cell showActivityDescription];
+}
+
+-(void)activityGridCell:(ActivityGridCell *)activityGridCell didSelectItemWithAction:(UserActivityAction)userActivityAction cellIndex:(NSString *)cellIndex userActivityInfo:(Activity *)userActivityInfo
+{
+
+    [[ServiceRequest sharedRequest] updateAvtivityForUserID:self.currentUser.id
+                                               userActivity:userActivityInfo
+                                                  cellIndex:cellIndex
+                                          completionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
+                                              NSIndexPath *ip = [NSIndexPath indexPathForItem:[cellIndex integerValue] inSection:0];
+                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                  [self.currentUser updateActivity:userActivityInfo atIndex:[cellIndex integerValue]];
+                                                  [self.activityGridCollectionView reloadItemsAtIndexPaths:@[ip]];
+                                              });
+                                          }];
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
@@ -119,16 +135,19 @@
     if (kind == UICollectionElementKindSectionHeader) {
         
         UICollectionReusableView *reusableview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
-        UILabel *header = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 310, 42)];
+        CGRect frame = reusableview.frame;
+        frame.origin.x = 5;
+        frame.size.width = CGRectGetWidth(reusableview.frame)-10;
+        UILabel *header = [[UILabel alloc] initWithFrame:frame];
         [header setLineBreakMode:NSLineBreakByWordWrapping];
         [header setNumberOfLines:0];
-        [header setText:@"Complete 5 squares in a row to win prizes"];
+        [header setText:@"Complete any 5 squares in a row to win prizes."];
         [reusableview addSubview:header];
         return reusableview;
     }
     else if (kind == UICollectionElementKindSectionFooter) {
         PrizesFooterView *reusableview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"PrizesFooterView" forIndexPath:indexPath];
-        [reusableview setupViewWithPrizeType:self.prizesForUser];
+        [reusableview setupViewWithPrizeType:self.prizesForUser userPrizeStatus:self.currentUser.prizes];
         return reusableview;
     }
     return nil;
