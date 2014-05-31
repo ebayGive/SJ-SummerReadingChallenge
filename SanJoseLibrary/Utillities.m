@@ -20,4 +20,9 @@
     return alert;
 }
 
++(void)showBasicError
+{
+    [[self alertViewWithTitle:@"Request Error" message:@"Please check your network connection or try again later" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+}
+
 @end

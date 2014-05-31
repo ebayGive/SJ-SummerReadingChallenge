@@ -37,60 +37,65 @@
     NSString *imgName = [NSString stringWithFormat:@"PRIZES_1_%d",p.state];
     [self.prize1 setBackgroundImage:[UIImage imageNamed:imgName]
                            forState:UIControlStateNormal];
-    
+
     p = [self.userPrizes objectAtIndex:1];
     imgName = [NSString stringWithFormat:@"PRIZES_2_%d",p.state];
+    self.prize2.tag = p.state;
     [self.prize2 setBackgroundImage:[UIImage imageNamed:imgName]
                            forState:UIControlStateNormal];
     
     p = [self.userPrizes objectAtIndex:2];
     imgName = [NSString stringWithFormat:@"PRIZES_3_%d",p.state];
+    self.prize3.tag = p.state;
     [self.prize3 setBackgroundImage:[UIImage imageNamed:imgName]
                            forState:UIControlStateNormal];
     
     p = [self.userPrizes objectAtIndex:3];
     imgName = [NSString stringWithFormat:@"PRIZES_4_%d",p.state];
+    self.prize4.tag = p.state;
     [self.prize4 setBackgroundImage:[UIImage imageNamed:imgName]
                            forState:UIControlStateNormal];
     
     p = [self.userPrizes objectAtIndex:5];
     imgName = [NSString stringWithFormat:@"PRIZES_5_%d",p.state];
+    self.prize5.tag = p.state;
     [self.prize5 setBackgroundImage:[UIImage imageNamed:imgName]
                            forState:UIControlStateNormal];
 }
 
 - (IBAction)prizeButtonClicked:(UIButton *)sender
 {
-    switch (sender.tag)
-    {
-        case 1:
-            [self showActivityDescription:self.prizeType.prize1];
-            break;
-        case 2:
-            [self showActivityDescription:self.prizeType.prize2];
-            break;
-        case 3:
-            [self showActivityDescription:self.prizeType.prize3];
-            break;
-        case 4:
-            [self showActivityDescription:self.prizeType.prize4];
-            break;
-        case 5:
-            [self showActivityDescription:self.prizeType.prize5];
-            break;
-        default:
-            break;
+    NSString *commonMsg = nil;
+    
+    if (sender.tag==0) {
+        commonMsg = [NSString stringWithFormat:@"Complete 5 squares in a row to win '##'."];
+    } else if (sender.tag==1) {
+        commonMsg = [NSString stringWithFormat:@"Congratulations! You have won '##'. Visit your local library to pick up the prize."];
+    } else if (sender.tag==2) {
+        commonMsg = [NSString stringWithFormat:@"Congratulations! You have collected '##'."];
     }
-}
-
-- (void)showActivityDescription:(NSString *)prizeText
-{
-    NSString *msg = [NSString stringWithFormat:@"Complete 5 squares in a row to win '%@'",prizeText];
+    
+    if ([sender isEqual:self.prize1]) {
+        commonMsg = [commonMsg stringByReplacingOccurrencesOfString:@"##"
+                                                         withString:self.prizeType.prize1];
+    } else if ([sender isEqual:self.prize2]) {
+        commonMsg = [commonMsg stringByReplacingOccurrencesOfString:@"##"
+                                                         withString:self.prizeType.prize2];
+    } else if ([sender isEqual:self.prize3]) {
+        commonMsg = [commonMsg stringByReplacingOccurrencesOfString:@"##"
+                                                         withString:self.prizeType.prize3];
+    } else if ([sender isEqual:self.prize4]) {
+        commonMsg = [commonMsg stringByReplacingOccurrencesOfString:@"##"
+                                                         withString:self.prizeType.prize4];
+    } else if ([sender isEqual:self.prize5]) {
+        commonMsg = [commonMsg stringByReplacingOccurrencesOfString:@"##"
+                                                         withString:self.prizeType.prize5];
+    }
+    
     UIAlertView *alert = [Utillities alertViewWithTitle:@"Prize"
-                                   message:msg
-                                  delegate:self
-                         cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    alert.tag = 1;
+                                                message:commonMsg
+                                               delegate:self
+                                      cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     [alert show];
 }
 

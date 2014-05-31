@@ -38,9 +38,9 @@
                                                                                         forIndexPath:ip];
         NSString *imgName = nil;
         if ((ip.item+1)/10<1) {
-            imgName = [NSString stringWithFormat:@"APP BATTERY OFF-0%d",ip.item+1];
+            imgName = [NSString stringWithFormat:@"APP_BATTERY_OFF-0%ld",(long)ip.item+1];
         } else {
-            imgName = [NSString stringWithFormat:@"APP BATTERY OFF-%d",ip.item+1];
+            imgName = [NSString stringWithFormat:@"APP_BATTERY_OFF-%ld",(long)ip.item+1];
         }
         [cell.imageView setImage:[UIImage imageNamed:imgName]];
         [cells addObject:cell];
@@ -136,9 +136,9 @@
         ReadingLogCell *cell = [self.readingLogCollectionViewCells objectAtIndex:ip.item];
         NSString *imgName = nil;
         if ((ip.item+1)/10<1) {
-            imgName = [NSString stringWithFormat:@"APP BATTERY ON-0%d",ip.item+1];
+            imgName = [NSString stringWithFormat:@"APP_BATTERY_ON-0%ld",(long)ip.item+1];
         } else {
-            imgName = [NSString stringWithFormat:@"APP BATTERY ON-%d",ip.item+1];
+            imgName = [NSString stringWithFormat:@"APP_BATTERY_ON-%ld",(long)ip.item+1];
         }
         [cell.imageView setImage:[UIImage imageNamed:imgName]];
     } completion:^(BOOL finished) {

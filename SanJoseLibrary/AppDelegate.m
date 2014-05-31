@@ -8,13 +8,11 @@
 
 #import "AppDelegate.h"
 
-#import "SelectUserViewController.h"
-
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self.window setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background-01"]]];
+//    [self.window setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background-01"]]];
     return YES;
 }
 							

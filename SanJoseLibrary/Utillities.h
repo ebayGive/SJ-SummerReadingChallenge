@@ -12,6 +12,8 @@
 
 @interface Utillities : NSObject
 
++(void)showBasicError;
+
 +(UIAlertView *)alertViewWithTitle:(NSString *)title
                            message:(NSString *)msg
                           delegate:(id)delegate

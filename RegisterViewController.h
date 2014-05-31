@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RegisterViewController : UIViewController
+@interface RegisterViewController : UITableViewController
 @property(nonatomic,strong) UIViewController *presentingController;
 @end

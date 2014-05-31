@@ -32,7 +32,7 @@
         User *new = [User new];
         new.firstName = self.firstName.text;
         new.lastName = self.lastName.text;
-        new.age = self.age.text;
+        new.age = [self.age.text integerValue];
         NSInteger i = [self.userType selectedRowInComponent:0];
         new.userType = [[[self.userTypes userTypes] objectAtIndex:i] id];
         [[ServiceRequest sharedRequest] startAddUserTaskWithParameters:new completionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {

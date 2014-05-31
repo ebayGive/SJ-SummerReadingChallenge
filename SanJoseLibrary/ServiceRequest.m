@@ -11,6 +11,7 @@
 #import "Account.h"
 #import "User.h"
 #import "Activity.h"
+#import "Utillities.h"
 
 static ServiceRequest *sharedInstance;
 
@@ -65,7 +66,14 @@ static ServiceRequest *sharedInstance;
 //                                                  [PersistentStore saveObject:data withKey:urlStr];
 //                                              }
                                               NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                                              handler(json,response,error);
+                                              
+                                              if (json && [(NSHTTPURLResponse*)response statusCode] == 200) {
+                                                  handler(json,response,error);
+                                              }else{
+                                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                                      [Utillities showBasicError];
+                                                  });
+                                              }
                                           }];
     [postDataTask resume];
 }
@@ -77,7 +85,14 @@ static ServiceRequest *sharedInstance;
                                                          completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                           {
                                               NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                                              handler(json,response,error);
+
+                                              if (json && [(NSHTTPURLResponse*)response statusCode] == 200) {
+                                                  handler(json,response,error);
+                                              }else{
+                                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                                      [Utillities showBasicError];
+                                                  });
+                                              }
                                           }];
     [postDataTask resume];
 }
@@ -89,7 +104,14 @@ static ServiceRequest *sharedInstance;
                                                          completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                           {
                                               NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                                              handler(json,response,error);
+                                              
+                                              if (json && [(NSHTTPURLResponse*)response statusCode] == 200) {
+                                                  handler(json,response,error);
+                                              }else{
+                                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                                      [Utillities showBasicError];
+                                                  });
+                                              }
                                           }];
     [postDataTask resume];
 }
@@ -101,7 +123,14 @@ static ServiceRequest *sharedInstance;
                                                          completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                           {
                                               NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                                              handler(json,response,error);
+                                              
+                                              if (json && [(NSHTTPURLResponse*)response statusCode] == 200) {
+                                                  handler(json,response,error);
+                                              }else{
+                                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                                      [Utillities showBasicError];
+                                                  });
+                                              }
                                           }];
     [postDataTask resume];
 }
@@ -115,7 +144,14 @@ static ServiceRequest *sharedInstance;
                                                          completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                           {
                                               NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                                              handler(json,response,error);
+                                              
+                                              if (json && [(NSHTTPURLResponse*)response statusCode] == 200) {
+                                                  handler(json,response,error);
+                                              }else{
+                                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                                      [Utillities showBasicError];
+                                                  });
+                                              }
                                           }];
     [postDataTask resume];
 
@@ -144,7 +180,14 @@ static ServiceRequest *sharedInstance;
                                                          completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                           {
                                               NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                                              handler(json,response,error);
+                                              
+                                              if (json && [(NSHTTPURLResponse*)response statusCode] == 200) {
+                                                  handler(json,response,error);
+                                              }else{
+                                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                                      [Utillities showBasicError];
+                                                  });
+                                              }
                                           }];
     [postDataTask resume];
 
@@ -157,7 +200,14 @@ static ServiceRequest *sharedInstance;
                                                          completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                           {
                                               NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                                              handler(json,response,error);
+                                              
+                                              if (json && [(NSHTTPURLResponse*)response statusCode] == 200) {
+                                                  handler(json,response,error);
+                                              }else{
+                                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                                      [Utillities showBasicError];
+                                                  });
+                                              }
                                           }];
     [postDataTask resume];
 }
@@ -206,7 +256,7 @@ static ServiceRequest *sharedInstance;
     [urlPath appendFormat:@"firstName=%@",param.firstName];
     [urlPath appendFormat:@"&lastName=%@",param.lastName];
     [urlPath appendFormat:@"&userType=%@",param.userType];
-    [urlPath appendFormat:@"&age=%@",param.age];
+    [urlPath appendFormat:@"&age=%ld",(long)param.age];
     
     NSMutableURLRequest *req = [self createPostRequestForURLPath:urlPath];
     if ([NSJSONSerialization isValidJSONObject:newUser]) {
@@ -240,11 +290,14 @@ static ServiceRequest *sharedInstance;
                                                       error = err;
                                                   }
                                               }
-                                              else
-                                              {
-                                                  
+                                              
+                                              if (json[@"account"] && [(NSHTTPURLResponse*)response statusCode] == 200) {
+                                                  handler(json[@"account"],response,error);
+                                              }else{
+                                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                                      [Utillities showBasicError];
+                                                  });
                                               }
-                                              handler(json[@"account"],response,error);
                                           }];
     [postDataTask resume];
 
@@ -263,8 +316,7 @@ static ServiceRequest *sharedInstance;
                                               
                                               NSString *errorMessage = json[@"message"];
                                               NSString *errorMsg = json[@"errors"];
-                                              if ((errorMessage && [errorMessage length]) ||
-                                                  (errorMsg && [errorMsg length])) {
+                                              if (errorMessage || errorMsg ) {
                                                   if (error == nil) {
                                                       error = [[NSError alloc] initWithDomain:@"Registration Error"
                                                                                          code:-1
@@ -291,7 +343,13 @@ static ServiceRequest *sharedInstance;
                                                       [PersistentStore saveAccountDetails:self.account];
                                                   }
                                               }
-                                              handler(json[@"account"],response,error);
+                                              if (json[@"account"] && [(NSHTTPURLResponse*)response statusCode] == 200) {
+                                                  handler(json[@"account"],response,error);
+                                              }else{
+                                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                                      [Utillities showBasicError];
+                                                  });
+                                              }
                                           }];
     [postDataTask resume];
 }
@@ -329,7 +387,14 @@ static ServiceRequest *sharedInstance;
                                                   self.account.passcode = param.passcode;
                                                   [PersistentStore saveAccountDetails:self.account];
                                               }
-                                              handler(json[@"account"],response,error);
+
+                                              if (json[@"account"] && [(NSHTTPURLResponse*)response statusCode] == 200) {
+                                                  handler(json[@"account"],response,error);
+                                              }else{
+                                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                                      [Utillities showBasicError];
+                                                  });
+                                              }
                                           }];
     [postDataTask resume];
 }
