@@ -233,12 +233,10 @@
 		C24FDF2719195819009C7A9A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C24FDF2619195819009C7A9A /* Foundation.framework */; };
 		C24FDF2919195819009C7A9A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C24FDF2819195819009C7A9A /* CoreGraphics.framework */; };
 		C24FDF2B19195819009C7A9A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C24FDF2A19195819009C7A9A /* UIKit.framework */; };
-		C24FDF2D19195819009C7A9A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C24FDF2C19195819009C7A9A /* CoreData.framework */; };
 		C24FDF3319195819009C7A9A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C24FDF3119195819009C7A9A /* InfoPlist.strings */; };
 		C24FDF3519195819009C7A9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C24FDF3419195819009C7A9A /* main.m */; };
 		C24FDF3919195819009C7A9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C24FDF3819195819009C7A9A /* AppDelegate.m */; };
 		C24FDF3C19195819009C7A9A /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C24FDF3A19195819009C7A9A /* Main_iPhone.storyboard */; };
-		C24FDF4219195819009C7A9A /* SanJoseLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C24FDF4019195819009C7A9A /* SanJoseLibrary.xcdatamodeld */; };
 		C24FDF4A19195819009C7A9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C24FDF4919195819009C7A9A /* Images.xcassets */; };
 		C24FDF5119195819009C7A9A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C24FDF5019195819009C7A9A /* XCTest.framework */; };
 		C24FDF5219195819009C7A9A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C24FDF2619195819009C7A9A /* Foundation.framework */; };
@@ -632,7 +630,6 @@
 		C24FDF3719195819009C7A9A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C24FDF3819195819009C7A9A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		C24FDF3B19195819009C7A9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		C24FDF4119195819009C7A9A /* SanJoseLibrary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SanJoseLibrary.xcdatamodel; sourceTree = "<group>"; };
 		C24FDF4919195819009C7A9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C24FDF4F19195819009C7A9A /* SanJoseLibraryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SanJoseLibraryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C24FDF5019195819009C7A9A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -818,7 +815,6 @@
 			files = (
 				C2548563192D28FC0007DFC6 /* Security.framework in Frameworks */,
 				C24FDF2919195819009C7A9A /* CoreGraphics.framework in Frameworks */,
-				C24FDF2D19195819009C7A9A /* CoreData.framework in Frameworks */,
 				C24FDF2B19195819009C7A9A /* UIKit.framework in Frameworks */,
 				C24FDF2719195819009C7A9A /* Foundation.framework in Frameworks */,
 			);
@@ -1173,7 +1169,6 @@
 				C2D683B2191D733C00C3F7E5 /* Viewcontrollers */,
 				C283E420191AF11D008B66DB /* Extentions */,
 				C24FDF4919195819009C7A9A /* Images.xcassets */,
-				C24FDF4019195819009C7A9A /* SanJoseLibrary.xcdatamodeld */,
 				C24FDF2F19195819009C7A9A /* Supporting Files */,
 				C283E419191AD824008B66DB /* API */,
 				C283E41A191AD836008B66DB /* DataModels */,
@@ -1899,7 +1894,6 @@
 				C2548566192D2B3B0007DFC6 /* KeychainItemWrapper.m in Sources */,
 				C2D683B5191D756400C3F7E5 /* ContainerViewController.m in Sources */,
 				C2CCFBBA193937A700FEB1B6 /* MemberCell.m in Sources */,
-				C24FDF4219195819009C7A9A /* SanJoseLibrary.xcdatamodeld in Sources */,
 				C283E406191AAFCB008B66DB /* User.m in Sources */,
 				C2D683BC191D77A200C3F7E5 /* ReadingLogViewController.m in Sources */,
 				C2D683BF191D77B400C3F7E5 /* InformationViewController.m in Sources */,
@@ -2137,19 +2131,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		C24FDF4019195819009C7A9A /* SanJoseLibrary.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				C24FDF4119195819009C7A9A /* SanJoseLibrary.xcdatamodel */,
-			);
-			currentVersion = C24FDF4119195819009C7A9A /* SanJoseLibrary.xcdatamodel */;
-			path = SanJoseLibrary.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = C24FDF1B19195819009C7A9A /* Project object */;
 }
