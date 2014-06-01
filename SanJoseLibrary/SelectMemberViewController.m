@@ -50,14 +50,12 @@
         [sr getUserAccountDetailsWithCompletionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
             if (json != nil) {
                 self.accountInfo = [Account AccountWithProperties:json];
-                dispatch_sync(dispatch_get_main_queue(), ^{
-                    [self.collectionView reloadData];
-                    if ([self.accountInfo.users count]==1) {
-                        [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
-                                                          animated:YES
-                                                    scrollPosition:UICollectionViewScrollPositionNone];
-                    }else if ([self.accountInfo.users count]==0) {
-                        [self showAddMember];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    if ([self.accountInfo.users count]) {
+                        [self.collectionView reloadData];
+                    } else {
+                        [self didDismissLoginViewController];
                     }
                 });
             }
@@ -78,15 +76,20 @@
     self.title = @"";
 }
 
+-(void)didDismissLoginViewController
+{
+    if ([self.accountInfo.users count]==1) {
+        [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                                          animated:YES
+                                    scrollPosition:UICollectionViewScrollPositionNone];
+    }else if ([self.accountInfo.users count]==0) {
+        [self showAddMember];
+    }
+}
+
 - (void)showLoginViewController
 {
-    UIViewController *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"RegisterViewController"];
-    [(RegisterViewController *)loginVC setPresentingController:self];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginVC];
-    navController.modalPresentationStyle = UIModalPresentationFormSheet;
-    [self presentViewController:navController animated:YES completion:^{
-        
-    }];
+    [self performSegueWithIdentifier:@"RegisterViewController" sender:nil];
 }
 
 - (void)showAddMember
@@ -96,9 +99,7 @@
     NewMemberViewController * destVC = (NewMemberViewController *)[navController topViewController];
     [destVC setUserTypes:self.userTypes];
     [destVC setAccountInfo:self.accountInfo];
-    [self presentViewController:navController animated:YES completion:^{
-        
-    }];
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -116,6 +117,26 @@
 }
 
 #pragma mark - Navigation
+
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    BOOL shouldPerformSegue = NO;
+    
+    if ([identifier isEqualToString:@"NewMemberViewController"]) {
+        shouldPerformSegue = self.userTypes&&self.accountInfo;
+    }
+    else if ([identifier isEqualToString:@"RegisterViewController"])
+    {
+        [PersistentStore deleteAccount];
+        shouldPerformSegue = YES;
+    }
+    else if ([identifier isEqualToString:@"ActivityViewController"])
+    {
+        shouldPerformSegue = [self.accountInfo.users count]&&self.accountInfo.users;
+    }
+    
+    return shouldPerformSegue;
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

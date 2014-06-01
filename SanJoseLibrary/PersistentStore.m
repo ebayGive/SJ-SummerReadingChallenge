@@ -53,6 +53,7 @@ static KeychainItemWrapper *standardKeychainItemWrapper;
 + (void)deleteAccount
 {
     [[self standardPersistentStore] removeObjectForKey:@"Account"];
+    [[self standardPersistentStore] synchronize];
 }
 
 +(BOOL)saveObject:(id)obj withKey:(NSString *)key

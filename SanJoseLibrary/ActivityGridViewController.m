@@ -73,6 +73,8 @@
 {
     [super viewWillAppear:animated];
     [self.activityGridCollectionView reloadData];
+    UINavigationItem *navItem = self.parentViewController.parentViewController.navigationItem;
+    navItem.title = [self.currentUser fullName];
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView

@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class SelectMemberViewController;
+
 @interface RegisterViewController : UITableViewController
-@property(nonatomic,strong) UIViewController *presentingController;
+
+@property(nonatomic,strong) SelectMemberViewController *presentingController;
+
 @end

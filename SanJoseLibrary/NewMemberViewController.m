@@ -11,6 +11,7 @@
 #import "UserType.h"
 #import "ServiceRequest.h"
 #import "User.h"
+#import "Utillities.h"
 
 @interface NewMemberViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 
@@ -35,9 +36,15 @@
         new.age = [self.age.text integerValue];
         NSInteger i = [self.userType selectedRowInComponent:0];
         new.userType = [[[self.userTypes userTypes] objectAtIndex:i] id];
-        [[ServiceRequest sharedRequest] startAddUserTaskWithParameters:new completionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
-            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-        }];
+        if ([new.firstName length] && [new.lastName length] && new.age && [self.userTypes.userTypes count]) {
+            [[ServiceRequest sharedRequest] startAddUserTaskWithParameters:new completionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
+                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            }];
+        }
+        else
+        {
+            [Utillities showBasicInputError];
+        }
     }
 }
 

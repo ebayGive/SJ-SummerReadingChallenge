@@ -12,5 +12,6 @@
 @interface SelectMemberViewController : UICollectionViewController
 
 -(void)setAccountInfo:(Account *)accountInfo;
+-(void)didDismissLoginViewController;
 
 @end

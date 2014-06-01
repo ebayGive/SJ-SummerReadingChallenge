@@ -12,7 +12,8 @@
 
 @interface Utillities : NSObject
 
-+(void)showBasicError;
++(void)showBasicInputError;
++(void)showBasicNetworkError;
 
 +(UIAlertView *)alertViewWithTitle:(NSString *)title
                            message:(NSString *)msg

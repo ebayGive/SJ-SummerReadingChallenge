@@ -20,9 +20,14 @@
     return alert;
 }
 
-+(void)showBasicError
++(void)showBasicNetworkError
 {
     [[self alertViewWithTitle:@"Request Error" message:@"Please check your network connection or try again later" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+}
+
++(void)showBasicInputError
+{
+    [[self alertViewWithTitle:@"Data Error" message:@"Please check the entered values" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 }
 
 @end

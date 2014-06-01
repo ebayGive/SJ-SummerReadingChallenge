@@ -8,6 +8,7 @@
 
 #import "InformationViewController.h"
 #import "User.h"
+#import "ContainerViewController.h"
 
 @interface InformationViewController () <UIWebViewDelegate>
 
@@ -21,6 +22,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.currentUser = [(ContainerViewController *)self.parentViewController currentUser];
+    
     NSString *pathForHTML = [[NSBundle mainBundle] pathForResource:@"help-android" ofType:@"html"];
     
     NSString *imagePath = [[NSBundle mainBundle] resourcePath];
@@ -36,6 +40,13 @@
           textEncodingName:@"utf-8"
                    baseURL:baseURL];
     
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    UINavigationItem *navItem = self.parentViewController.parentViewController.navigationItem;
+    navItem.title = [self.currentUser fullName];
 }
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType

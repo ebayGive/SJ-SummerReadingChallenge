@@ -71,7 +71,7 @@ static ServiceRequest *sharedInstance;
                                                   handler(json,response,error);
                                               }else{
                                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                                      [Utillities showBasicError];
+                                                      [Utillities showBasicNetworkError];
                                                   });
                                               }
                                           }];
@@ -90,7 +90,7 @@ static ServiceRequest *sharedInstance;
                                                   handler(json,response,error);
                                               }else{
                                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                                      [Utillities showBasicError];
+                                                      [Utillities showBasicNetworkError];
                                                   });
                                               }
                                           }];
@@ -109,7 +109,7 @@ static ServiceRequest *sharedInstance;
                                                   handler(json,response,error);
                                               }else{
                                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                                      [Utillities showBasicError];
+                                                      [Utillities showBasicNetworkError];
                                                   });
                                               }
                                           }];
@@ -128,7 +128,7 @@ static ServiceRequest *sharedInstance;
                                                   handler(json,response,error);
                                               }else{
                                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                                      [Utillities showBasicError];
+                                                      [Utillities showBasicNetworkError];
                                                   });
                                               }
                                           }];
@@ -149,7 +149,7 @@ static ServiceRequest *sharedInstance;
                                                   handler(json,response,error);
                                               }else{
                                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                                      [Utillities showBasicError];
+                                                      [Utillities showBasicNetworkError];
                                                   });
                                               }
                                           }];
@@ -185,7 +185,7 @@ static ServiceRequest *sharedInstance;
                                                   handler(json,response,error);
                                               }else{
                                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                                      [Utillities showBasicError];
+                                                      [Utillities showBasicNetworkError];
                                                   });
                                               }
                                           }];
@@ -205,7 +205,7 @@ static ServiceRequest *sharedInstance;
                                                   handler(json,response,error);
                                               }else{
                                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                                      [Utillities showBasicError];
+                                                      [Utillities showBasicNetworkError];
                                                   });
                                               }
                                           }];
@@ -270,9 +270,8 @@ static ServiceRequest *sharedInstance;
     NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:req
                                                          completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                           {
-                                              NSLog(@"%@",[NSString stringWithUTF8String:[data bytes]]);
-                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                                              
+                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                   options:kNilOptions error:&error];
                                               NSString *errorMessage = json[@"message"];
                                               if (errorMessage && [errorMessage length]) {
                                                   if (error == nil) {
@@ -295,7 +294,7 @@ static ServiceRequest *sharedInstance;
                                                   handler(json[@"account"],response,error);
                                               }else{
                                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                                      [Utillities showBasicError];
+                                                      [Utillities showBasicNetworkError];
                                                   });
                                               }
                                           }];
@@ -347,7 +346,7 @@ static ServiceRequest *sharedInstance;
                                                   handler(json[@"account"],response,error);
                                               }else{
                                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                                      [Utillities showBasicError];
+                                                      [Utillities showBasicNetworkError];
                                                   });
                                               }
                                           }];
@@ -357,13 +356,14 @@ static ServiceRequest *sharedInstance;
 -(NSMutableURLRequest *)createRequestWithAccountParameters:(Account *)param
 {
     NSMutableString *loginURL = [NSMutableString stringWithString:@"http://hackathon.ebaystratus.com/accounts.json?"];
-    [loginURL appendFormat:@"accountName=%@&emailAddress=%@&branchId=%@&passcode=%@",
+    [loginURL appendFormat:@"accountName=%@&emailAddress=%@&branchId=%@&passcode=%@&role=READER",
      param.accountName,param.emailAddress,param.branchId,param.passcode];
     
     NSDictionary *newAcc = @{@"accountName": param.accountName,
                                          @"emailAddress": param.emailAddress,
                                          @"branchId": param.branchId,
-                                         @"passcode": param.passcode};
+                                         @"passcode": param.passcode,
+                                         @"role":@"READER"};
     
     NSMutableURLRequest *req = [self createPostRequestForURLPath:loginURL];
     [req setHTTPBody:[NSJSONSerialization dataWithJSONObject:newAcc
@@ -392,7 +392,7 @@ static ServiceRequest *sharedInstance;
                                                   handler(json[@"account"],response,error);
                                               }else{
                                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                                      [Utillities showBasicError];
+                                                      [Utillities showBasicNetworkError];
                                                   });
                                               }
                                           }];

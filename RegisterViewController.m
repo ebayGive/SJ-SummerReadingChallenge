@@ -114,8 +114,10 @@
 -(void)handleResponse:(Account *)accountInfo
 {
     if ([accountInfo.id length]) {
-        [(SelectMemberViewController *)self.presentingController setAccountInfo:accountInfo];
-        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        [self.presentingController setAccountInfo:accountInfo];
+        [self.navigationController dismissViewControllerAnimated:YES completion:^{
+            [self.presentingController didDismissLoginViewController];
+        }];
     }
     else
     {
@@ -129,11 +131,36 @@
 
 - (IBAction)registerAction:(UIBarButtonItem *)sender
 {
+    if (!self.branches.branches && [self.branches.branches count]==0) {
+        ServiceRequest *sr = [ServiceRequest sharedRequest];
+        [sr getBranchDetailsWithCompletionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
+            self.branches = [[Branches alloc] branchesWithProperties:(NSArray *)json];
+            
+            if (response) {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self.branchNames reloadAllComponents];
+                    [self switchToRegistrationView:sender];
+                });
+            }
+            else
+                [self.branchNames reloadAllComponents];
+            
+        }];
+    }
+    else
+    {
+        [self switchToRegistrationView:sender];
+    }
+}
+
+- (void)switchToRegistrationView:(UIBarButtonItem *)sender
+{
+    sender.title = self.isRegistrationModeActive?@"Registration":@"Login";
+    
     [self.accountName setDelegate:nil];
     [self.passcode setDelegate:nil];
     [self.emails setDelegate:nil];
     
-    sender.title = self.isRegistrationModeActive?@"Registration":@"Login";
     self.isRegistrationModeActive = !self.isRegistrationModeActive;
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
                   withRowAnimation:UITableViewRowAnimationBottom];
@@ -146,18 +173,27 @@
 
 - (IBAction)doneAction:(UIBarButtonItem *)sender
 {
-//    if (self.canSubmitRequest) {
-        self.isRegistrationModeActive?
-        [self startRegistrationRequest]:
+    if (!self.isRegistrationModeActive && [self.accountName.text length] && [self.passcode.text length]) {
         [self startLoginRequest];
-//    }
+    } else if (self.isRegistrationModeActive &&
+               [self.accountName.text length] && [self.passcode.text length] &&
+               [self.branches.branches count] && [self.emails.text length])
+    {
+        [self startRegistrationRequest];
+    }
+    else
+    {
+        [Utillities showBasicInputError];
+    }
 }
 
 -(void)handleRegistrationCompleteWithData:(NSDictionary *)data
 {
     Account *acc = [Account AccountWithProperties:data];
-    [(SelectMemberViewController *)self.presentingController setAccountInfo:acc];
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [self.presentingController setAccountInfo:acc];
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        [self.presentingController didDismissLoginViewController];
+    }];
 }
 -(void)handleRegistrationFailedWithError:(NSError *)error
 {
@@ -193,10 +229,7 @@
 
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-    if ([textField isEqual:self.emails]) {
-        return (self.canSubmitRequest = [self validateEmail:textField.text]);
-    }
-    return (self.canSubmitRequest = [textField.text length]);
+    return [textField.text length];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
