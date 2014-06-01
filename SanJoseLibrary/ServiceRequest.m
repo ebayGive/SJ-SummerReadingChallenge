@@ -48,7 +48,7 @@ static ServiceRequest *sharedInstance;
 
 -(void)getPrizeAndUserTypesWithCompletionHandler:(ServiceRequestCompletion)handler
 {
-    NSString *urlStr = @"http://hackathon.ebaystratus.com/prizes.json";
+    NSString *urlStr = @"http://www.sjplsummer.org/prizes.json";
     
 //    id data = [PersistentStore objectWithKey:urlStr];
 //    
@@ -80,7 +80,7 @@ static ServiceRequest *sharedInstance;
 
 - (void)getUserTypesWithCompletionHandler:(ServiceRequestCompletion)handler
 {
-    NSString *urlStr = @"http://hackathon.ebaystratus.com/user_types.json";
+    NSString *urlStr = @"http://www.sjplsummer.org/user_types.json";
     NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createGetRequestForURLPath:urlStr]
                                                          completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                           {
@@ -99,7 +99,7 @@ static ServiceRequest *sharedInstance;
 
 - (void)getGridDetailsWithCompletionHandler:(ServiceRequestCompletion)handler
 {
-    NSString *urlStr = @"http://hackathon.ebaystratus.com/grids.json";
+    NSString *urlStr = @"http://www.sjplsummer.org/grids.json";
     NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createGetRequestForURLPath:urlStr]
                                                          completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                           {
@@ -118,7 +118,7 @@ static ServiceRequest *sharedInstance;
 
 - (void)getBranchDetailsWithCompletionHandler:(ServiceRequestCompletion)handler
 {
-    NSString *urlStr = @"http://hackathon.ebaystratus.com/branches.json";
+    NSString *urlStr = @"http://www.sjplsummer.org/branches.json";
     NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createGetRequestForURLPath:urlStr]
                                                          completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                           {
@@ -138,7 +138,7 @@ static ServiceRequest *sharedInstance;
 - (void)getUserAccountDetailsWithCompletionHandler:(ServiceRequestCompletion)handler
 {
     Account *acc = [PersistentStore accountDetails];
-    NSString *urlStr = [NSString stringWithFormat:@"http://hackathon.ebaystratus.com/accounts/%@.json",acc.id];
+    NSString *urlStr = [NSString stringWithFormat:@"http://www.sjplsummer.org/accounts/%@.json",acc.id];
     
     NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createGetRequestForURLPath:urlStr]
                                                          completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
@@ -173,7 +173,7 @@ static ServiceRequest *sharedInstance;
                      cellIndex:(NSString *)cellIndex
              completionHandler:(ServiceRequestCompletion)handler
 {
-    NSMutableString *userActivityUrl = [NSMutableString stringWithFormat:@"http://hackathon.ebaystratus.com/accounts/%@/users/%@/activity_grid/%@.json?",self.account.id,userId,cellIndex];
+    NSMutableString *userActivityUrl = [NSMutableString stringWithFormat:@"http://www.sjplsummer.org/accounts/%@/users/%@/activity_grid/%@.json?",self.account.id,userId,cellIndex];
     [userActivityUrl appendFormat:@"activity=%d&notes=%@&updatedAt=%@",userActivity.activity,userActivity.notes,userActivity.updatedAt];
     
     NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:[self createPutRequestForURLPath:userActivityUrl]
@@ -214,7 +214,7 @@ static ServiceRequest *sharedInstance;
 
 -(NSMutableURLRequest *)createRequestWithUser:(User *)user
 {
-    NSMutableString *loginURL = [NSMutableString stringWithFormat:@"http://hackathon.ebaystratus.com/accounts/%@/users/%@/reading_log.json?",self.account.id,user.id];
+    NSMutableString *loginURL = [NSMutableString stringWithFormat:@"http://www.sjplsummer.org/accounts/%@/users/%@/reading_log.json?",self.account.id,user.id];
     [loginURL appendFormat:@"readingLog=%@",user.readingLog];
     
     NSMutableURLRequest *req = [self createPutRequestForURLPath:loginURL];
@@ -251,7 +251,7 @@ static ServiceRequest *sharedInstance;
                                          @"lastName": param.lastName,
                                          @"userType": param.userType,
                                          @"age":@(param.age)}};
-    NSMutableString *urlPath = [NSMutableString stringWithFormat:@"http://hackathon.ebaystratus.com/accounts/%@/users.json?",self.account.id];
+    NSMutableString *urlPath = [NSMutableString stringWithFormat:@"http://www.sjplsummer.org/accounts/%@/users.json?",self.account.id];
     
     [urlPath appendFormat:@"firstName=%@",param.firstName];
     [urlPath appendFormat:@"&lastName=%@",param.lastName];
@@ -290,8 +290,8 @@ static ServiceRequest *sharedInstance;
                                                   }
                                               }
                                               
-                                              if (json[@"account"] && [(NSHTTPURLResponse*)response statusCode] == 200) {
-                                                  handler(json[@"account"],response,error);
+                                              if (json && [(NSHTTPURLResponse*)response statusCode] == 200) {
+                                                  handler(json,response,error);
                                               }else{
                                                   dispatch_async(dispatch_get_main_queue(), ^{
                                                       [Utillities showBasicNetworkError];
@@ -355,7 +355,7 @@ static ServiceRequest *sharedInstance;
 
 -(NSMutableURLRequest *)createRequestWithAccountParameters:(Account *)param
 {
-    NSMutableString *loginURL = [NSMutableString stringWithString:@"http://hackathon.ebaystratus.com/accounts.json?"];
+    NSMutableString *loginURL = [NSMutableString stringWithString:@"http://www.sjplsummer.org/accounts.json?"];
     [loginURL appendFormat:@"accountName=%@&emailAddress=%@&branchId=%@&passcode=%@&role=READER",
      param.accountName,param.emailAddress,param.branchId,param.passcode];
     
@@ -401,7 +401,7 @@ static ServiceRequest *sharedInstance;
 
 -(NSMutableURLRequest *)createRequestWithLoginParameters:(Account *)param
 {
-    NSMutableString *loginURL = [NSMutableString stringWithString:@"http://hackathon.ebaystratus.com/accounts/signin.json?"];
+    NSMutableString *loginURL = [NSMutableString stringWithString:@"http://www.sjplsummer.org/accounts/signin.json?"];
     [loginURL appendFormat:@"accountName=%@&passcode=%@",param.accountName,param.passcode];
     
     return [self createPostRequestForURLPath:loginURL];

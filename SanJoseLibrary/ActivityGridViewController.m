@@ -13,6 +13,7 @@
 #import "ServiceRequest.h"
 #import "ActivityGrids.h"
 #import "ActivityGrid.h"
+#import "Activity.h"
 #import "PrizesFooterView.h"
 #import "PrizeType.h"
 #import "PrizeTypes.h"
@@ -21,7 +22,7 @@
 
 @interface ActivityGridViewController () <UICollectionViewDataSource, UICollectionViewDelegate, ActivityGridCellDelegate>
 
-@property (weak, nonatomic) User *currentUser;
+@property (strong, nonatomic) User *currentUser;
 @property (strong, nonatomic) ActivityGrid *activityGrid;
 @property (strong, nonatomic) PrizeType *prizesForUser;
 
@@ -50,10 +51,7 @@
             dispatch_sync(dispatch_get_main_queue(), ^{
                 [self.activityGridCollectionView reloadData];
             });
-        }
-        else
-            [self.activityGridCollectionView reloadData];
-        
+        }        
     }];
     
     [sr getPrizeAndUserTypesWithCompletionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
@@ -64,17 +62,32 @@
                 [self.activityGridCollectionView reloadData];
             });
         }
-        else
-            [self.activityGridCollectionView reloadData];
     }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     [self.activityGridCollectionView reloadData];
     UINavigationItem *navItem = self.parentViewController.parentViewController.navigationItem;
     navItem.title = [self.currentUser fullName];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if ([self.currentUser.readingLog integerValue] == 900) {
+        Activity *userActivity = [self.currentUser.activityGrid objectAtIndex:12];
+        if (!userActivity.activity) {
+            userActivity.activity = YES;
+            [self activityGridCell:nil
+           didSelectItemWithAction:ActivityCompleted
+                         cellIndex:@"12"
+                  userActivityInfo:userActivity];
+        }
+    }
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -117,7 +130,7 @@
                                                   [arr addObject:p];
                                               }
                                               BOOL prizesViewNeedsRefresh = NO;
-                                              if (![[arr valueForKeyPath:@"state"] isEqualToArray:[self.currentUser.prizes valueForKeyPath:@"state"]])
+                                              if ([arr count] && ![[arr valueForKeyPath:@"state"] isEqualToArray:[self.currentUser.prizes valueForKeyPath:@"state"]])
                                               {
                                                   prizesViewNeedsRefresh = YES;
                                                   self.currentUser.prizes = [arr copy];

@@ -13,5 +13,5 @@
 
 -(void)setAccountInfo:(Account *)accountInfo;
 -(void)didDismissLoginViewController;
-
+-(void)didAddNewMember;
 @end

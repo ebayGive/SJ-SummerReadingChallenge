@@ -25,6 +25,14 @@
 
 @implementation ReadingLogViewController
 
+-(void)didReceiveMemoryWarning
+{
+    if ([self.currentUser.readingLog integerValue] == 900) {
+        self.batteryFullImageView.hidden = NO;
+        self.readingLogCollectionViewCells = nil;
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -32,21 +40,25 @@
     self.currentUser = [(ContainerViewController *)self.parentViewController currentUser];
     
     NSMutableArray *cells = [[NSMutableArray alloc] initWithCapacity:23];
-    for (int i =0; i<[self.readingLogCollectionView numberOfItemsInSection:0]; i++) {
-        NSIndexPath *ip = [NSIndexPath indexPathForItem:i inSection:0];
-        ReadingLogCell *cell = [self.readingLogCollectionView dequeueReusableCellWithReuseIdentifier:@"readingLogCell"
-                                                                                        forIndexPath:ip];
-        NSString *imgName = nil;
-        if ((ip.item+1)/10<1) {
-            imgName = [NSString stringWithFormat:@"APP_BATTERY_OFF-0%ld",(long)ip.item+1];
-        } else {
-            imgName = [NSString stringWithFormat:@"APP_BATTERY_OFF-%ld",(long)ip.item+1];
+    for (int i =0; i<[self.readingLogCollectionView numberOfItemsInSection:0]; i++)
+    {
+        @autoreleasepool {
+            NSIndexPath *ip = [NSIndexPath indexPathForItem:i inSection:0];
+            ReadingLogCell *cell = [self.readingLogCollectionView dequeueReusableCellWithReuseIdentifier:@"readingLogCell"
+                                                                                            forIndexPath:ip];
+            NSString *imgName = nil;
+            if ((ip.item+1)/10<1) {
+                imgName = [NSString stringWithFormat:@"APP_BATTERY_OFF-0%ld",(long)ip.item+1];
+            } else {
+                imgName = [NSString stringWithFormat:@"APP_BATTERY_OFF-%ld",(long)ip.item+1];
+            }
+            [cell.imageView setImage:[UIImage imageNamed:imgName]];
+            [cells addObject:cell];
         }
-        [cell.imageView setImage:[UIImage imageNamed:imgName]];
-        [cells addObject:cell];
     }
     self.batteryFullImageView.hidden = YES;
     self.readingLogCollectionViewCells = [cells copy];
+    [cells removeAllObjects];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -133,14 +145,17 @@
     }
     
     [self.readingLogCollectionView performBatchUpdates:^{
-        ReadingLogCell *cell = [self.readingLogCollectionViewCells objectAtIndex:ip.item];
-        NSString *imgName = nil;
-        if ((ip.item+1)/10<1) {
-            imgName = [NSString stringWithFormat:@"APP_BATTERY_ON-0%ld",(long)ip.item+1];
-        } else {
-            imgName = [NSString stringWithFormat:@"APP_BATTERY_ON-%ld",(long)ip.item+1];
+        @autoreleasepool {
+            ReadingLogCell *cell = [self.readingLogCollectionViewCells objectAtIndex:ip.item];
+            NSString *imgName = nil;
+            if ((ip.item+1)/10<1) {
+                imgName = [NSString stringWithFormat:@"APP_BATTERY_ON-0%ld",(long)ip.item+1];
+            } else {
+                imgName = [NSString stringWithFormat:@"APP_BATTERY_ON-%ld",(long)ip.item+1];
+            }
+            [cell.imageView setImage:nil];
+            [cell.imageView setImage:[UIImage imageNamed:imgName]];
         }
-        [cell.imageView setImage:[UIImage imageNamed:imgName]];
     } completion:^(BOOL finished) {
         [self updateIndexPath];
         [self updateCellAtIndexPath:self.currentIndexPath];
@@ -159,8 +174,10 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ReadingLogCell *cell = [self.readingLogCollectionViewCells objectAtIndex:indexPath.item];
-    
+    ReadingLogCell *cell = nil;
+    if ([self.readingLogCollectionViewCells count]) {
+        cell = [self.readingLogCollectionViewCells objectAtIndex:indexPath.item];
+    }
     return cell;
 }
 

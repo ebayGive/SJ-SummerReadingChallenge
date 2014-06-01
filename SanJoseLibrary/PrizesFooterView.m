@@ -13,8 +13,7 @@
 
 @interface PrizesFooterView ()
 
-@property PrizeType *prizeType;
-@property NSArray *userPrizes;
+@property (weak, nonatomic) PrizeType *prizeType;
 
 @property (weak, nonatomic) IBOutlet UIButton *prize1;
 @property (weak, nonatomic) IBOutlet UIButton *prize2;
@@ -29,34 +28,34 @@
 
 -(void)setupViewWithPrizeType:(PrizeType *)prizeType userPrizeStatus:(NSArray *)userPrizes
 {
-    self.userPrizes = userPrizes;
     self.prizeType = prizeType;
     self.title.text = @"Prizes";
     
-    Prize *p = [self.userPrizes objectAtIndex:0];
+    Prize *p = [userPrizes objectAtIndex:0];
     NSString *imgName = [NSString stringWithFormat:@"PRIZES_1_%d",p.state];
+    self.prize1.tag = p.state;
     [self.prize1 setBackgroundImage:[UIImage imageNamed:imgName]
                            forState:UIControlStateNormal];
 
-    p = [self.userPrizes objectAtIndex:1];
+    p = [userPrizes objectAtIndex:1];
     imgName = [NSString stringWithFormat:@"PRIZES_2_%d",p.state];
     self.prize2.tag = p.state;
     [self.prize2 setBackgroundImage:[UIImage imageNamed:imgName]
                            forState:UIControlStateNormal];
     
-    p = [self.userPrizes objectAtIndex:2];
+    p = [userPrizes objectAtIndex:2];
     imgName = [NSString stringWithFormat:@"PRIZES_3_%d",p.state];
     self.prize3.tag = p.state;
     [self.prize3 setBackgroundImage:[UIImage imageNamed:imgName]
                            forState:UIControlStateNormal];
     
-    p = [self.userPrizes objectAtIndex:3];
+    p = [userPrizes objectAtIndex:3];
     imgName = [NSString stringWithFormat:@"PRIZES_4_%d",p.state];
     self.prize4.tag = p.state;
     [self.prize4 setBackgroundImage:[UIImage imageNamed:imgName]
                            forState:UIControlStateNormal];
     
-    p = [self.userPrizes objectAtIndex:5];
+    p = [userPrizes objectAtIndex:5];
     imgName = [NSString stringWithFormat:@"PRIZES_5_%d",p.state];
     self.prize5.tag = p.state;
     [self.prize5 setBackgroundImage:[UIImage imageNamed:imgName]

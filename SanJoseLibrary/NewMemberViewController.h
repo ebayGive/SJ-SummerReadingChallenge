@@ -10,8 +10,11 @@
 
 @class Account;
 @class UserTypes;
+@class SelectMemberViewController;
+
 @interface NewMemberViewController : UITableViewController
 
+@property(nonatomic,strong) SelectMemberViewController *presentingController;
 @property (strong, nonatomic) Account *accountInfo;
 @property (strong, nonatomic) UserTypes *userTypes;
 

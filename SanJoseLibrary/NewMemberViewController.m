@@ -12,6 +12,7 @@
 #import "ServiceRequest.h"
 #import "User.h"
 #import "Utillities.h"
+#import "SelectMemberViewController.h"
 
 @interface NewMemberViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 
@@ -38,7 +39,10 @@
         new.userType = [[[self.userTypes userTypes] objectAtIndex:i] id];
         if ([new.firstName length] && [new.lastName length] && new.age && [self.userTypes.userTypes count]) {
             [[ServiceRequest sharedRequest] startAddUserTaskWithParameters:new completionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
-                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                    [self.presentingController didAddNewMember];
+                });
             }];
         }
         else

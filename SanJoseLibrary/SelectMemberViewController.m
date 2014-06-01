@@ -40,23 +40,14 @@
     [sr getUserTypesWithCompletionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
         self.userTypes = [[UserTypes alloc] userTypesWithProperties:(NSArray *)json];
     }];
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    ServiceRequest *sr = [ServiceRequest sharedRequest];
     if ([PersistentStore accountDetails]) {
         [sr getUserAccountDetailsWithCompletionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
             if (json != nil) {
                 self.accountInfo = [Account AccountWithProperties:json];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
-                    if ([self.accountInfo.users count]) {
-                        [self.collectionView reloadData];
-                    } else {
-                        [self didDismissLoginViewController];
-                    }
+                    [self.collectionView reloadData];
+                    [self didDismissLoginViewController];
                 });
             }
         }];
@@ -67,6 +58,11 @@
             [self showLoginViewController];
         });
     }
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     self.title = @"Select Member";
 }
 
@@ -82,9 +78,23 @@
         [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
                                           animated:YES
                                     scrollPosition:UICollectionViewScrollPositionNone];
+        [self performSegueWithIdentifier:@"ActivityViewController" sender:nil];
     }else if ([self.accountInfo.users count]==0) {
         [self showAddMember];
     }
+}
+
+-(void)didAddNewMember
+{
+    [[ServiceRequest sharedRequest] getUserAccountDetailsWithCompletionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
+        if (json != nil) {
+            self.accountInfo = [Account AccountWithProperties:json];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.collectionView reloadData];
+                [self didDismissLoginViewController];
+            });
+        }
+    }];
 }
 
 - (void)showLoginViewController
