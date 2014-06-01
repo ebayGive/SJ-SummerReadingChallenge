@@ -47,7 +47,7 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
                     [self.collectionView reloadData];
-                    [self didDismissLoginViewController];
+                    [self autoNavigate];
                 });
             }
         }];
@@ -74,6 +74,19 @@
 
 -(void)didDismissLoginViewController
 {
+    [[ServiceRequest sharedRequest] getUserAccountDetailsWithCompletionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
+        if (json != nil) {
+            self.accountInfo = [Account AccountWithProperties:json];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.collectionView reloadData];
+                [self autoNavigate];
+            });
+        }
+    }];
+}
+
+-(void)autoNavigate
+{
     if ([self.accountInfo.users count]==1) {
         [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
                                           animated:YES
@@ -91,7 +104,7 @@
             self.accountInfo = [Account AccountWithProperties:json];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.collectionView reloadData];
-                [self didDismissLoginViewController];
+                [self autoNavigate];
             });
         }
     }];
