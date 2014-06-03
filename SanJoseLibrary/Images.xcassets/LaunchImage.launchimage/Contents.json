@@ -5,14 +5,14 @@
       "idiom" : "iphone",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
-      "filename" : "launch640x960 copy.png",
+      "filename" : "1_launch_640x1136.png",
       "scale" : "2x"
     },
     {
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "retina4",
-      "filename" : "launch640x1136.png",
+      "filename" : "1launch_640x1136@2x.png",
       "minimum-system-version" : "7.0",
       "orientation" : "portrait",
       "scale" : "2x"
@@ -22,7 +22,7 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
-      "filename" : "launch768x1024 copy.png",
+      "filename" : "launch_640x1136 copy.png",
       "scale" : "1x"
     },
     {
@@ -30,6 +30,7 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
+      "filename" : "launch_640x1136@2x copy.png",
       "scale" : "1x"
     },
     {
@@ -37,7 +38,7 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
-      "filename" : "launch1536x2048 copy 2.png",
+      "filename" : "launch_640x1136.png",
       "scale" : "2x"
     },
     {
@@ -45,35 +46,7 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
-      "filename" : "launch2048x1536.png",
-      "scale" : "2x"
-    },
-    {
-      "orientation" : "portrait",
-      "idiom" : "iphone",
-      "extent" : "full-screen",
-      "filename" : "launch640x960.png",
-      "scale" : "2x"
-    },
-    {
-      "orientation" : "portrait",
-      "idiom" : "ipad",
-      "extent" : "full-screen",
-      "filename" : "launch768x1024.png",
-      "scale" : "1x"
-    },
-    {
-      "orientation" : "landscape",
-      "idiom" : "ipad",
-      "extent" : "full-screen",
-      "filename" : "launch1024x768.png",
-      "scale" : "1x"
-    },
-    {
-      "orientation" : "portrait",
-      "idiom" : "ipad",
-      "extent" : "full-screen",
-      "filename" : "launch1536x2048.png",
+      "filename" : "launch_640x1136@2x.png",
       "scale" : "2x"
     }
   ],

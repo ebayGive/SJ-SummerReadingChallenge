@@ -225,11 +225,11 @@
                      cancelButtonTitle:@"ok" otherButtonTitles:nil];
         [alert show];
     }
-}
-
--(BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
-    return [textField.text length];
+    if ([textField isEqual:self.emails] && ![self validateEmail:textField.text]) {
+        UIAlertView * alert = [Utillities alertViewWithTitle:@"Invalid Email" message:@"Please enter a valid email id" delegate:nil
+                                           cancelButtonTitle:@"ok" otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
