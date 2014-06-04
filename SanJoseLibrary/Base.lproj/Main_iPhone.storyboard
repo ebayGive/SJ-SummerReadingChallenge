@@ -40,7 +40,7 @@
                 <viewController storyboardIdentifier="ActivityViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fDS-Du-nls" customClass="ActivityViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IfT-cW-e6o">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="k06-h8-63Z">
                                 <rect key="frame" x="1" y="67" width="318" height="29"/>
@@ -429,7 +429,7 @@
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="OQv-Fq-GA2">
                                 <rect key="frame" x="35" y="8" width="250" height="450"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="mjK-Eb-HKg">
                                     <size key="itemSize" width="50" height="50"/>
@@ -487,11 +487,11 @@
                 <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="ql2-67-XmX" customClass="ActivityGridViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sL4-Co-SNF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="465"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="H6y-C6-9ll">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="465"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="nhk-5T-mrJ">
                                     <size key="itemSize" width="64" height="64"/>
@@ -644,7 +644,7 @@
                 <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="GKx-py-LmC" customClass="InformationViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5It-of-dMr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="465"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" id="yBB-6d-zcX">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="465"/>

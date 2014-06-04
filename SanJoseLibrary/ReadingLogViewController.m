@@ -30,6 +30,7 @@
     if ([self.currentUser.readingLog integerValue] == 900) {
         self.batteryFullImageView.hidden = NO;
         self.readingLogCollectionViewCells = nil;
+        self.readingLogCollectionView.hidden = YES;
     }
 }
 

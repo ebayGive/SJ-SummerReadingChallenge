@@ -117,12 +117,7 @@
 
 - (void)showAddMember
 {
-    UINavigationController *navController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewMemberNavigation"];
-    navController.modalPresentationStyle = UIModalPresentationFormSheet;
-    NewMemberViewController * destVC = (NewMemberViewController *)[navController topViewController];
-    [destVC setUserTypes:self.userTypes];
-    [destVC setAccountInfo:self.accountInfo];
-    [self presentViewController:navController animated:YES completion:nil];
+    [self performSegueWithIdentifier:@"NewMemberViewController" sender:nil];
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -165,14 +160,18 @@
 {
     if ([segue.identifier isEqualToString:@"NewMemberViewController"]) {
         UINavigationController *nav = (UINavigationController *)[segue destinationViewController];
+        nav.modalPresentationStyle = UIModalPresentationFormSheet;
+        
         NewMemberViewController * destVC = (NewMemberViewController *)[nav topViewController];
         [destVC setUserTypes:self.userTypes];
         [destVC setAccountInfo:self.accountInfo];
+        [destVC setPresentingController:self];
     }
     else if ([segue.identifier isEqualToString:@"RegisterViewController"])
     {
         [PersistentStore deleteAccount];
         UINavigationController *nav = (UINavigationController *)[segue destinationViewController];
+        nav.modalPresentationStyle = UIModalPresentationFormSheet;
         RegisterViewController * destVC = (RegisterViewController *)[nav topViewController];
         [destVC setPresentingController:self];
     }

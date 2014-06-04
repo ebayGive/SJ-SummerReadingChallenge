@@ -25,6 +25,19 @@
 
 @implementation NewMemberViewController
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    if ([self.userTypes.userTypes count] == 0) {
+        ServiceRequest *sr = [ServiceRequest sharedRequest];
+        [sr getUserTypesWithCompletionHandler:^(NSDictionary *json, NSURLResponse *response, NSError *error) {
+            self.userTypes = [[UserTypes alloc] userTypesWithProperties:(NSArray *)json];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.userType reloadAllComponents];
+            });
+        }];
+    }
+}
+
 - (IBAction)dismissView:(UIButton *)sender {
     if (sender.tag == 1) {
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
