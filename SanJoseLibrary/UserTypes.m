@@ -19,7 +19,9 @@
         NSMutableArray *arr = [[NSMutableArray alloc] initWithCapacity:[properties count]];
         for (id obj in properties) {
             UserType *u = [[UserType alloc] initWithJSONProperties:obj];
-            [arr addObject:u];
+            if (![u.name hasPrefix:@"STAFF"]) { //we dont need to show this usertype to the users.
+                [arr addObject:u];
+            }
         }
         self.userTypes = [NSArray arrayWithArray:arr];
     }

@@ -48,10 +48,18 @@
     }
     else
     {
-        alert = [Utillities alertViewWithTitle:@"Activity"
-                                       message:self.activityCellData.description
-                                      delegate:self
-                             cancelButtonTitle:@"I'll do it later" otherButtonTitles:@"I did it",nil];
+        if (self.activityCellData.url) {
+            alert = [[UIAlertView alloc] initWithTitle:@"Activity"
+                                           message:self.activityCellData.description
+                                          delegate:self
+                                 cancelButtonTitle:@"I'll do it later" otherButtonTitles:@"I did it",@"Open URL",nil];
+        }else {
+            alert = [Utillities alertViewWithTitle:@"Activity"
+                                           message:self.activityCellData.description
+                                          delegate:self
+                                 cancelButtonTitle:@"I'll do it later" otherButtonTitles:@"I did it",nil];
+        }
+        
         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
         [alert textFieldAtIndex:0].text = self.userActivity.notes;
         [[alert textFieldAtIndex:0] setPlaceholder:@"Enter activity notes (optional)"];
@@ -76,6 +84,12 @@
     if (buttonIndex == [alertView cancelButtonIndex]) {
         action = ActivityDelayed;
         self.userActivity.activity = NO;
+    }
+    else if (buttonIndex == 2)
+    {
+        if ([[UIApplication sharedApplication] canOpenURL:self.activityCellData.url]) {
+            [[UIApplication sharedApplication] openURL:self.activityCellData.url];
+        }
     }
     else
     {

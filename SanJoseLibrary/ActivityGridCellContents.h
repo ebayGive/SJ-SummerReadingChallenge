@@ -14,5 +14,6 @@
 @property (nonatomic, strong) NSString *description;
 @property (nonatomic, strong) NSString *imgSrc;
 @property (nonatomic, strong) NSString *gridIcon;
+@property (nonatomic, strong) NSURL *url;
 
 @end

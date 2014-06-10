@@ -10,4 +10,19 @@
 
 @implementation ActivityGridCellContents
 
+-(NSURL *)url
+{
+    if (_url) {
+        return _url;
+    }
+    NSDataDetector *links = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink
+                                                            error:nil];
+    NSArray *linkArray = [links matchesInString:self.description
+                                        options:0
+                                          range:NSMakeRange(0, self.description.length)];
+    
+    _url = [[linkArray firstObject] URL];
+    return _url;
+}
+
 @end

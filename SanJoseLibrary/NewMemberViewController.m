@@ -72,15 +72,12 @@
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [[self.userTypes userTypes] count]-1;
+    return [[self.userTypes userTypes] count];
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     UserType *b = [self.userTypes.userTypes objectAtIndex:row];
-    if ([b.name hasPrefix:@"STAFF"]) {
-        b = [self.userTypes.userTypes objectAtIndex:row+1];
-    }
     NSString *title = [NSString stringWithFormat:@"%@ (%@-%@)",b.name, b.minAge, b.maxAge];
     return title;
 }
