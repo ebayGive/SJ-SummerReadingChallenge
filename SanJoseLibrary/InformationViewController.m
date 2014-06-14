@@ -25,7 +25,7 @@
     
     self.currentUser = [(ContainerViewController *)self.parentViewController currentUser];
     
-    NSString *pathForHTML = [[NSBundle mainBundle] pathForResource:@"help-android" ofType:@"html"];
+    NSString *pathForHTML = [[NSBundle mainBundle] pathForResource:@"help-iPhone" ofType:@"html"];
     
     NSString *imagePath = [[NSBundle mainBundle] resourcePath];
     imagePath = [imagePath stringByReplacingOccurrencesOfString:@"/" withString:@"//"];

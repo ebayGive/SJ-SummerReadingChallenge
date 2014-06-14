@@ -14,7 +14,7 @@
 
 @interface ReadingLogViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIActionSheetDelegate>
 
-@property (strong, nonatomic) NSArray *readingLogCollectionViewCells;
+@property (strong, nonatomic) NSMutableArray *readingLogCollectionViewCells;
 @property (strong, nonatomic) NSIndexPath *currentIndexPath;
 @property (weak, nonatomic) User *currentUser;
 @property (weak, nonatomic) IBOutlet UICollectionView *readingLogCollectionView;
@@ -29,8 +29,9 @@
 {
     if ([self.currentUser.readingLog integerValue] == 900) {
         self.batteryFullImageView.hidden = NO;
+        [self.readingLogCollectionViewCells removeAllObjects];
         self.readingLogCollectionViewCells = nil;
-        self.readingLogCollectionView.hidden = YES;
+        [self.readingLogCollectionView removeFromSuperview];
     }
 }
 
@@ -40,7 +41,7 @@
     
     self.currentUser = [(ContainerViewController *)self.parentViewController currentUser];
     
-    NSMutableArray *cells = [[NSMutableArray alloc] initWithCapacity:23];
+    self.readingLogCollectionViewCells = [[NSMutableArray alloc] initWithCapacity:23];
     for (int i =0; i<[self.readingLogCollectionView numberOfItemsInSection:0]; i++)
     {
         @autoreleasepool {
@@ -54,12 +55,10 @@
                 imgName = [NSString stringWithFormat:@"APP_BATTERY_OFF-%ld",(long)ip.item+1];
             }
             [cell.imageView setImage:[UIImage imageNamed:imgName]];
-            [cells addObject:cell];
+            [self.readingLogCollectionViewCells addObject:cell];
         }
     }
     self.batteryFullImageView.hidden = YES;
-    self.readingLogCollectionViewCells = [cells copy];
-    [cells removeAllObjects];
 }
 
 - (void)viewWillAppear:(BOOL)animated

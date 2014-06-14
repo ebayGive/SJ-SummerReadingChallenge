@@ -46,10 +46,9 @@
 		C24FDF69191958EE009C7A9A /* ServiceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C24FDF68191958EE009C7A9A /* ServiceRequest.m */; };
 		C24FDF6F1919922F009C7A9A /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = C24FDF6E1919922F009C7A9A /* Account.m */; };
 		C2548541192AA2C80007DFC6 /* read.png in Resources */ = {isa = PBXBuildFile; fileRef = C254853B192AA2C80007DFC6 /* read.png */; };
-		C2548542192AA2C80007DFC6 /* help-android.html in Resources */ = {isa = PBXBuildFile; fileRef = C254853C192AA2C80007DFC6 /* help-android.html */; };
+		C2548542192AA2C80007DFC6 /* help-iPhone.html in Resources */ = {isa = PBXBuildFile; fileRef = C254853C192AA2C80007DFC6 /* help-iPhone.html */; };
 		C2548543192AA2C80007DFC6 /* explore.png in Resources */ = {isa = PBXBuildFile; fileRef = C254853D192AA2C80007DFC6 /* explore.png */; };
 		C2548544192AA2C80007DFC6 /* energize.png in Resources */ = {isa = PBXBuildFile; fileRef = C254853E192AA2C80007DFC6 /* energize.png */; };
-		C2548545192AA2C80007DFC6 /* help-web.html in Resources */ = {isa = PBXBuildFile; fileRef = C254853F192AA2C80007DFC6 /* help-web.html */; };
 		C2548546192AA2C80007DFC6 /* learn.png in Resources */ = {isa = PBXBuildFile; fileRef = C2548540192AA2C80007DFC6 /* learn.png */; };
 		C2548549192ABB9B0007DFC6 /* NewMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2548548192ABB9B0007DFC6 /* NewMemberViewController.m */; };
 		C254854C192BBB7B0007DFC6 /* PrizesFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C254854B192BBB7B0007DFC6 /* PrizesFooterView.m */; };
@@ -242,10 +241,9 @@
 		C24FDF6D1919922F009C7A9A /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
 		C24FDF6E1919922F009C7A9A /* Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Account.m; sourceTree = "<group>"; };
 		C254853B192AA2C80007DFC6 /* read.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = read.png; sourceTree = "<group>"; };
-		C254853C192AA2C80007DFC6 /* help-android.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "help-android.html"; sourceTree = "<group>"; };
+		C254853C192AA2C80007DFC6 /* help-iPhone.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "help-iPhone.html"; sourceTree = "<group>"; };
 		C254853D192AA2C80007DFC6 /* explore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explore.png; sourceTree = "<group>"; };
 		C254853E192AA2C80007DFC6 /* energize.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = energize.png; sourceTree = "<group>"; };
-		C254853F192AA2C80007DFC6 /* help-web.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "help-web.html"; sourceTree = "<group>"; };
 		C2548540192AA2C80007DFC6 /* learn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = learn.png; sourceTree = "<group>"; };
 		C2548547192ABB9B0007DFC6 /* NewMemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMemberViewController.h; sourceTree = "<group>"; };
 		C2548548192ABB9B0007DFC6 /* NewMemberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMemberViewController.m; sourceTree = "<group>"; };
@@ -572,10 +570,9 @@
 			isa = PBXGroup;
 			children = (
 				C254853B192AA2C80007DFC6 /* read.png */,
-				C254853C192AA2C80007DFC6 /* help-android.html */,
+				C254853C192AA2C80007DFC6 /* help-iPhone.html */,
 				C254853D192AA2C80007DFC6 /* explore.png */,
 				C254853E192AA2C80007DFC6 /* energize.png */,
-				C254853F192AA2C80007DFC6 /* help-web.html */,
 				C2548540192AA2C80007DFC6 /* learn.png */,
 			);
 			name = "Information Screen Assets";
@@ -919,7 +916,6 @@
 				C2CCFBDC1939B12A00FEB1B6 /* APP_BATTERY_OFF-17.png in Resources */,
 				C2CCFC421939B18900FEB1B6 /* APP_BATTERY_ON-29.png in Resources */,
 				C2483512192EA10600539C98 /* GRID_READ_0.jpg in Resources */,
-				C2548545192AA2C80007DFC6 /* help-web.html in Resources */,
 				C2483518192EA10600539C98 /* PRIZES_2_0.png in Resources */,
 				C2CCFBDA1939B12A00FEB1B6 /* APP_BATTERY_OFF-15.png in Resources */,
 				C2CCFBE11939B12A00FEB1B6 /* APP_BATTERY_OFF-22.png in Resources */,
@@ -943,7 +939,7 @@
 				C2CCFC481939B18900FEB1B6 /* APP_BATTERY_ON-35.png in Resources */,
 				C29A2BE0192475D9000CE3DF /* APP_BATTERY_OFF-08.png in Resources */,
 				C2CCFBF11939B12A00FEB1B6 /* APP_BATTERY_OFF-38.png in Resources */,
-				C2548542192AA2C80007DFC6 /* help-android.html in Resources */,
+				C2548542192AA2C80007DFC6 /* help-iPhone.html in Resources */,
 				C29A2BE1192475D9000CE3DF /* APP_BATTERY_OFF-09.png in Resources */,
 				C2483508192EA10600539C98 /* GRID_ROBOT_1.jpg in Resources */,
 				C2548543192AA2C80007DFC6 /* explore.png in Resources */,
@@ -1222,7 +1218,7 @@
 				INFOPLIST_FILE = "SanJoseLibrary/SanJoseLibrary-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "49779FEB-0D0A-44CD-83EB-FE0F6EB67259";
+				PROVISIONING_PROFILE = "70740C97-EB07-48A9-AB37-414A034AD3D2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1239,7 +1235,7 @@
 				INFOPLIST_FILE = "SanJoseLibrary/SanJoseLibrary-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "49779FEB-0D0A-44CD-83EB-FE0F6EB67259";
+				PROVISIONING_PROFILE = "70740C97-EB07-48A9-AB37-414A034AD3D2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
